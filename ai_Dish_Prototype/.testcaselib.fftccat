@@ -1,2 +1,411 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.6.1.202109290400"/>
+<TestCaseCatalog version="8.6.1.202109290400">
+    <testCaseCatalog>
+        <item name="DISH_5G/Utilities/pcap_utils.fftc">
+            <tcDescriptor version="8.6.1.202109290400">
+                <general>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                    <language>Python</language>
+                </general>
+                <procedures>
+                    <item name="query_request_response" isPublic="true" defaultSessionProfile="application:com.fnfr.svt.applications.wireshark">
+                        <arguments>
+                            <item name="session">
+                                <defaultValue>s4</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="validate_flow">
+                                <defaultValue>true</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="filter">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="request_object_name"/>
+                            <item name="response_object_name"/>
+                            <item name="request_ies"/>
+                            <item name="response_ies"/>
+                            <item name="tag_name">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="response_status">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="DISH_5G/Utilities/topology.fftc">
+            <tcDescriptor version="8.6.1.202109290400">
+                <general>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                    <language>Python</language>
+                </general>
+                <procedures>
+                    <item name="get_topology_resource_info" isPublic="true">
+                        <response>{}</response>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="DISH_5G/Utilities/utils.fftc">
+            <tcDescriptor version="8.6.1.202109290400">
+                <general>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                    <language>Python</language>
+                </general>
+                <procedures>
+                    <item name="add_topology_artifactLink" isPublic="true">
+                        <arguments>
+                            <item name="topo_file_name">
+                                <description>Optional. Topology file name - use it when it different with testcase name</description>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="calculate_failure" isPublic="true">
+                        <arguments>
+                            <item name="kpi_attempted">
+                                <description>Number of Attempted or request</description>
+                            </item>
+                            <item name="kpi_successes">
+                                <description>KPI successes or accepted value</description>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="calculate_percentage" isPublic="true">
+                        <arguments>
+                            <item name="instance_number">
+                                <description>Number of Nodal instance</description>
+                                <defaultValue>1</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="compare_2_number" isPublic="true">
+                        <arguments>
+                            <item name="actual">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="expected">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="operation">
+                                <description>Operation. Support: =, ==, &lt;, &lt;=, &gt;, &gt;=, !=</description>
+                                <defaultValue>=</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="convert_to_milisecond" isPublic="true">
+                        <arguments>
+                            <item name="value">
+                                <description>Value string with or without unit. Required unit value if without unit</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="unit">
+                                <description>Unit of value. Required value. &quot;us&quot; for micro second, &quot;ms&quot; for milisecond, &quot;s&quot; for second</description>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="execute_fail_message" isPublic="true">
+                        <arguments>
+                            <item name="message">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="should_exit">
+                                <defaultValue>false</defaultValue>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="get_SUT_cpu_memory_utilization" isPublic="true">
+                        <arguments>
+                            <item name="is_b2b">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="get_nearest_number" isPublic="true">
+                        <arguments>
+                            <item name="list_of_numbers">
+                                <description>List of numbers</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="measured_number">
+                                <description>A number in the list that is nearest with this number will be returned</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="get_profile_A_SUCI_keys" isPublic="true">
+                        <arguments>
+                            <item name="ts_ip_address">
+                                <description>IP Address or Hostname of the TS you want to SSH to</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ssh_port">
+                                <description>SSH port</description>
+                                <defaultValue>22</defaultValue>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="get_profile_B_SUCI_keys" isPublic="true">
+                        <arguments>
+                            <item name="ts_ip_address">
+                                <description>IP Address or Hostname of the TS you want to SSH to</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ssh_port">
+                                <description>SSH port</description>
+                                <defaultValue>22</defaultValue>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="insert_devider_string" isPublic="true">
+                        <arguments>
+                            <item name="char">
+                                <defaultValue>-</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="length">
+                                <defaultValue>60</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="isIPv4" isPublic="true">
+                        <arguments>
+                            <item name="ip">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="is_number" isPublic="true">
+                        <arguments>
+                            <item name="input_str">
+                                <description>The following string will matches with this:
+894
+923.21
+76876876
+.321
+-8943
+-9213.21
+-1234
+-.321
+87078.
+8707893.12e+10
+870e-234
+8707893.e2
+.345E10
+8.23E-8
+83.E+8
+
+Some strings that don&apos;t:
+hello
+9bye
+hello9bye</description>
+                            </item>
+                            <item name="accept_commas">
+                                <description>Accept string with commas. For example:
+884,323
+1,542,4123.3
+-8,336.09
+
+Limitation when setting accept_commas to &quot;true&quot;:
+The string starting with a dot (.) will not be matched, the procedure will return False. For example:
+.321,332,4343
+-.3,434,545</description>
+                                <defaultValue>false</defaultValue>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="print_extracted_data" isPublic="true">
+                        <arguments>
+                            <item name="data">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="instance"/>
+                            <item name="instance_str">
+                                <description>The string placed between kpi_name and instance number in the following pattern [kpi_name]-Instance.[instance]
+For example: instace_str = &quot;Nodal Instance&quot; =&gt; [kpi_name]-Nodal Instance.[instance]
+Default value: Instance</description>
+                                <defaultValue>Instance</defaultValue>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="validate_and_add_to_KPI" isPublic="true">
+                        <arguments>
+                            <item name="kpi_name">
+                                <description>Name of KPI</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="kpi_value">
+                                <description>Acutal value of KPI</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="kpi_expected">
+                                <description>Expected value</description>
+                            </item>
+                            <item name="add_to_kpi">
+                                <description>Add to response or not</description>
+                                <defaultValue>true</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="kpi_response">
+                                <description>KPI response object</description>
+                            </item>
+                            <item name="kpi_unit">
+                                <description>KPI unit</description>
+                            </item>
+                            <item name="operation">
+                                <description>Operation. Support: =, ==, &lt;, &lt;=, &gt;, &gt;=, !=</description>
+                                <defaultValue>=</defaultValue>
+                            </item>
+                            <item name="add_to_extracted">
+                                <defaultValue>false</defaultValue>
+                            </item>
+                            <item name="extracted_name"/>
+                            <item name="validate">
+                                <defaultValue>true</defaultValue>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="validate_cpu_and_memory" isPublic="true">
+                        <arguments>
+                            <item name="is_b2b">
+                                <defaultValue>true</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="kpi_response"/>
+                            <item name="add_to_extracted">
+                                <defaultValue>false</defaultValue>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="validate_params" isPublic="true">
+                        <arguments>
+                            <item name="params">
+                                <description>Input is a string that can contain one or more params to validate, each param item must be separated by a semicolon (;) and follow the pattern as below:
+Param_Name:Expected_Values:Required
+in which:
+- Param_Name: the path to param. For ex: TC_parameters/Session_Capacity
+- Expected_Values:
+\t+ (m,n): the range from m to n. Either m or n can be empty. If m is empty, the lower limit will not get validated. If n is empty, the higher limit will not get validated. For example: a string of &quot;(0,10000)&quot; will check if the param is in range of 0 - 10000, a string of &quot;(0)&quot; or &quot;(0,)&quot; will check if the param is greater than or equal to 0.
+\t+ [value1,value2,value3]: the list of desired values, each is separated by a comma. For ex: a &quot;[option1, option2]&quot; string will be check if the param value matches either &quot;option1&quot; or &quot;option2&quot;.
+\t+ Empty: if this is empty, no validation to check (for other types except boolean). Note: For boolean type, this can be left empty, the util will detect automatically to check the true/false value.
+- Required: true or false. If it&apos;s true, the param is required and an error will print if it&apos;s empty or doesn&apos;t exist.</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="validate_ts_percentage">
+                                <defaultValue>false</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="should_fail_test">
+                                <description>true/false</description>
+                                <defaultValue>true</defaultValue>
+                            </item>
+                            <item name="should_exit_test">
+                                <description>true/false</description>
+                                <defaultValue>true</defaultValue>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="validate_percent_and_add_to_KPI" isPublic="true">
+                        <multilineDescription>Purpose: Calculate Failure and validate Percentage of Failure calculated as Attempted (or Requests)  / Actual (or Accepted or Successes) x 100</multilineDescription>
+                        <arguments>
+                            <item name="kpi_name">
+                                <description>Name of KPI</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="kpi_failure">
+                                <description>Number of failure</description>
+                            </item>
+                            <item name="kpi_failure_name">
+                                <description>KPI Falure Name</description>
+                                <defaultValue>Failure</defaultValue>
+                            </item>
+                            <item name="kpi_attempted">
+                                <description>Number of Attempted or request</description>
+                            </item>
+                            <item name="kpi_attempted_name">
+                                <description>KPI Attempted or Requests name</description>
+                                <defaultValue>Attempted</defaultValue>
+                            </item>
+                            <item name="kpi_successes">
+                                <description>KPI successes or accepted value</description>
+                            </item>
+                            <item name="kpi_successes_name">
+                                <description>KPI successes or accepted name</description>
+                            </item>
+                            <item name="kpi_expected">
+                                <description>Expected value</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="kpi_unit">
+                                <description>KPI unit</description>
+                            </item>
+                            <item name="add_to_kpi">
+                                <description>Add to response or not</description>
+                                <defaultValue>true</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="add_failure_to_kpi">
+                                <description>Add the Failure to response or not</description>
+                                <defaultValue>true</defaultValue>
+                            </item>
+                            <item name="operation">
+                                <description>Operation. Support: =, ==, &lt;, &lt;=, &gt;, &gt;=, !=</description>
+                                <defaultValue>=</defaultValue>
+                            </item>
+                            <item name="kpi_response">
+                                <description>KPI response object</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="validate_percentage_list" isPublic="true">
+                        <arguments>
+                            <item name="percentage_list">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="session_capacity">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="targeted_end_rate"/>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                    <item name="expected_ts_count" isPublic="true">
+                        <arguments>
+                            <item name="number_of_testsession">
+                                <description>Number of expected TSs for b2b</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="tsgroup_count">
+                                <description>Actual TS Group Count</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="is_b2b">
+                                <description>B2B check</description>
+                                <defaultValue>true</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

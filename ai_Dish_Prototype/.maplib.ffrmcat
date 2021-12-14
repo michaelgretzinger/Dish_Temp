@@ -1,2 +1,8 @@
 <?xml version="1.0"?>
-<ResponseMapCatalog version="8.6.1.202109290400"/>
+<ResponseMapCatalog version="8.6.1.202109290400">
+    <mapCatalog>
+        <item name="DISH_5G/parameters/wireshark_utility_library/instance_validation_data.ffrm">
+            <applicability actionType="eval" command="instance_validation_data"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>
