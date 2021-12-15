@@ -15,6 +15,7 @@ Performance Counters:
 • Verify that the counter M173C056 (ue_reg_succ_emerg_reg) in AMF has increased by 1.</notes>
         <language>Python</language>
     </general>
+    <testbed>project://ai_Dish_Prototype/topologies/Dish%20Custom/D-E1-IN-001_TS2.tbml</testbed>
     <procedures>
         <item name="main">
             <steps>
@@ -191,74 +192,6 @@ Performance Counters:
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
                                             </nestedSteps>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                    </nestedSteps>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                                <item guid="46034db2-4b95-410f-8a5f-aed231879454" action="comment" skip="true" useFieldsInCommand="false">
-                                    <command>
-                                        <body>Set the tmd variables</body>
-                                    </command>
-                                    <nestedSteps>
-                                        <item guid="6444b1e0-eaa2-4f7c-a2ed-bc22aca47531" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>additional_validation = param(tmd_query_path + &quot;/additional_validation&quot;, &apos;False&apos;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="d21b5b85-c787-42c9-8a1c-085a839c7016" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>enable_port_capture = param(tmd_query_path + &quot;/Enable_Port_Capture&quot;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="c0f9cc93-323d-4692-aea3-af8033a21aaf" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>enable_tac_report = param(tmd_query_path + &quot;/Enable_TAC_Report&quot;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="3c04172a-a7d6-46af-9c74-bc21964e1768" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>next_gen_topology_process = param(tmd_query_path + &quot;/next_gen_topology_process&quot;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="694609a0-401c-4282-a29d-ffe48fa717d3" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>nf_interaction = param(tmd_query_path + &quot;/nf_interaction&quot;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="7738a87e-bad4-452b-b2fb-aaa7bf4efe4e" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>show_charts = param(tmd_query_path + &quot;/show_charts&quot;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="acc77847-c8a5-4b0a-bd44-190b7d642e55" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>test_waiting_timeout = param(tmd_query_path + &quot;/test_waiting_timeout&quot;, 300)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="aa2592e6-ae0c-4743-b134-b0e7674ba529" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>ts_groups_required = param(tmd_query_path + &quot;/ts_groups_required&quot;, 1)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="7cdac5e6-507f-4644-a45b-c4892ad64e4f" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>ts_clean_up_required = param(tmd_query_path + &quot;/ts_clean_up_required&quot;, &apos;False&apos;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="f476f605-342e-445f-838d-7b970a80746c" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>test_severity = param(tmd_query_path + &quot;/test_severity&quot;, &quot;Not Set&quot;)</body>
-                                            </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
                                     </nestedSteps>
