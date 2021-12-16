@@ -1947,6 +1947,45 @@
                                 <body>idx, running_id in enumerate(running_id_list):</body>
                             </command>
                             <nestedSteps>
+                                <item guid="5435a021-7ffa-4fb8-8aee-9ed3753511b4" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>&gt;&gt;&gt;&gt;&gt;&gt; Store ALL result file uri&apos;s  &apos;results_payload_uri_list&apos; &lt;&lt;&lt;&lt;&lt;&lt;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="88c19fa4-2594-4dd3-b938-0415a0a58532" action="Custom" session="s1">
+                                            <command>
+                                                <body>-requestMethod GET -dataType json -rawResponse true -url runningTests/[running_id]</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>resultFilesList()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>results_payload_uri_list</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="Custom" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" rawResponse="true" rawResponse.inherit="false" url="runningTests/[running_id]" url.inherit="false"/>
+                                        </item>
+                                        <item guid="53e5d1ce-db98-4600-ba8a-689c448e6da3" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>results_payload_uri_list</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
                                 <item guid="0ca5d20c-8c49-49d0-b044-d9d8402008d7" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Get the favorites and criteria for each instance.</body>

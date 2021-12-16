@@ -1738,6 +1738,21 @@ Performance Counters:
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>resultFilesList()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>pcap_payload_uri_list</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
                                         </analysisRules>
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="Custom" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" rawResponse="true" rawResponse.inherit="false" url="runningTests/[running_id]" url.inherit="false"/>
@@ -1893,6 +1908,12 @@ Performance Counters:
                                 <body>idx, running_id in enumerate(running_id_list):</body>
                             </command>
                             <nestedSteps>
+                                <item guid="e81b2526-9c04-4cf7-98af-26d82479332b" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>MIKE &gt;&gt;&gt;&gt;&gt;&gt; Store PCAP file uri&apos;s  &apos;pcap_payload_uri_list&apos; &lt;&lt;&lt;&lt;&lt;&lt;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
                                 <item guid="73421dc9-7fc0-4928-a0de-2d40d7f53338" action="Custom" session="s1">
                                     <command>
                                         <body>-requestMethod GET -dataType json -rawResponse true -url runningTests/[running_id]</body>
@@ -1960,6 +1981,45 @@ Performance Counters:
                                 <body>idx, running_id in enumerate(running_id_list):</body>
                             </command>
                             <nestedSteps>
+                                <item guid="caf9524f-5459-409e-96a7-76e2765d92a8" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>&gt;&gt;&gt;&gt;&gt;&gt; Store ALL result file uri&apos;s  &apos;results_payload_uri_list&apos; &lt;&lt;&lt;&lt;&lt;&lt;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="cd1ebca7-47d4-4c45-83f1-5be084fef497" action="Custom" session="s1">
+                                            <command>
+                                                <body>-requestMethod GET -dataType json -rawResponse true -url runningTests/[running_id]</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>resultFilesList()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>results_payload_uri_list</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="Custom" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" rawResponse="true" rawResponse.inherit="false" url="runningTests/[running_id]" url.inherit="false"/>
+                                        </item>
+                                        <item guid="25f3f1b8-d277-4ca5-bbe2-29406447b694" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>results_payload_uri_list</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
                                 <item guid="99457351-b929-48f7-9646-b351448219ed" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Get the favorites and criteria for each instance.</body>
