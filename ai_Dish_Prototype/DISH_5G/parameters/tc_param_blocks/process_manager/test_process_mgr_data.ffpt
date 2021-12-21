@@ -27,7 +27,7 @@
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </FiveG_DC_003>
-                <FiveG_DC_124 pt:description="tdm_key ANY paratermeter parent starting with &apos;5G&apos; will == FiveG">
+                <FiveG_DC_124>
                     <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
@@ -39,7 +39,7 @@
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </FiveG_DC_124>
-                <FiveG_DEREG_008 pt:description="tdm_key ANY paratermeter parent starting with &apos;5G&apos; will == FiveG">
+                <FiveG_DEREG_008>
                     <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
@@ -51,7 +51,7 @@
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </FiveG_DEREG_008>
-                <FiveG_ER_018 pt:description="tdm_key ANY paratermeter parent starting with &apos;5G&apos; will == FiveG">
+                <FiveG_ER_018>
                     <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
@@ -112,7 +112,7 @@
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                     <pcap_analysis pt:datatype="BOOLEAN">false</pcap_analysis>
                 </FiveG_ER_020>
-                <FiveG_PDU_064 pt:description="tdm_key ANY paratermeter parent starting with &apos;5G&apos; will == FiveG">
+                <FiveG_PDU_064>
                     <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
@@ -124,7 +124,7 @@
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </FiveG_PDU_064>
-                <FiveG_PDU_076 pt:description="tdm_key ANY paratermeter parent starting with &apos;5G&apos; will == FiveG">
+                <FiveG_PDU_076>
                     <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
@@ -136,7 +136,42 @@
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </FiveG_PDU_076>
-                <FiveG_REG_022 pt:description="tdm_key ANY paratermeter parent starting with &apos;5G&apos; will == FiveG">
+                <FiveG_PDU_080>
+                    <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
+                    <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
+                    <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
+                    <next_gen_topology_process pt:datatype="BOOLEAN">false</next_gen_topology_process>
+                    <nf_interaction pt:datatype="BOOLEAN" pt:description="Enable: if NF inter-action is required">false</nf_interaction>
+                    <pcap_analysis pt:datatype="BOOLEAN">false</pcap_analysis>
+                    <pcap_analysis_drivers pt:description="The data below is treated as a group of List Pairs">
+                        <tshark_display_filter pt:description="This filter will be applied when he session is opened"/>
+                        <target_pcap_keys pt:description="Example: [&quot;ts0_eth1&quot;, &quot;ts0_eth3&quot;]">[&quot;ts0_eth3&quot;]</target_pcap_keys>
+                        <validation_instances_groups>
+                            <item pt:description="VALIDATION GROUP">
+                                <item pt:description="VERIFICATION INSTANCE">
+                                    <item pt:description="display filter - any valid wireshark filter">nas_5gs.mm.5gs_reg_type == 4</item>
+                                    <item pt:description="get method - Valid values: typeCapture or typeQuery">typeQuery</item>
+                                    <item pt:datatype="BOOLEAN" pt:description="expected return">true</item>
+                                    <item pt:description="return action">g1_v1_item_4</item>
+                                    <item pt:description="optional message">Checking valid 5G NAS security context</item>
+                                </item>
+                                <item pt:description="VERIFICATION INSTANCE">
+                                    <item pt:description="display filter - any valid wireshark filter">nas_5gs.mm.type_id == 2</item>
+                                    <item pt:description="get method - Valid values: capture or query">typeQuery</item>
+                                    <item pt:datatype="BOOLEAN" pt:description="expected return">true</item>
+                                    <item pt:description="return action">g1_v2_item_4</item>
+                                    <item pt:description="optional message">Verify AMF sends request with 5G GUTI</item>
+                                </item>
+                            </item>
+                        </validation_instances_groups>
+                    </pcap_analysis_drivers>
+                    <show_charts pt:datatype="BOOLEAN">false</show_charts>
+                    <test_severity pt:description="Dish defined: &quot;severity&quot;: &quot;Sev 1 - Critical&quot; or &quot;Sev 2 - Major&quot; or &quot;Sev 3 - Minor&quot;">Sev 1 - Critical</test_severity>
+                    <test_waiting_timeout pt:datatype="INTEGER" pt:description="Bailout timer.... if things get sideways">180</test_waiting_timeout>
+                    <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
+                    <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
+                </FiveG_PDU_080>
+                <FiveG_REG_022>
                     <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
@@ -148,7 +183,7 @@
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </FiveG_REG_022>
-                <FiveG_REG_023 pt:description="tdm_key ANY paratermeter parent starting with &apos;5G&apos; will == FiveG">
+                <FiveG_REG_023>
                     <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
@@ -160,7 +195,7 @@
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </FiveG_REG_023>
-                <FiveG_REG_039 pt:description="tdm_key ANY paratermeter parent starting with &apos;5G&apos; will == FiveG">
+                <FiveG_REG_039>
                     <additional_validation pt:datatype="BOOLEAN" pt:description="Enable: If additional validation not included LS criteria P/F">false</additional_validation>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
@@ -309,7 +344,7 @@
                                 <item pt:description="VERIFICATION INSTANCE">
                                     <item pt:description="display filter - any valid wireshark filter">g1_v1_item_1</item>
                                     <item pt:description="get method - Valid values: typeCapture or typeQuery">typeQuery</item>
-                                    <item pt:description="expected return">g1_v1_item_3</item>
+                                    <item pt:description="expected return; filter_response, filter_r_cnt, filter_get_value">g1_v1_item_3</item>
                                     <item pt:description="return action">g1_v1_item_4</item>
                                     <item pt:description="optional message">g1_v1_item_5</item>
                                 </item>
