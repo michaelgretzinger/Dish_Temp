@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="8.5.0.202104211757" entryPoint="query_request_response">
+<testCase version="8.6.1.202109290400" entryPoint="query_request_response">
     <general>
         <isProcedureLibrary>true</isProcedureLibrary>
         <language>Python</language>
@@ -1636,6 +1636,74 @@
                 </item>
             </arguments>
             <response>{}</response>
+        </item>
+        <item name="SaveResultLocalhost" isPublic="true">
+            <steps>
+                <item guid="f2bece10-5d89-440b-9255-a9ec1e974123" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>import requests</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="11edee76-049e-470f-b5ad-e4a0ce6efacc" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>import re</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="33b937ee-bd4c-4a48-8cd9-3651a855b921" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>clean_file = re.sub(&apos;//\\d+.\\d+.\\d+.\\d+/&apos;,&apos;//127.0.0.1/&apos;,filepattern)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3c1d4874-b254-48cc-9bdc-ae3fb9edf2a8" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>clean_file</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e6b90a45-6c01-44f1-9e44-0bd598c54abd" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>file_contents = requests.get(clean_file)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5d541734-04ba-4420-8e39-1d1b911ff16d" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>file_contents</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f6d73eae-b580-4719-b0ed-2815d388e8d8" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>f = open(location,&apos;wb&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cd0a7f84-918a-4ffb-ac9e-5a5288a6de64" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>f.write(file_contents.content)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="fb199071-6b21-46b2-9a2f-a314a07e358c" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>f.close</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="runningTestId">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="filepattern">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="location"/>
+                <item name="lsSession"/>
+            </arguments>
         </item>
     </procedures>
 </testCase>
