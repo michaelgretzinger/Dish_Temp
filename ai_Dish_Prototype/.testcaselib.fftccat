@@ -34,6 +34,91 @@
                         </arguments>
                         <response>{}</response>
                     </item>
+                    <item name="create_temp_results_directory" isPublic="true"/>
+                    <item name="get_filtered_index_list" isPublic="true">
+                        <description>Get the packet index(s) based upon display filter</description>
+                        <arguments>
+                            <item name="current_pcap_key"/>
+                            <item name="tshark_filter"/>
+                            <item name="display_filter"/>
+                            <item name="rid_key"/>
+                            <item name="target_index"/>
+                            <item name="wireshark_session">
+                                <description>Set to 1 and wieshark session will be open/closed in context</description>
+                                <defaultValue>0</defaultValue>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="get_packet_data_element" isPublic="true">
+                        <arguments>
+                            <item name="current_pcap_key"/>
+                            <item name="rid_key"/>
+                            <item name="target_index"/>
+                            <item name="value_key"/>
+                            <item name="wireshark_session">
+                                <description>Set to 1 and wieshark session will be open/closed in context</description>
+                                <defaultValue>0</defaultValue>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="get_pcap_data_time" isPublic="true">
+                        <description>Get the date_time key data from the defined pcap uri</description>
+                        <arguments>
+                            <item name="pcap_uri"/>
+                        </arguments>
+                    </item>
+                    <item name="get_pcap_result_urls" isPublic="true"/>
+                    <item name="get_pcap_rid" isPublic="true">
+                        <description>Get the RID key data from the defined pcap uri</description>
+                        <arguments>
+                            <item name="pcap_uri"/>
+                        </arguments>
+                    </item>
+                    <item name="get_pcap_src_address" isPublic="true">
+                        <description>Get the source address key data from the defined pcap uri</description>
+                        <arguments>
+                            <item name="pcap_uri"/>
+                        </arguments>
+                    </item>
+                    <item name="get_pcap_ts_eth_key" isPublic="true">
+                        <description>Get the tsN_ethN key data from the defined pcap uri</description>
+                        <arguments>
+                            <item name="pcap_uri"/>
+                        </arguments>
+                    </item>
+                    <item name="get_pcap_user_name" isPublic="true">
+                        <description>Get the date_time key data from the defined pcap uri</description>
+                        <arguments>
+                            <item name="pcap_uri"/>
+                        </arguments>
+                    </item>
+                    <item name="get_target_pcap_file" isPublic="true">
+                        <arguments>
+                            <item name="master_pcap_payload"/>
+                            <item name="ts_eth_targets">
+                                <description>Example: ts_0_eth1, ts0_eth3, ts1_eth2</description>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="get_validation_param_instance" isPublic="true">
+                        <description>Get pcap validation parameter instance values</description>
+                        <arguments>
+                            <item name="tmd_key">
+                                <description>Test case Id. </description>
+                            </item>
+                            <item name="instance_grp_id">
+                                <description>Validation Group Id</description>
+                            </item>
+                            <item name="instance_id">
+                                <description>Validation Instance Id</description>
+                            </item>
+                            <item name="target_value">
+                                <description>Single Return Valid Values: get_filter, get_method, get_definition, get_element_key, get_message.
+Note: &apos;nulll&apos; will return all values found for the defined target Id.
+</description>
+                            </item>
+                        </arguments>
+                    </item>
                     <item name="SaveResultLocalhost" isPublic="true">
                         <arguments>
                             <item name="runningTestId">
@@ -44,6 +129,21 @@
                             </item>
                             <item name="location"/>
                             <item name="lsSession"/>
+                        </arguments>
+                    </item>
+                    <item name="query_load_defined_pcap" isPublic="true">
+                        <arguments>
+                            <item name="pcapAbsolutePath"/>
+                            <item name="tshark_filter"/>
+                            <item name="display_filter"/>
+                            <item name="optional_message"/>
+                            <item name="open_session"/>
+                        </arguments>
+                    </item>
+                    <item name="wireshark_close" isPublic="true"/>
+                    <item name="wireshark_open" isPublic="true" defaultSessionProfile="application:com.fnfr.svt.applications.wireshark">
+                        <arguments>
+                            <item name="tshark_filter"/>
                         </arguments>
                     </item>
                 </procedures>
