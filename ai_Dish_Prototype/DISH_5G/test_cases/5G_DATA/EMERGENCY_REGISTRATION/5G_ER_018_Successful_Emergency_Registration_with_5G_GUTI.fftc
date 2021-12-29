@@ -2581,9 +2581,9 @@ Performance Counters:
                                     <nestedSteps>
                                         <item guid="e77bab4b-11d7-44f1-b07f-4740985d5410" action="SaveResult" session="s1">
                                             <command>
-                                                <body>-runningTestId [running_id] -location [temp_file] -filepattern [file_url]</body>
+                                                <body>-runningTestId [running_id] -location file:[temp_file] -filepattern [file_name]</body>
                                             </command>
-                                            <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="SaveResult" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" runningTestId="[running_id]" runningTestId.inherit="false" location="[temp_file]" location.inherit="false" filepattern="[file_url]" filepattern.inherit="false"/>
+                                            <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="SaveResult" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" runningTestId="[running_id]" runningTestId.inherit="false" location="file:[temp_file]" location.inherit="false" filepattern="[file_name]" filepattern.inherit="false"/>
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
