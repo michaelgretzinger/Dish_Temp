@@ -34,6 +34,18 @@
                         </arguments>
                         <response>{}</response>
                     </item>
+                    <item name="SaveResultLocalhost" isPublic="true">
+                        <arguments>
+                            <item name="runningTestId">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="filepattern">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="location"/>
+                            <item name="lsSession"/>
+                        </arguments>
+                    </item>
                 </procedures>
             </tcDescriptor>
         </item>
