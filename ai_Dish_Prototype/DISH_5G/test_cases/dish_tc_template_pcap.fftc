@@ -139,51 +139,6 @@
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="3817b5eb-48f1-446d-a681-bad59291987f" action="comment" skip="true" useFieldsInCommand="false">
-                                    <command>
-                                        <body>If there is pcap work to do; Load the driving data</body>
-                                    </command>
-                                    <nestedSteps>
-                                        <item guid="ea101fe1-dd15-4c29-af20-eeb57705595a" action="if" useFieldsInCommand="false">
-                                            <command>
-                                                <body>pcap_analysis:</body>
-                                            </command>
-                                            <nestedSteps>
-                                                <item guid="1ed3144d-6ed2-46b1-9a97-b88affaa19c8" action="comment" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>Reset the TMD pointer into the &apos;pcap_analysis_drivers&apos; level</body>
-                                                    </command>
-                                                    <nestedSteps>
-                                                        <item guid="a23c2166-dee8-455d-b43a-2e96657be706" action="eval" useFieldsInCommand="false">
-                                                            <command>
-                                                                <body>tmd_query_path = &apos;TMD_Name/{0}/pcap_analysis_drivers/&apos;.format(tmd_key)</body>
-                                                            </command>
-                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                        </item>
-                                                    </nestedSteps>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                                <item guid="31cfbd66-b0e9-4d6a-9876-a9c516b13d26" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>tshark_display_filter = param(tmd_query_path + &quot;/tshark_display_filter&quot;, &quot;&quot;)</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                                <item guid="77937642-9273-4030-8735-f13712194e60" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>ts_eth_targets = param(tmd_query_path + &quot;/target_pcap_keys&quot;, &quot;&quot;)</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                                <item guid="10f6b8d3-dcd3-4e24-90bf-af31afeb84b8" action="comment" useFieldsInCommand="false">
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                            </nestedSteps>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                    </nestedSteps>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
@@ -2113,46 +2068,14 @@
                                                 <body>str(pcap_analysis) == &quot;True&quot;:</body>
                                             </command>
                                             <nestedSteps>
-                                                <item guid="42a1942d-eaeb-4005-9c10-b19f9df36b09" action="comment" useFieldsInCommand="false">
+                                                <item guid="70322cce-a8f2-412c-8931-1b1a320e962b" action="comment" useFieldsInCommand="false">
                                                     <command>
-                                                        <body>There is PCAP validation; Get the required driving data from the parameters</body>
+                                                        <body>Call pcap_validation and do the work</body>
                                                     </command>
                                                     <nestedSteps>
-                                                        <item guid="48476184-e872-4d57-ba3a-22a69a930511" action="eval" useFieldsInCommand="false">
+                                                        <item guid="cb7f4410-8a23-4645-99f8-765f2bb0374d" action="call" useFieldsInCommand="false">
                                                             <command>
-                                                                <body>tmd_key = param(&apos;TC_parameters/tmd_key&apos;)</body>
-                                                            </command>
-                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                        </item>
-                                                        <item guid="17cb4554-d4e7-4186-bc0b-43d8b4b288b4" action="eval" useFieldsInCommand="false">
-                                                            <command>
-                                                                <body>tmd_query_path = &apos;TMD_Name/{0}/pcap_analysis_drivers/&apos;.format(tmd_key)</body>
-                                                            </command>
-                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                        </item>
-                                                        <item guid="a03d4a2d-78f4-450e-9e3b-bbdb17ff6c47" action="eval" useFieldsInCommand="false">
-                                                            <command>
-                                                                <body>tshark_display_filter = param(tmd_query_path + &quot;/tshark_display_filter&quot;, &quot;&quot;)</body>
-                                                            </command>
-                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                        </item>
-                                                        <item guid="9ed883d1-d0c2-4367-8933-7cb585c6ccae" action="eval" useFieldsInCommand="false">
-                                                            <command>
-                                                                <body>ts_eth_targets = param(tmd_query_path + &quot;/target_pcap_keys&quot;, &quot;&quot;)</body>
-                                                            </command>
-                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                        </item>
-                                                    </nestedSteps>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                                <item guid="0f2526a1-4762-428c-8ad4-dba08b26060a" action="comment" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>Call the wireshark process manager and do the work</body>
-                                                    </command>
-                                                    <nestedSteps>
-                                                        <item guid="502a1f7c-fb6b-4249-8365-2790c896235f" action="call" useFieldsInCommand="false">
-                                                            <command>
-                                                                <body>project://$project_id/DISH_5G/Utilities/wireshark_utility_library.fftc#wireshark_process_mgr -landslide_result_id $running_id -tmd_key $tmd_key -ts_eth_targets $ts_eth_targets</body>
+                                                                <body>pcap_validation -results_url_list [results_payload_uri_list] -running_id [running_id]</body>
                                                             </command>
                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                         </item>
@@ -2242,6 +2165,651 @@
                     <description>Additional OM/kpi to validate</description>
                     <defaultValue>False</defaultValue>
                 </item>
+            </arguments>
+        </item>
+        <item name="pcap_validation" isPublic="true" defaultSessionProfile="application:com.fnfr.svt.applications.wireshark">
+            <steps>
+                <item guid="7705e708-32b9-422b-9ed8-f20923983b54" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>######################################################################################</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f87040d1-54b7-4c58-a4cc-39b7ebca0883" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This an example routine, it is from a previously developed test instance. AND is NOT intended to work as is.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4a4ed60c-4c5d-4f74-bab6-8fcdf3d8e26d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Utilizes parameter data and the pcap_utils as the primary driver.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="87105c80-66d5-4a55-b798-b184c6d5c5ba" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>######################################################################################</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="89a2a24b-12da-4e5f-9ed0-98b27b396c57" action="comment" useFieldsInCommand="false">
+                    <nestedSteps>
+                        <item guid="8c3ae046-4c32-414c-b3f2-c58ebdf2c5a3" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>results_url_list</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e5c5bc42-9272-41a0-a550-655429671667" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>running_id</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f4eb0e59-7eaa-46a5-9266-565933042f6e" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>project_id = info(&apos;testCaseProject&apos;, &apos;main&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="89f589fd-1ba4-4ac8-8c80-8d7868827689" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Set the tmd_query_path</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a337f34c-ae97-4eac-afa3-2cf5cd24f4cb" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>tmd_key = param(&apos;TC_parameters/tmd_key&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="59604c43-7957-4104-a3c9-d4a87ce9d30c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>tmd_query_path = &apos;TMD_Name/{0}/&apos;.format(tmd_key)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9dce9075-a3c6-427a-a55a-09f40159630d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get minimum required driving data from the parameters</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e615b987-c530-4dd8-bdb2-9b365ca2a788" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>tshark_display_filter = param(tmd_query_path + &quot;/tshark_display_filter&quot;, &quot;&quot;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="eb5cdb13-9e88-40b6-86de-9a46fa06d5ee" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Build the ts_eth_targets list</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="c74f4ab1-e8ab-4a52-a192-0b336cd3bfe3" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>eth_targets = param(tmd_query_path + &quot;/target_pcap_keys&quot;, &quot;&quot;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="54afaf76-2882-4027-b800-c894ff916486" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>eth_targets</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>count(mapped/Json/item)</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>eth_key_cnt</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="57ea9f6b-9fe4-402b-a617-fe06d271d56a" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>ts_eth_targets = []</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="70584569-339d-404c-9197-ee0e2bd5b647" action="for" useFieldsInCommand="false">
+                                    <command>
+                                        <body>eth_cnt in range(1, int(eth_key_cnt) + 1):</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="61beeedf-0490-48e9-b8df-7c50cbbc96fe" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>eth_targets</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/item</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>eth_param_key</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="656270af-c397-4c82-b67c-1fb396dea408" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>ts_eth_targets.append(eth_param_key.split(&apos;/&apos;)[1]+&quot;_&quot;+param(eth_param_key, &quot;&quot;))</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="0603690a-62ea-405f-a366-50ca13b7c483" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>ts_eth_targets</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c2407b91-9813-4fd8-8215-36619dcad2e3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get the pcap file payload from &apos;results_url_list&apos; and Store: &apos;pcap_files&apos;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e1958ac5-1eb3-42f2-b27d-2a92cf291330" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_pcap_result_urls -results_url_list [results_url_list]</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>pcap_files</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="4c897e19-48e4-412b-8da9-cdd02947c789" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>pcap_files</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b6fc58a4-4b24-41f9-84c6-b308ee32771f" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Get the target &apos;file_url&apos; based on ts_eth_target parameter</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="94e48141-227a-4ce8-b3eb-f93ba05ba107" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_target_pcap_file -master_pcap_payload [pcap_files] -ts_eth_targets [ts_eth_targets]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/item</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>target_pcap_url</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/item</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>file_url</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="588a2a02-0c69-4f4a-8f40-16a2f0442632" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>target_pcap_url</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="24c0f73a-d13b-4f23-9e2b-beb4696b61e4" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>file_url</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="4b710803-f2ae-4ef0-b1e9-7d9508b951ae" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Get the file tail from filepattern; Store in &apos;file_name&apos;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="4419e85a-f8c5-4e36-8e51-d81f7f3bf7a6" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>file_name = file_url.split(&apos;/&apos;)[-1]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ccbc9ffb-744c-4f14-a42d-6913eec90bfd" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>file_name</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3e01407f-db88-4b82-bb24-a9c246b4b613" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create the temporary results directory</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5dfbae23-4644-4875-955d-6e9538c916a2" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>import tempfile</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d2aec5ff-3b0d-4d38-8634-0e8189bf9e47" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>temp_dir = tempfile.TemporaryDirectory()</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="21406ac7-4f31-4cd0-98ab-3fcac9347d91" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>temp_dir.name</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="23f62ae9-538f-4327-96b5-a8934bd23d36" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>results_root_url = temp_dir.name.replace(&apos;\\\\&apos;,&apos;/&apos;)+&apos;/&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b65aec0c-05c0-4f4b-86d2-1077ad00898d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>results_root_url</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="83eeaa8d-41af-45ee-a5e6-01b12a306d1d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Store the target files</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ad8700d6-9f98-46d6-9b46-1cdb66838b76" action="comment" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="89aff1f4-5367-440c-b85c-c1e059cf4297" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>temp_file = results_root_url+file_name</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e1b8b29d-9997-403c-bf65-ffbccb7704cd" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>temp_file</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="32eaadc3-bb67-4192-8bb2-786e6b19a1e1" action="comment" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9d75b10b-214a-4d37-8b40-8809c1668c67" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Download file</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="abd5d184-ca78-4a1f-b88b-3b975be931ed" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>os = info(&apos;platform&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c4bffbc0-ce90-40a9-918a-c3434e5f7c70" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>os</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c8a9e69f-a00a-47e5-a2a7-587a84d40e39" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>os == &apos;linux&apos;:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="2d0405d6-0bed-4774-896b-45fb6644c433" action="SaveResult" session="s1">
+                                            <command>
+                                                <body>-runningTestId [running_id] -location [temp_file] -filepattern [file_url]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="SaveResult" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" runningTestId="[running_id]" runningTestId.inherit="false" location="[temp_file]" location.inherit="false" filepattern="[file_url]" filepattern.inherit="false"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="d0363a21-45a6-402e-996a-813f4e3725da" action="else" useFieldsInCommand="false">
+                                    <nestedSteps>
+                                        <item guid="71c701d0-c101-4c43-b30a-236c5aac1727" action="call" useFieldsInCommand="false">
+                                            <command>
+                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/pcap_utils.fftc#SaveResultLocalhost(runningTestId=running_id, filepattern=file_url, location=temp_file)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="da4b988d-a5e4-44cd-9d30-3b6a9e1adbe7" action="comment" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3a13e831-bb81-44d5-a90a-88b8c0b4b019" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7e4ed50e-7e12-4804-9806-f344f6c686e2" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get Paramerter Instance Validation Values - Group 1, Instance 1</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ab4bcabe-0535-470e-afff-e10ab087496b" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Return with target_value defined</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="a729b44f-8dae-4de5-ba64-cd2edefd97bd" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_validation_param_instance -tmd_key [tmd_key] -instance_grp_id 1 -instance_id 1 -target_value get_filter</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>responseLine()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>display_filter</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="4875ad52-7913-440a-b846-9aea5c1d92a3" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_validation_param_instance -tmd_key [tmd_key] -instance_grp_id 1 -instance_id 1 -target_value get_message</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>responseLine()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>optional_message</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="00fd7e23-55c6-44fc-84e1-950920ff6d41" action="call" useFieldsInCommand="false">
+                    <command>
+                        <body>project://ai_Dish_Prototype/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message] -open_session True</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c20a1405-3a61-4d53-a01d-2eb7c2989831" action="command" session="wireshark">
+                    <command>
+                        <body>query packets</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>success()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>value == &quot;true&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Target Capture Packet found as expected. Wireshark display filter: [display_filter]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Target Capture Packet NOT found. Wireshark display filter: [display_filter]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                        <storeResponseAt>response</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6191303b-9d97-4304-86ac-33129619b0f0" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="01edaed5-d7ce-49a5-886a-409bc18dcd80" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get Paramerter Instance Validation Values - Group 1, Instance 2</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f980f8ad-43f7-4989-a7f2-6b6fc18505da" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Return with target_value defined</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="d1524c7d-1489-4e27-8368-869f55e10695" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_validation_param_instance -tmd_key [tmd_key] -instance_grp_id 1 -instance_id 2 -target_value get_filter</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>responseLine()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>display_filter</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c11af037-ed4e-469f-95e4-30ff7f2b2941" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_validation_param_instance -tmd_key [tmd_key] -instance_grp_id 1 -instance_id 2 -target_value get_message</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>responseLine()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>optional_message</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="aa585ce1-ac43-41a8-be8a-a4fb4f736d4a" action="call" useFieldsInCommand="false">
+                    <command>
+                        <body>project://ai_Dish_Prototype/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c6cf47ad-8ead-4a7f-a709-c60e14a19e5f" action="command" session="wireshark">
+                    <command>
+                        <body>query packets</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>success()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>value == &quot;true&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Target Capture Packet found as expected. Wireshark display filter: [display_filter]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Target Capture Packet NOT found. Wireshark display filter: [display_filter]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                        <storeResponseAt>response</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9b89a0b0-95cc-4fe2-a560-05a12f74f9db" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8c3e096f-e079-48f6-ac99-04b0dc455b55" action="call" useFieldsInCommand="false">
+                    <command>
+                        <body>project://ai_Dish_Prototype/DISH_5G/Utilities/pcap_utils.fftc#wireshark_close()</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2a8b0929-3325-4ca8-949b-b2bc9070b416" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="results_url_list"/>
+                <item name="running_id"/>
             </arguments>
         </item>
     </procedures>
