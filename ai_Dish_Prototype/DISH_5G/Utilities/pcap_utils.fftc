@@ -1637,57 +1637,6 @@
             </arguments>
             <response>{}</response>
         </item>
-        <item name="create_temp_results_directory" isPublic="true">
-            <steps>
-                <item guid="d727cea3-9112-43e7-a2e6-3c2bb85e9ab0" action="comment" useFieldsInCommand="false">
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="576e76ce-4d96-4b01-b494-f8ea79e04a41" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>create tempfolder</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="00a00d93-1d60-4439-950a-b0a11d3f5c9a" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>import tempfile</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="e9fc4ba1-c84b-496e-a2af-f8d3bd5bd03a" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>temp_dir = tempfile.TemporaryDirectory()</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="10501acf-c5b1-4c67-b0e3-24e6ffcc36b3" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>temp_dir.name</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="204810eb-41e3-40f9-b67a-52d5476df3c6" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>uri_root = temp_dir.name.replace(&apos;\\\\&apos;,&apos;/&apos;)+&apos;/&apos;</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="4987d549-504f-4f1f-aed9-0945e49734f0" action="comment" useFieldsInCommand="false">
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="c7acec45-59d5-4a36-ab7f-b194a9df2bbd" action="return">
-                    <command>
-                        <body>[uri_root]</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="3a5fe97d-dc3e-4664-b992-7372916810a7" action="comment" useFieldsInCommand="false">
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-        </item>
         <item name="get_filtered_index_list" isPublic="true">
             <description>Get the packet index(s) based upon display filter</description>
             <steps>

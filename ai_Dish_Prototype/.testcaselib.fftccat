@@ -34,7 +34,6 @@
                         </arguments>
                         <response>{}</response>
                     </item>
-                    <item name="create_temp_results_directory" isPublic="true"/>
                     <item name="get_filtered_index_list" isPublic="true">
                         <description>Get the packet index(s) based upon display filter</description>
                         <arguments>
