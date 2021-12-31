@@ -1083,12 +1083,6 @@
                         <body>Local Variables</body>
                     </command>
                     <nestedSteps>
-                        <item guid="95057db4-dee7-421e-910b-44af5394150a" action="eval" skip="true" useFieldsInCommand="false">
-                            <command>
-                                <body>port_capture = view_pcap</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
                         <item guid="92018c5a-8ba1-416a-a57f-66a9cf0c3e54" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>project_id = info(&apos;testCaseProject&apos;, &apos;main&apos;)</body>
@@ -2538,9 +2532,9 @@
                                 </item>
                                 <item guid="d0363a21-45a6-402e-996a-813f4e3725da" action="else" useFieldsInCommand="false">
                                     <nestedSteps>
-                                        <item guid="71c701d0-c101-4c43-b30a-236c5aac1727" action="call" useFieldsInCommand="false">
+                                        <item guid="af50e8f5-3863-45a2-b2bd-9d7a9ddfc112" action="call" useFieldsInCommand="false">
                                             <command>
-                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/pcap_utils.fftc#SaveResultLocalhost(runningTestId=running_id, filepattern=file_url, location=temp_file)</body>
+                                                <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#SaveResultLocalhost -runningTestId [running_id] -filepattern [file_url] -location [temp_file]</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
@@ -2627,7 +2621,7 @@
                 </item>
                 <item guid="00fd7e23-55c6-44fc-84e1-950920ff6d41" action="call" useFieldsInCommand="false">
                     <command>
-                        <body>project://ai_Dish_Prototype/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message] -open_session True</body>
+                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message] -open_session True</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -2746,7 +2740,7 @@
                 </item>
                 <item guid="aa585ce1-ac43-41a8-be8a-a4fb4f736d4a" action="call" useFieldsInCommand="false">
                     <command>
-                        <body>project://ai_Dish_Prototype/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message]</body>
+                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message]</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -2799,7 +2793,7 @@
                 </item>
                 <item guid="8c3e096f-e079-48f6-ac99-04b0dc455b55" action="call" useFieldsInCommand="false">
                     <command>
-                        <body>project://ai_Dish_Prototype/DISH_5G/Utilities/pcap_utils.fftc#wireshark_close()</body>
+                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#wireshark_close</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
