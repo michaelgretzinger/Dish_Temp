@@ -1347,12 +1347,6 @@ Performance Counters:
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="37bb8b04-47ec-4640-a8f6-f90a8dcaa3d9" action="eval" skip="true" useFieldsInCommand="false">
-                            <command>
-                                <body>reduce_time = 30</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
                         <item guid="e05a0307-16a4-4900-a5a1-da8b9d16fb3a" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>reduce_time = ts_timeout</body>
@@ -3564,7 +3558,7 @@ Performance Counters:
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>messages/item[1]/source</query>
+                                        <query>messages/item/source</query>
                                     </extractorProperties>
                                 </extractorInfo>
                                 <processorInfo ruleType="store">
@@ -3579,7 +3573,7 @@ Performance Counters:
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>messages/item[1]/destination</query>
+                                        <query>messages/item/destination</query>
                                     </extractorProperties>
                                 </extractorInfo>
                                 <processorInfo ruleType="store">
@@ -3594,7 +3588,7 @@ Performance Counters:
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>messages/item[1]/info</query>
+                                        <query>messages/item/info</query>
                                     </extractorProperties>
                                 </extractorInfo>
                                 <processorInfo ruleType="store">
@@ -3612,7 +3606,7 @@ Performance Counters:
                                 </extractorInfo>
                                 <processorInfo ruleType="assert">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                        <expression>int(inst_cnt) == 2</expression>
+                                        <expression>int(inst_cnt) == 1</expression>
                                         <actionsWhenTrue>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
