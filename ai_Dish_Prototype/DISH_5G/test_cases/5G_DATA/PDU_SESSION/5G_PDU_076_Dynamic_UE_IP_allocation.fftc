@@ -912,35 +912,6 @@ Expected Result/Post Condition:
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="b8d8d218-f4c1-43ea-ac58-fda49bd22a9d" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Get landslide capture file from NetworkHostLocal interface</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="3aa62ed5-4180-49c6-9c1e-b74070ebcb60" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>eth_int = param(&apos;LS_Nodal_favorite_params/ts0/tc0/NetworkHostAddrLocal/phy&apos;)</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="052f6166-0aec-4b36-b7ea-ddc60a6d12e4" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>eth_int</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="e91e1d9f-b63a-454b-96a9-92f63c3252b8" action="eval" useFieldsInCommand="false">
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="961c7df4-8e0c-487b-870b-23c624112286" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Apply filter to file</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="0e88daf4-b135-415f-82ee-74cf9cd64fd6" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Display end of instance info</body>
@@ -2373,11 +2344,17 @@ Expected Result/Post Condition:
                                                         <body>os == &apos;linux&apos;:</body>
                                                     </command>
                                                     <nestedSteps>
+                                                        <item guid="61232b07-fee3-474c-9e7b-5217b5636f04" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>file_url = file_url.split(&apos;/&apos;)[-1]</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
                                                         <item guid="a607a8e9-bb77-47f5-b4c3-f1e4922a0de5" action="SaveResult" session="s1">
                                                             <command>
-                                                                <body>-runningTestId [running_id] -location [temp_file] -filepattern [file_url]</body>
+                                                                <body>-runningTestId [running_id] -location file:[temp_file] -filepattern [file_url]</body>
                                                             </command>
-                                                            <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="SaveResult" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" runningTestId="[running_id]" runningTestId.inherit="false" location="[temp_file]" location.inherit="false" filepattern="[file_url]" filepattern.inherit="false"/>
+                                                            <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="SaveResult" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" runningTestId="[running_id]" runningTestId.inherit="false" location="file:[temp_file]" location.inherit="false" filepattern="[file_url]" filepattern.inherit="false"/>
                                                         </item>
                                                     </nestedSteps>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
