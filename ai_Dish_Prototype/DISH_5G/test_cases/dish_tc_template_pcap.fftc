@@ -2830,9 +2830,6 @@
                                     </applicationProperties>
                                 </item>
                                 <item guid="359dca71-dbe7-4667-bec0-ed61cb7fda54" action="return">
-                                    <command>
-                                        <body>Information:</body>
-                                    </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
