@@ -2166,7 +2166,7 @@
                                                 </item>
                                                 <item guid="b8086c1e-d5b3-45f7-b915-1605fa5c0575" action="call" useFieldsInCommand="false">
                                                     <command>
-                                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#process_landslide_criteria_data -favorites_measurements $favorites_measurements</body>
+                                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#process_landslide_criteria_data -favorites_measurements [favorites_measurements]</body>
                                                     </command>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
