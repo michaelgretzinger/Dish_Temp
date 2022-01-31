@@ -3018,9 +3018,27 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
+                <item guid="694ea51e-3db7-44aa-b5b7-42167283ee7f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>&gt;&gt;&gt;&gt; No tshark filter &lt;&lt;&lt;&lt;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="fb5f8d71-d96c-4888-a288-ebb0859cfed7" action="call" useFieldsInCommand="false">
                     <command>
                         <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message] -open_session True</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2c6131f4-2eca-4778-9ba4-279c412557d6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>&gt;&gt;&gt;&gt; Utilize  tshark filter &lt;&lt;&lt;&lt;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7af015b3-29ed-46fe-8a85-13f97d52d6c7" action="call" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message] -open_session True -tshark_filter [tshark_display_filter]</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
