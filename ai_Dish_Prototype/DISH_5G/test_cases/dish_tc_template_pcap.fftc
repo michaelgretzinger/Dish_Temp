@@ -1336,7 +1336,7 @@
                         </item>
                         <item guid="37bb8b04-47ec-4640-a8f6-f90a8dcaa3d9" action="eval" useFieldsInCommand="false">
                             <command>
-                                <body>reduce_time = 30</body>
+                                <body>reduce_time = ts_timeout</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
