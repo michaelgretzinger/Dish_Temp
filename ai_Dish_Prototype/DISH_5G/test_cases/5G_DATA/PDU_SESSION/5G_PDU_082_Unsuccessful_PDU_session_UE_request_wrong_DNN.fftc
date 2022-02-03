@@ -498,7 +498,7 @@
                         <body>Start iTest Landslide Session</body>
                     </command>
                     <nestedSteps>
-                        <item guid="e8425363-09eb-43ad-8ff1-87d3d1d5cb5d" action="open" session="s1">
+                        <item guid="c7196c67-f5fd-4149-8d78-80434d5c22e2" action="open" session="s1">
                             <command>
                                 <body>project://di_Landslide/session_profiles/landslide_rest.ffsp</body>
                             </command>
@@ -518,17 +518,15 @@
                                                         <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                     </item>
                                                     <item actionId="DeclareExecutionIssue">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
-                                                            <message>Landslide Session Currently Unavaliable at: [tas_api_url] </message>
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Cannot start Landslide Session at: [tas_api_url]</message>
                                                         </actionProperties>
                                                     </item>
-                                                    <item actionId="DeclareExecutionIssue">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
-                                                            <message>Will retry in 15 seconds</message>
-                                                        </actionProperties>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                     </item>
-                                                    <item actionId="RepeatStep">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="6" delayBetweenRepeats="15.0"/>
+                                                    <item actionId="SkipRemainingRules">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                     </item>
                                                 </actionsWhenTrue>
                                             </ruleProperties>
@@ -549,24 +547,6 @@
                                     </item>
                                 </analysisRules>
                             </postProcessing>
-                            <eventHandlers>
-                                <item name="OnRepeatStepMaxCountExceeded">
-                                    <item actionId="DeclareExecutionIssue">
-                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                            <message>Unable to Start Landslide Session at: [tas_api_url]</message>
-                                        </actionProperties>
-                                    </item>
-                                    <item actionId="FailTest">
-                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    </item>
-                                    <item actionId="AbortExecution">
-                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    </item>
-                                    <item actionId="SkipRemainingRules">
-                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    </item>
-                                </item>
-                            </eventHandlers>
                             <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                                 <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.spirent.itest.applications.landsliderest" transferableType="com.spirent.itest.applications.landsliderest.properties.LandslideRestSessionProperties"/>
