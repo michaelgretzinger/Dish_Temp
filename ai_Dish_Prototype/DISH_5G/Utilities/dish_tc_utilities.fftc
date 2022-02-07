@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<testCase version="8.6.1.202109290400">
+<testCase version="8.6.2.202112190518">
     <general>
+        <isProcedureLibrary>true</isProcedureLibrary>
         <language>Python</language>
     </general>
     <execution>
-        <parameters version="8.6.1.202109290400">
+        <parameters version="8.6.2.202112190518">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
                     <GnbName pt:description="gnb.spirent.com">gnb.spirent.com</GnbName>
@@ -7115,6 +7116,85 @@ Valid Types: csv or iev or pcap</description>
                 <item name="addition_validation_data"/>
             </arguments>
             <response>{}</response>
+        </item>
+        <item name="update_run_data_parameters" isPublic="true">
+            <steps>
+                <item guid="fb206c5c-faa2-4f3b-87c3-b35408b3df21" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Convert json list to dict</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e6418d9e-b049-48ba-a394-81255a74ebaa" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>import json</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c89fd6ed-82d9-4842-a600-163137114502" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>import re</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ce4f9030-c76a-4593-b699-116012000d36" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>temp_dict = json.loads(run_data_list[0])</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="dee8a5e6-65b7-450e-98ec-ea820a12b5ee" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>param_dict = temp_dict[&apos;tsGroups&apos;][int(ts_group_index)][&apos;testCases&apos;][int(test_case_index)][&apos;parameters&apos;]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ec90f443-0373-4bdb-a698-e0cd8532ac78" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>param_dict</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a4dafe3c-c027-4588-8358-ab1b5ee61d26" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>add_dict</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e3a42edb-bf53-4815-ae26-c59e8d9d5e06" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>temp_dict[&apos;tsGroups&apos;][int(ts_group_index)][&apos;testCases&apos;][int(test_case_index)][&apos;parameters&apos;] = param_dict | add_dict</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e250b796-48ce-4a1b-a990-57a37cdc4932" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>run_data_list = [json.dumps(temp_dict)]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c55932ff-3616-470f-834f-3b6b3ae5b434" action="return">
+                            <command>
+                                <body>[run_data_list]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="run_data_list"/>
+                <item name="ts_group_index">
+                    <defaultValue>0</defaultValue>
+                </item>
+                <item name="test_case_index">
+                    <defaultValue>0</defaultValue>
+                </item>
+                <item name="add_dict">
+                    <description>dictionary to add to the run_list json. Shoud look something like this
+[&apos;tsGroups&apos;][0][&apos;testCases&apos;][0][&apos;parameters&apos;]...</description>
+                </item>
+            </arguments>
         </item>
     </procedures>
 </testCase>
