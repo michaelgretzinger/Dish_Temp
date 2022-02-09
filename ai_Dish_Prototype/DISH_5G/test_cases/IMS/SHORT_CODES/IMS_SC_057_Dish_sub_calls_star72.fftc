@@ -844,6 +844,12 @@ Expected Result/Post Condition:
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
+                                <item guid="768a5d14-2695-4dc0-81cb-0e838064ddb9" action="Custom" session="s1">
+                                    <command>
+                                        <body>-requestMethod GET -dataType json -url sipFlow</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="Custom" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" url="sipFlow" url.inherit="false"/>
+                                </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
@@ -898,6 +904,16 @@ Expected Result/Post Condition:
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
+                                        <item guid="a7d7c06c-47ab-4aef-a483-bed9469e3f73" action="call" useFieldsInCommand="false">
+                                            <command>
+                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#incr_ls_n_number_in_string(string=start_phone_num)</body>
+                                            </command>
+                                            <postProcessing>
+                                                <storeResponseAt>called_pn</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
@@ -914,7 +930,7 @@ Expected Result/Post Condition:
                                         </item>
                                         <item guid="779c86df-0650-4ed6-991d-6196e873369b" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>param_dict[&apos;ImsSipEndptsPublicUserName&apos;] = &quot;*72&quot;+start_phone_num[2:]</body>
+                                                <body>param_dict[&apos;ImsSipEndptsPublicUserName&apos;] = &quot;*72&quot;+called_pn[1:]</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
@@ -928,16 +944,17 @@ Expected Result/Post Condition:
                                     <nestedSteps>
                                         <item guid="654589d4-87f8-4931-a1ea-21f0ab98fa47" action="call" useFieldsInCommand="false">
                                             <command>
-                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters(run_data_list=run_data, add_dict=param_dict)</body>
+                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters(run_data_list=run_data_list, add_dict=param_dict)</body>
                                             </command>
                                             <postProcessing>
-                                                <storeResponseAt>run_data</storeResponseAt>
+                                                <storeResponseAt>run_data_list</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
                                         <item guid="ff0e4685-0673-4279-a149-82bf3024935b" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>run_data</body>
+                                                <body>run_data_list</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>

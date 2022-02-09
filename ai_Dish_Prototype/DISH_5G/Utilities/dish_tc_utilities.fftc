@@ -7184,15 +7184,55 @@ Valid Types: csv or iev or pcap</description>
             </steps>
             <arguments>
                 <item name="run_data_list"/>
+                <item name="add_dict">
+                    <description>dictionary to add to the run_list json. Shoud look something like this
+[&apos;tsGroups&apos;][0][&apos;testCases&apos;][0][&apos;parameters&apos;]...</description>
+                </item>
                 <item name="ts_group_index">
                     <defaultValue>0</defaultValue>
                 </item>
                 <item name="test_case_index">
                     <defaultValue>0</defaultValue>
                 </item>
-                <item name="add_dict">
-                    <description>dictionary to add to the run_list json. Shoud look something like this
-[&apos;tsGroups&apos;][0][&apos;testCases&apos;][0][&apos;parameters&apos;]...</description>
+            </arguments>
+        </item>
+        <item name="incr_ls_n_number_in_string" isPublic="true">
+            <steps>
+                <item guid="f1f62a8d-cff7-46cc-8c91-8d2923895cb1" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>import re</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="de0ea943-15d2-4a1f-8a64-0a84bc2f4db4" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>t_list = re.split(&apos;N|:&apos;,string)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1329bfac-4bfe-4729-ac1c-38e3de32e610" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>num = int(t_list[1])+int(incr)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="65367dd2-edc3-47dd-b8c4-7f8d74d02c40" action="return">
+                    <command>
+                        <body>[t_list[0]+&apos;N&apos;+str(num)+&apos;:&apos;+t_list[2]]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Input a string like:
+ +130740210#(N7:2 0/2)
+ 3133401999990#(N7:2 0/2)
+and this will return the number between the N and the : incremented</multilineDescription>
+            <arguments>
+                <item name="string">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="incr">
+                    <defaultValue>1</defaultValue>
                 </item>
             </arguments>
         </item>
