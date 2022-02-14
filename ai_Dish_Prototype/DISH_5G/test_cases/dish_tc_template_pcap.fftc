@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="8.6.1.202109290400">
+<testCase version="8.6.2.202112190518">
     <general>
         <language>Python</language>
     </general>
@@ -634,6 +634,20 @@
                                     </item>
                                 </analysisRules>
                             </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3cdf39fb-9658-4d96-9301-57779e0fc296" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e080fc0f-6c05-4ff4-96b4-71fdf5578ff6" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready(session=&apos;s1&apos;, ts_groups_json=ts_groups)</body>
+                            </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>

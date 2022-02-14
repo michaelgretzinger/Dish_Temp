@@ -7236,5 +7236,207 @@ and this will return the number between the N and the : incremented</multilineDe
                 </item>
             </arguments>
         </item>
+        <item name="wait_for_test_servers_ready" isPublic="true">
+            <steps>
+                <item guid="0246cd2f-837f-4173-85fe-41d6fc9b8052" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>ts_groups_json</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/item/TS_Name</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>test_server_list</storageLocation>
+                                        <storeInAList>true</storeInAList>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6358382d-ef3b-4c9a-bde5-08ce24e40b2a" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>i = 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="56f8a146-09aa-45fd-bcf5-2dad1096e4f3" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>end_time = time.time()+int(timeout)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="385e23d8-5e19-4377-ab7b-8a71adefedb2" action="while" useFieldsInCommand="false">
+                    <command>
+                        <body>time.time() &lt; end_time:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="414f2264-f7a2-416c-a612-49fa26cd2d05" action="Custom" session="[session]">
+                            <command>
+                                <body>-requestMethod GET -dataType json -rawResponse true -url testServers</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>get_json</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="Custom" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" rawResponse="true" rawResponse.inherit="false" url="testServers" url.inherit="false"/>
+                            <advancedProperties defaultSessionProfile="project://di_Landslide/session_profiles/landslide_rest.ffsp"/>
+                        </item>
+                        <item guid="995f3ef8-37d6-4e2e-9e03-328ba46ab920" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retry = False</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <advancedProperties defaultSessionProfile="project://di_Landslide/session_profiles/landslide_rest.ffsp"/>
+                        </item>
+                        <item guid="c96e4c0a-9d96-4beb-84e2-78c18a5307c0" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>i in test_server_list:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="cd4c5efb-2f30-4b2d-a1fd-a71f1365dddb" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get_json</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query sub="true">mapped/Json/testServers/item\\[./name=&apos;[i]&apos;]/state</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>value == &apos;READY&apos;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                    <message>Test Server: [i] Ready</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                                    <message>Test Server [i] is in state [value]</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="Eval">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                    <statement>retry = True</statement>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="733dd749-8b63-44ac-8e73-b41a4c255871" action="eval" useFieldsInCommand="false">
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <advancedProperties defaultSessionProfile="project://di_Landslide/session_profiles/landslide_rest.ffsp"/>
+                        </item>
+                        <item guid="3a709a10-efca-4f43-bc99-85c11d2f403d" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>If all ok, then return</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <advancedProperties defaultSessionProfile="project://di_Landslide/session_profiles/landslide_rest.ffsp"/>
+                        </item>
+                        <item guid="91ec9bef-246a-46b7-9fb9-f3cf1a9a9c48" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>retry == False:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="a20a0de2-055e-4ec5-b415-c4b3894632fd" action="return">
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <advancedProperties defaultSessionProfile="project://di_Landslide/session_profiles/landslide_rest.ffsp"/>
+                        </item>
+                        <item guid="07e0433b-7e20-45dd-b835-8eb5a56a7ac1" action="sleep">
+                            <command>
+                                <body>10</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <advancedProperties defaultSessionProfile="project://di_Landslide/session_profiles/landslide_rest.ffsp"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1d908357-ac35-4799-960a-bccaa558989f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>If we get here the system timed out, time to exit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="967cfd22-5b5c-4322-8171-def5b4c3fad3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>use dummy analyis rule to throw error and abort</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>1 == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>One or more Landslide Test Servers not in ready state before timeout of [str(timeout)], aborting test</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="AbortExecution">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="session">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="ts_groups_json">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="timeout">
+                    <description>60 sec default timeout waiting for test server</description>
+                    <defaultValue>60</defaultValue>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
     </procedures>
 </testCase>
