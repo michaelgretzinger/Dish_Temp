@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="8.6.1.202109290400">
+<testCase version="8.6.2.202112190518">
     <general>
         <documentation>5G_DEREG_007 Successful UE initiated Deregistration procedure due to power off with UE in CM-CONNECTED /RRC Inactive Mode (No PDU).</documentation>
         <tags>5G_DEREG_007</tags>
@@ -636,6 +636,20 @@ Performance Counters:
                                     </item>
                                 </analysisRules>
                             </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="11bb7dc8-addf-4d4a-bebe-2cd8386e55bd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="135a1d3b-47c5-41fd-9384-9218eed4bc7b" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
+                            </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>

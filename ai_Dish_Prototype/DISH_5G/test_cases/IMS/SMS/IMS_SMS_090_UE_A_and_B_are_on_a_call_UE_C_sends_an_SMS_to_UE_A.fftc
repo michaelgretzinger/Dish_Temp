@@ -613,6 +613,20 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
+                <item guid="c34c69c2-53bd-4919-838f-93b650bbe1ea" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="1f893edf-e5e9-44aa-bb01-fc8cf24b625b" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="2eacbfa6-8ee8-4846-87a8-21fdc974cfb2" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Pre-verify Test Servers are &quot;Ready&quot;</body>

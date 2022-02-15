@@ -650,6 +650,20 @@ Expected Result/Post Condition:
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
+                <item guid="0ba9bcf2-0f65-4157-a42b-e3ce451001f0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ad2a2612-b7d8-4840-ad4e-ddfb7e00164d" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="659c0194-52bc-4bc1-97e3-1142702d79d0" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Verify test servers: status, license, process, ... map test session requirement</body>

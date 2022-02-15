@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="8.6.1.202109290400">
+<testCase version="8.6.2.202112190518">
     <general>
         <documentation>5G_PDU_066 UE Requested PDU Session Establishment (SMF Selection UPF based on TAI).</documentation>
         <tags>5G_PDU_066</tags>
@@ -628,6 +628,20 @@ Expected Result/Post Condition:
                                     </item>
                                 </analysisRules>
                             </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d49fd4d4-c5e5-4bd8-8a49-a3a5de39fae8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="40556ec7-cc84-4d6a-a704-8805fae33bc9" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
+                            </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>

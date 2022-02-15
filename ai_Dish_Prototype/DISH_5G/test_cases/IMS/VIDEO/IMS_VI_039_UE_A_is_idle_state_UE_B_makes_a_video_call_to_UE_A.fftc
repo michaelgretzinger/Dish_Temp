@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="8.6.1.202109290400">
+<testCase version="8.6.2.202112190518">
     <general>
         <documentation>IMS_VI_039 UE A is idle state. UE B makes a video call to UE A.</documentation>
         <tags>IMS_VI_039</tags>
@@ -618,6 +618,20 @@ Expected Result/Post Condition:
                                     </item>
                                 </analysisRules>
                             </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a3c16c17-a753-4216-92e0-1deafb23e7f1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9ce31ba0-b3e6-48f1-8cd6-6117243d1a6c" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
+                            </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>
