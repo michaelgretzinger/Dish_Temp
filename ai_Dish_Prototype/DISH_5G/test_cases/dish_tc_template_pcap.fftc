@@ -639,14 +639,14 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="3cdf39fb-9658-4d96-9301-57779e0fc296" action="comment" useFieldsInCommand="false">
+                <item guid="ff17eebd-f4fc-40a1-bb05-78e0f101a814" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
                     </command>
                     <nestedSteps>
-                        <item guid="e080fc0f-6c05-4ff4-96b4-71fdf5578ff6" action="call" useFieldsInCommand="false">
+                        <item guid="e9988288-4d61-4f09-b8a1-3a35714e4e5b" action="call" useFieldsInCommand="false">
                             <command>
-                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready(session=&apos;s1&apos;, ts_groups_json=ts_groups)</body>
+                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
