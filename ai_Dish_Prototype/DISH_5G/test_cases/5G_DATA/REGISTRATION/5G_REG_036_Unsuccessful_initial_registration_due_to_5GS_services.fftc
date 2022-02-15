@@ -1,6 +1,37 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
+        <documentation>5G_REG_036 Unsuccessful initial registration due to 5GS services </documentation>
+        <tags>5G_REG_036</tags>
+        <notes>Test Purpose: The purpose of this test is Unsuccessful Initial Registration due to 5GS services not allowed.
+Pre-requisites/Test Environment:
+•\tUE with 5G DISH SIM.
+•\tUDM access required.
+•\tThe trace/log collection is started.
+Test Dependencies: 
+•\tUE is not registered in the network.
+•\tThe UE’s 5GS services needed to remove from UDM.
+Test parameter and Tools:
+•\tInternal log and Wireshark.
+Test Procedure:
+•\tStart the trace / log collection.
+•\tTurn on the UE.
+•\tUE is not able to register to the network.
+•\tStop the trace/ log collection.
+Remarks: 
+•\t3GPP TS References - 3GPP TS 23.502 v16.5.0 Article 4.2.2.2.2
+•\tCall Flow References - E2E Call Flow Document Appendix Section 2.8.
+Expected Result/Post Condition:  
+•\tUE sends Registration Request message to AMF.
+•\tVerify Authentication Failure occurred due to UDM restrict the 5GS Services.
+•\tVerify the Cause #7 – 5GS services did not allow This 5GMM cause is sent to the UE when it is not allowed to operate 5GS services.
+•\tAMF sends Registration Reject message with cause &quot;5GS services not allowed (07)” to the UE.
+•\tThe trace/ log collection is stopped successfully.
+Performance Counters:
+•\tVerify that the counter M173C007 (UE_REG_FAIL_INIT_REG) in AMF has increased by 1. 
+Actual Results: 
+Status (Pass/Fail):
+</notes>
         <language>Python</language>
     </general>
     <procedures>
