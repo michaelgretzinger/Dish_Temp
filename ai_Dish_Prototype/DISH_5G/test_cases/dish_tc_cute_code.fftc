@@ -185,7 +185,7 @@
                                     <nestedSteps>
                                         <item guid="c673f257-6fde-4eca-99a0-df3ca6dc74a7" action="call" useFieldsInCommand="false">
                                             <command>
-                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters(run_data_list=run_data_list, add_dict=tc1_dict)</body>
+                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters(run_data_list=run_data_list, add_dict=tc1_dict, test_case_index=1)</body>
                                             </command>
                                             <postProcessing>
                                                 <storeResponseAt>run_data_list</storeResponseAt>
