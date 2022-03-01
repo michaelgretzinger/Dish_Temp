@@ -923,7 +923,7 @@
                                             <nestedSteps>
                                                 <item guid="08310598-1be7-4b22-bdf5-a8ded3dfaace" action="call" useFieldsInCommand="false">
                                                     <command>
-                                                        <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters(run_data_list=run_data_list, add_dict=tc0_dict)</body>
+                                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc0_dict]</body>
                                                     </command>
                                                     <postProcessing>
                                                         <storeResponseAt>run_data_list</storeResponseAt>
@@ -1013,7 +1013,7 @@
                                             <nestedSteps>
                                                 <item guid="f601aada-f158-42e5-a539-6f7a62ede8d8" action="call" useFieldsInCommand="false">
                                                     <command>
-                                                        <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters(run_data_list=run_data_list, add_dict=tc1_dict, test_case_index=1)</body>
+                                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc1_dict] -test_case_index 1</body>
                                                     </command>
                                                     <postProcessing>
                                                         <storeResponseAt>run_data_list</storeResponseAt>

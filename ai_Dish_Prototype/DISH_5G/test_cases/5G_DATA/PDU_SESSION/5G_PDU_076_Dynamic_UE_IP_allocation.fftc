@@ -639,12 +639,12 @@ Expected Result/Post Condition:
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="a572d108-5bab-4731-8ad4-55506f483cee" action="comment" useFieldsInCommand="false">
+                <item guid="455ffb6b-a10b-4ccf-aa65-7c676ab54cd0" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
                     </command>
                     <nestedSteps>
-                        <item guid="9291c6af-1160-4700-959b-cf3f601d2a17" action="call" useFieldsInCommand="false">
+                        <item guid="21f0b18f-c493-4da7-b165-b2b12ea41689" action="call" useFieldsInCommand="false">
                             <command>
                                 <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
                             </command>
@@ -2784,19 +2784,19 @@ Expected Result/Post Condition:
                                         <body>Add the NetworkHostAddrLocal to the filter</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="604faec7-b044-422e-818a-3a72f2136056" action="comment" useFieldsInCommand="false">
+                                        <item guid="604faec7-b044-422e-818a-3a72f2136056" action="comment" skip="true" useFieldsInCommand="false">
                                             <command>
                                                 <body>filter set &quot;tcp &amp;&amp; ip.dst == [param(&apos;LS_Nodal_favorite_params/ts0/tc0/NetworkHostAddrLocal/ip&apos;)] &amp;&amp; !tcp.analysis.retransmission&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="26b81d68-18bb-4802-8c2d-72fa6cfcf451" action="eval" useFieldsInCommand="false">
+                                        <item guid="26b81d68-18bb-4802-8c2d-72fa6cfcf451" action="eval" skip="true" useFieldsInCommand="false">
                                             <command>
                                                 <body>display_filter = display_filter+&quot; == &quot;+netHost_ip+&quot; &amp;&amp; !tcp.analysis.retransmission&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="ef33169d-4f51-4583-b8d1-13843d445e45" action="eval" useFieldsInCommand="false">
+                                        <item guid="ef33169d-4f51-4583-b8d1-13843d445e45" action="eval" skip="true" useFieldsInCommand="false">
                                             <command>
                                                 <body>display_filter</body>
                                             </command>

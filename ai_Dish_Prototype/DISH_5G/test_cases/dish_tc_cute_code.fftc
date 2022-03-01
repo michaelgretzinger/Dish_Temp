@@ -6,28 +6,28 @@
     <procedures>
         <item name="Do_NOT_Run_ME">
             <steps>
-                <item guid="4af5df2e-c9b5-474e-9cfd-d1eac61718ac" action="comment" useFieldsInCommand="false">
+                <item guid="299e9b2c-c31b-478e-97a3-3cc5ec06a805" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Modify JSON in string format before passing to Landslide IMS_SMS_090</body>
                     </command>
                     <nestedSteps>
-                        <item guid="4cf431b8-3e3b-46f0-99db-d70289136008" action="comment" useFieldsInCommand="false">
+                        <item guid="c8e9eb90-9b0c-435f-ba80-f149a8ea7a89" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>modify info for tc0</body>
                             </command>
                             <nestedSteps>
-                                <item guid="57983a58-576e-464a-b1db-2c03989d2289" action="eval" useFieldsInCommand="false">
+                                <item guid="0241d60a-8ac2-407d-b21e-1ee2dd098d10" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>tc0_dict = {}</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="b171d7d8-0d2c-4cab-b0a6-b22752fd963f" action="comment" useFieldsInCommand="false">
+                                <item guid="abbf2e29-8f02-44a4-ac38-d723e346b11e" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Increment phone numbers and sip_imsi by 1</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="979b1a86-fb88-4cb4-99c3-5f4f75fab1dc" action="call" useFieldsInCommand="false">
+                                        <item guid="5fc8b880-2854-4d84-9ff6-3e3dfbdc66bb" action="call" useFieldsInCommand="false">
                                             <command>
                                                 <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#incr_ls_n_number_in_string(string=param(&apos;LS_Nodal_favorite_params/ts0/tc1/ImsSipSubsPublicUserName&apos;))</body>
                                             </command>
@@ -37,19 +37,19 @@
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="3a4608cd-6cd6-44a1-a47f-ef090614b486" action="eval" useFieldsInCommand="false">
+                                        <item guid="340ae83c-262d-4ce6-8df4-115dc39fe7ac" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc0_dict[&apos;ImsSipSubsPublicUserName&apos;] = new_ph</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="7d60532f-94d0-45aa-bdfa-360aacdb4440" action="eval" useFieldsInCommand="false">
+                                        <item guid="34236600-82f9-4bd7-af31-f9d869de50bf" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc0_dict[&apos;ImsSipSubsPrivateUserName&apos;] = new_ph</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="52827bb0-e21a-4e19-b69e-09185c646104" action="call" useFieldsInCommand="false">
+                                        <item guid="87067b5f-2e7e-4f18-b906-2e1dab4dbe94" action="call" useFieldsInCommand="false">
                                             <command>
                                                 <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#incr_ls_n_number_in_string(string=param(&apos;LS_Nodal_favorite_params/ts0/tc1/ImsSipSubsImsi&apos;))</body>
                                             </command>
@@ -59,7 +59,7 @@
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="6decc32c-3ad6-4786-86a7-382c784544fa" action="eval" useFieldsInCommand="false">
+                                        <item guid="4d91a01d-8dce-42f4-9dfc-56e22b1b886f" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc0_dict[&apos;ImsSipSubsImsi&apos;] = new_imsi</body>
                                             </command>
@@ -68,18 +68,18 @@
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="30d65f9c-6819-4470-805a-bf8612c0b042" action="comment" useFieldsInCommand="false">
+                                <item guid="fbb63ca3-918f-4a2e-9c0d-8ee3bbda2714" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Increment SUPI/IMEI</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="5e4afc05-fdd3-4f97-99df-01387d266b04" action="eval" useFieldsInCommand="false">
+                                        <item guid="786dc588-7391-4a90-a192-ca373e32f370" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc0_dict[&apos;UeNas5gMmSupi&apos;]=str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/UeNas5gMmSupi&apos;))+1)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="53aaba11-5baa-4c46-85ba-cbf800ec2912" action="eval" useFieldsInCommand="false">
+                                        <item guid="3de56f7c-46d3-4687-b756-a8836253d57f" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc0_dict[&apos;UeNas5gMmImei&apos;]=str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/UeNas5gMmImei&apos;))+1)</body>
                                             </command>
@@ -88,14 +88,14 @@
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="59d14f31-6d15-44c6-a8c3-670380734184" action="comment" useFieldsInCommand="false">
+                                <item guid="c8aff001-76e6-4a98-98a2-19e18bdf35ef" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Add dictionary to run data</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="7efe80b2-7e3d-4bb4-8b7e-9043c7255ce0" action="call" useFieldsInCommand="false">
+                                        <item guid="b8b06678-7471-446a-b5eb-156bf1c0d146" action="call" useFieldsInCommand="false">
                                             <command>
-                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters(run_data_list=run_data_list, add_dict=tc0_dict)</body>
+                                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc0_dict]</body>
                                             </command>
                                             <postProcessing>
                                                 <storeResponseAt>run_data_list</storeResponseAt>
@@ -103,7 +103,7 @@
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="b5cd3226-e804-4752-b65d-7816b36ea745" action="eval" useFieldsInCommand="false">
+                                        <item guid="9c687d48-ba1c-4fb4-b707-f427ed7f6cad" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>run_data_list</body>
                                             </command>
@@ -115,23 +115,23 @@
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="59115a25-47aa-4e6d-a8f7-2e1a52337e9b" action="comment" useFieldsInCommand="false">
+                        <item guid="82fd4d83-6db0-42c7-a53b-91648bbd096a" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>modify info for tc1</body>
                             </command>
                             <nestedSteps>
-                                <item guid="9eea2b16-ca4d-4fc5-b05d-17148bd68d25" action="eval" useFieldsInCommand="false">
+                                <item guid="96dd0ace-381a-410e-ba3a-f870ca488f36" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>tc1_dict = {}</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="107bd437-177b-4e2f-afa4-db940601349b" action="comment" useFieldsInCommand="false">
+                                <item guid="00300dd0-98d9-4c2c-9e27-3d6df8280c8a" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>GnbId</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="41e8d2a6-a509-4152-8cee-c9e4ddff3eb2" action="eval" useFieldsInCommand="false">
+                                        <item guid="b394c1a2-5255-4d25-84dc-c1cea0ef387b" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc1_dict[&apos;GnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/GnbId&apos;)) +16)</body>
                                             </command>
@@ -140,36 +140,36 @@
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="7a107e18-c49b-4418-b871-27503e3627ee" action="comment" useFieldsInCommand="false">
+                                <item guid="363963c8-1e57-41c6-a6bc-c44124728daa" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>increment base phone and IMSI by 2x not 1x</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="84b1fc20-90e8-4bbb-81d5-9e2ef20e1e9b" action="eval" useFieldsInCommand="false">
+                                        <item guid="19512ea1-7f06-4764-9bbf-d6bc12e97db3" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>new_ph = param(&apos;LS_Nodal_favorite_params/ts0/tc1/ImsSipSubsPublicUserName&apos;)[0:-1]+&apos; 0/2&apos;+&apos;)&apos;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="312f63ee-8907-41aa-8e3d-511cef05b4a5" action="eval" useFieldsInCommand="false">
+                                        <item guid="1dfe8982-dd8b-4afb-8c28-b99b3446ca33" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc1_dict[&apos;ImsSipSubsPublicUserName&apos;] = new_ph</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="79b4d5d2-70cd-4884-a844-326ae1252d10" action="eval" useFieldsInCommand="false">
+                                        <item guid="ec900b6e-05be-4524-9a9d-b1fc6db1c2c7" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc1_dict[&apos;ImsSipSubsPrivateUserName&apos;] = new_ph</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="3be62e79-33e9-4b8a-aa47-c3241f3f3d3c" action="eval" useFieldsInCommand="false">
+                                        <item guid="dadbdd87-9f3f-463f-a569-1732d40d658a" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>new_imsi = param(&apos;LS_Nodal_favorite_params/ts0/tc1/ImsSipSubsImsi&apos;)[0:-1]+&apos; 0/2&apos;+&apos;)&apos;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="8cf381be-e95d-485d-b87e-f5dcec029856" action="eval" useFieldsInCommand="false">
+                                        <item guid="aa16e597-e493-4a7b-939f-51c0756deeea" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc1_dict[&apos;ImsSipSubsImsi&apos;] = new_imsi</body>
                                             </command>
@@ -178,14 +178,14 @@
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="68369914-6000-4f1a-839d-972b868a9178" action="comment" useFieldsInCommand="false">
+                                <item guid="bd0fc71a-ed98-448e-a6a7-5ec6e32235a3" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Add dictionary to run data</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="c673f257-6fde-4eca-99a0-df3ca6dc74a7" action="call" useFieldsInCommand="false">
+                                        <item guid="cb194c59-98e0-4218-911a-f5d89e15414d" action="call" useFieldsInCommand="false">
                                             <command>
-                                                <body>project://ai_Dish_Prototype/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters(run_data_list=run_data_list, add_dict=tc1_dict, test_case_index=1)</body>
+                                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc1_dict] -test_case_index 1</body>
                                             </command>
                                             <postProcessing>
                                                 <storeResponseAt>run_data_list</storeResponseAt>
@@ -193,7 +193,7 @@
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="584251b7-ce96-42f7-abda-64e520e7bd99" action="eval" useFieldsInCommand="false">
+                                        <item guid="6ec55679-fd55-4f44-af8e-8de85db362be" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>run_data_list</body>
                                             </command>
