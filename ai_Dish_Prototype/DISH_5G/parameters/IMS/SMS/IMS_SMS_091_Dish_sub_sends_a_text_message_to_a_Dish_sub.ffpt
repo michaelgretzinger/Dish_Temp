@@ -102,11 +102,6 @@
                     <test_waiting_timeout pt:datatype="INTEGER" pt:description="Bailout timer.... if things get sideways">90</test_waiting_timeout>
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
-                    <update_phone_data pt:datatype="BOOLEAN">true</update_phone_data>
-                    <update_LS_GM_SMS pt:datatype="BOOLEAN">true</update_LS_GM_SMS>
-                    <update_data_store>
-                        <param1/>
-                    </update_data_store>
                 </process_manager>
             </TMD_Name>
         </parameters>
