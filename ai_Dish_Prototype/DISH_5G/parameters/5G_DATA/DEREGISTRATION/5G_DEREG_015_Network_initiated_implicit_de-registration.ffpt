@@ -27,15 +27,10 @@
                         <GnbId>${topology/resources/Sub_1/Cell_ID}</GnbId>
                         <GnbMcc>${topology/resources/Sub_1/MCC}</GnbMcc>
                         <GnbMnc>${topology/resources/Sub_1/MNC}</GnbMnc>
-                        <GnbTac>${topology/resources/Sub_1/Starting_TAC}</GnbTac>
+                        <GnbTac pt:description="${topology/resources/Sub_1/Starting_TAC}">3113</GnbTac>
                         <GnbAltTac>${topology/resources/Sub_1/Alternate_TAC}</GnbAltTac>
                         <GnbName>${topology/resources/Sub_1/GNB_Name}</GnbName>
                         <ImsSipSubsImsi>${topology/resources/Sub_1/SIP_IMSI}</ImsSipSubsImsi>
-                        <ImsSipSubsSecretKey>0x1177a72328b603e34369f99d124d413c</ImsSipSubsSecretKey>
-                        <SipUeAuthenticationType>IMS_AKA</SipUeAuthenticationType>
-                        <UeReuseCredentials pt:datatype="BOOLEAN">true</UeReuseCredentials>
-                        <UeAkaVersion pt:datatype="INTEGER">1</UeAkaVersion>
-                        <UeOpVar>0x0000AAAA0000BBBB0000CCCC0000DDDD</UeOpVar>
                     </tc0>
                 </ts0>
             </LS_Nodal_favorite_params>
@@ -82,7 +77,7 @@
                     </pcap_analysis_drivers>
                     <show_charts pt:datatype="BOOLEAN">false</show_charts>
                     <test_severity pt:description="Dish defined: &quot;severity&quot;: &quot;Sev 1 - Critical&quot; or &quot;Sev 2 - Major&quot; or &quot;Sev 3 - Minor&quot;">Sev 3 - Minor</test_severity>
-                    <test_waiting_timeout pt:datatype="INTEGER" pt:description="Bailout timer.... if things get sideways">180</test_waiting_timeout>
+                    <test_waiting_timeout pt:datatype="INTEGER" pt:description="Bailout timer.... if things get sideways">15000</test_waiting_timeout>
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </process_manager>
@@ -109,7 +104,7 @@ single_testserver_1.ffpt
 If additions are required/desired please contact Spirent Automation Engineer for assistance.
 \t</description>
     <includeParameters>
-        <item>project://ai_Dish_Prototype/DISH_5G/parameters/tc_param_blocks/sut_params/1-AMF_SUTs.ffpt</item>
         <item>project://ai_Dish_Prototype/DISH_5G/parameters/tc_param_blocks/topology_params/single_testserver_1.ffpt</item>
+        <item>project://ai_Dish_Prototype/DISH_5G/parameters/tc_param_blocks/sut_params/1-AMF_SUTs.ffpt</item>
     </includeParameters>
 </ParameterTree>
