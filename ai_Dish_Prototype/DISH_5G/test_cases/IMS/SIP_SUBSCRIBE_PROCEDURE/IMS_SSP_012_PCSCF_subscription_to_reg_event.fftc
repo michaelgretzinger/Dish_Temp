@@ -2631,9 +2631,6 @@ Expected Result/Post Condition:
         </item>
         <item name="pcap_validation" isPublic="true" defaultSessionProfile="application:com.fnfr.svt.applications.wireshark">
             <steps>
-                <item guid="a7de26d9-3fd5-4a49-9400-af64b1c27360" action="comment" useFieldsInCommand="false">
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="64cc19cd-0302-49b2-88f5-8c2ed10ca639" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Arguement inspection and Get project_id</body>
