@@ -1063,7 +1063,7 @@ Expected Result/Post Condition:
                                                 </item>
                                                 <item guid="3d1ec7f5-ed4e-4c5d-82ba-8bcf8aedae4f" action="eval" useFieldsInCommand="false">
                                                     <command>
-                                                        <body>tc0_dict[&apos;ImsSipEndptsPublicUserName&apos;] = &apos;*82&apos;+raw_phone_number_tc1</body>
+                                                        <body>tc0_dict[&apos;ImsSipEndptsPublicUserName&apos;] = &apos;*67&apos;+raw_phone_number_tc1</body>
                                                     </command>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
