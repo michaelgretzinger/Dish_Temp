@@ -1287,6 +1287,20 @@
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
+                        <item guid="2ed37c47-cfea-4f2f-9cc4-24525440a580" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>IF you&apos;re here the LS process has started, Seed &apos;ls_start_time&apos;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="bac103ad-e327-476a-85e9-5d277d6e18b6" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>ls_start_time = info(&apos;time&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
                         <item guid="50128eef-7eb7-430c-8d82-f637049f5e81" action="if" useFieldsInCommand="false">
                             <command>
                                 <body>len(running_id_list) &gt; 1:</body>
@@ -1888,6 +1902,26 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
+                <item guid="5b9c464d-1838-4a39-93ec-fc9c920ec24a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>#### LS process complete. Grab and calculate the Landslide runtime, it will be writen out shortly ####</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="68486fdf-10c9-4a5b-aa91-e358081f475d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ls_end_time = info(&apos;time&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9c80f723-3042-4f3b-b4ac-df721201b223" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ls_total_time = int(float(ls_end_time) - float(ls_start_time))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="ea89041d-03be-49cf-bbea-8889ca8049fc" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>End of instance data processing</body>
@@ -2047,7 +2081,7 @@
                                 </item>
                                 <item guid="99457351-b929-48f7-9646-b351448219ed" action="comment" useFieldsInCommand="false">
                                     <command>
-                                        <body>Get the favorites and criteria for each instance.</body>
+                                        <body>Get the favorites and criteria for each instance. #### Message Landslide runtime via analysis rule. It&apos;s for report formatting purposes. ####</body>
                                     </command>
                                     <nestedSteps>
                                         <item guid="f79b0fd5-6ba3-49c7-8bb7-3d22553453c6" action="Custom" session="s1">
@@ -2069,6 +2103,11 @@
                                                                     <item actionId="DeclareExecutionIssue">
                                                                         <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
                                                                             <message>Completed Landslide Process: [running_id]</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                            <message>Landslide Execution Time: [ls_total_time]</message>
                                                                         </actionProperties>
                                                                     </item>
                                                                     <item actionId="DeclareExecutionIssue">

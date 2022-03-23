@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
+        <documentation>5G_WDN_061 Xn based inter NG-RAN handover when gNB1 in TAI 1 and gNB2 in same TAI 2.</documentation>
+        <tags>5G_WDN_061</tags>
+        <notes>Test Purpose: The purpose of this test is to verify Xn based inter NG-RAN handover when gNB1 in TAI 1 and gNB2 in same TAI 2.
+
+Expected Result/Post Condition: 
+•\tData bearer remains active and the GTP tunnel is changed to gNB2.
+</notes>
         <language>Python</language>
     </general>
     <procedures>
@@ -863,6 +870,114 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
+                <item guid="4ed8d585-5863-470a-b9d3-399f4b8e97dc" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>##### Modify JSON in string format before passing to Landslide #####</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5068fb17-d7a9-4aa0-a435-6ce45bd14a8b" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Convert json list to dict</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="93ce673b-2c57-4311-8b37-49a4f46eead0" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>import json</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="0a05e686-13ec-4d94-99d1-4c6e1e0b403d" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>import re</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="b9607c78-d69a-4de7-840e-ff36dc9acd3c" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>temp_dict = json.loads(run_data_list[0])</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="4f5a7c93-ac05-44bc-a078-f4f3c3b8073c" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Modify tc0 - Test contains 2 gNB controllers.... We need just an updated Cell ID</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="2d11f1da-ba8a-4dad-ae8f-e25337b34bef" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>tc0_dict = {}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="45646efb-4005-472c-8c28-8745d87081e2" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>tc0_dict[&apos;MobGnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc0/MobGnbId&apos;)) +16)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f2e55b6d-c397-44a8-a8ec-cb440e492d57" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Add dictionary to run data</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="d4e63d52-f739-4138-a457-756b8cf442b9" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc0_dict]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>run_data_list</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="b08f4c8d-870d-4f61-84b5-23d4a49f97ac" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>run_data_list</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b6eec419-ae13-4fa6-abaf-9aa7764400fc" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>##### Message all updated Sub_1 Non-default values #####</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="3180bb3b-0d34-4b3a-b412-0f272fa60116" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://ai_LS_5G/utility_library/utils.fftc#insert_devider_string -length 135</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="5d8e2db3-9c32-42b6-9fd6-5b6c55a55bf9" action="message" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Information:The Following values have been modified from the assigned Sub_1 default values</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                        <message inherit="false">The Following values have been modified from the assigned Sub_1 default values</message>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="affb4b71-dff8-4e27-bff0-a36b417f5acd" action="message" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Information:LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                        <message inherit="false">LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</message>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="00828864-e713-4133-9ecf-2e5e4dfc5fc2" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Perform Landslide Test Procedure</body>
@@ -1307,18 +1422,21 @@
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="ce6a7ae9-faa3-427e-a81c-19762e01d2d3" action="comment" useFieldsInCommand="false">
+                        <item guid="63ac7e99-f938-4d1c-a60c-e7d1c827eaae" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>IF you&apos;re here the LS process has started, Seed &apos;ls_start_time&apos;</body>
                             </command>
                             <nestedSteps>
-                                <item guid="c3b82710-a19f-4d51-9316-b6679d8c1ea0" action="eval" useFieldsInCommand="false">
+                                <item guid="34863ddd-c17e-478a-b9c1-9a3ebc1e3264" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>ls_start_time = info(&apos;time&apos;)</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f5f2c24f-d7f1-445a-a0fa-74f5d33c0ab3" action="comment" useFieldsInCommand="false">
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                         <item guid="39defa94-f09b-4cca-a37f-99e72c6230e9" action="if" useFieldsInCommand="false">
@@ -1922,22 +2040,30 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="b3ebe3fa-1062-438e-ae2c-24a2b4c9e3d3" action="comment" useFieldsInCommand="false">
+                <item guid="2bb5c6b2-27ba-4989-80ac-b22ca73484eb" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>#### LS process complete. Grab and calculate the Landslide runtime, it will be writen out shortly ####</body>
                     </command>
                     <nestedSteps>
-                        <item guid="98609c54-36b5-48c7-8071-0c1cc1b27885" action="eval" useFieldsInCommand="false">
+                        <item guid="1dcca553-9280-409e-9aac-c7a3b6ea936c" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>ls_end_time = info(&apos;time&apos;)</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="b01daf40-09ff-4c9b-bb50-92f9e8d07550" action="eval" useFieldsInCommand="false">
+                        <item guid="52158f2a-b041-4345-a99e-9dc6e7f08e3e" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>ls_total_time = int(float(ls_end_time) - float(ls_start_time))</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="615b3491-e9d2-4260-9f9f-2b2220451a0d" action="message" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>Information: Landslide Execution Time: [ls_total_time]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                <message inherit="false"> Landslide Execution Time: [ls_total_time]</message>
+                            </applicationProperties>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
@@ -2375,28 +2501,7 @@
         </item>
         <item name="pcap_validation" isPublic="true" defaultSessionProfile="application:com.fnfr.svt.applications.wireshark">
             <steps>
-                <item guid="07b68bb5-6a87-4aea-b06a-304205bf3102" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>######################################################################################</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="04e009b5-c9a7-471f-bc55-3c55c109b7d6" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>This an example routine, it is from a previously developed test instance. AND is NOT intended to work as is.</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="76ba2fc6-ec2c-4530-8527-29da82ecbff7" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Utilizes parameter data and the pcap_utils as the primary driver.</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="9a6c741a-9c47-4468-be75-58ef7b5815fd" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>######################################################################################</body>
-                    </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
                 <item guid="09c7d505-9d75-4294-99bf-f900e72f64a9" action="comment" useFieldsInCommand="false">
@@ -2979,26 +3084,38 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="7d653786-398b-438b-8916-fa780181ec7c" action="comment" useFieldsInCommand="false">
+                <item guid="3726da67-65dd-4d59-94bf-f46435cdffe7" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>Get the AMF, GnbController and GnbUser addresses for the current LS_Nodal_favorite_params</body>
+                        <body>Get the AMF, GnbController , MobGnbController and GnbUser addresses for the current LS_Nodal_favorite_params</body>
                     </command>
                     <nestedSteps>
-                        <item guid="7ce9a1de-4f9c-47a6-9cde-3886cd10daae" action="eval" useFieldsInCommand="false">
+                        <item guid="f975be5a-7ad7-40ad-bcbd-949586b8ccf7" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>amf_ip = param(&apos;SUT/nodal_ts0_tc0/AmfSut/name&apos;)</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="793b28a3-79e4-42cd-897a-b0630317bbe4" action="eval" useFieldsInCommand="false">
+                        <item guid="7a0572bf-e631-4cd3-bb18-446ba88a428a" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>gnbC_ip = param(&apos;LS_Nodal_favorite_params/ts0/tc0/GnbControlAddr/ip&apos;)</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="b827e7fc-3405-4fa6-ad51-e2bb32ee031e" action="eval" useFieldsInCommand="false">
+                        <item guid="ebbde6ab-aca3-4600-8f74-1e6bcd0591c2" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>gnbU_ip = param(&apos;LS_Nodal_favorite_params/ts0/tc0/GnbUserAddr/ip&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ae6ac532-549c-4c52-9580-61196117b663" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>mob_gnbC_ip = param(&apos;LS_Nodal_favorite_params/ts0/tc0/MobGnbControlAddr/ip&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3f48847c-eb2c-4772-81db-0f2dee7f866b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>mob_gnbU_ip = param(&apos;LS_Nodal_favorite_params/ts0/tc0/MobGnbUserAddr/ip&apos;)</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
@@ -3040,18 +3157,18 @@
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="807c8a0b-6d60-4c4e-bc73-d6859f9d31ef" action="comment" useFieldsInCommand="false">
+                                <item guid="2d0670df-246e-4f04-a01a-43aeeaef9877" action="comment" useFieldsInCommand="false">
                                     <command>
-                                        <body>Add the gndC_ip to the filter</body>
+                                        <body>Add the mob_gndC_ip to the filter</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="01c3e439-8341-41e9-a206-100bdefb06ac" action="eval" useFieldsInCommand="false">
+                                        <item guid="84fa6252-5168-4f17-9391-2ca1d3c27fc1" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+gnbC_ip+&quot;)&quot;</body>
+                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+mob_gnbC_ip+&quot;)&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="95220085-6837-4ef7-b6b8-c1a81a3265f4" action="eval" useFieldsInCommand="false">
+                                        <item guid="bf89785a-7fc2-4c4b-85f5-15e808aca5d7" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>display_filter</body>
                                             </command>
@@ -3091,25 +3208,13 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="694ea51e-3db7-44aa-b5b7-42167283ee7f" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>&gt;&gt;&gt;&gt; No tshark filter &lt;&lt;&lt;&lt;</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="fb5f8d71-d96c-4888-a288-ebb0859cfed7" action="call" useFieldsInCommand="false">
-                    <command>
-                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message] -open_session True</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="2c6131f4-2eca-4778-9ba4-279c412557d6" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>&gt;&gt;&gt;&gt; Utilize  tshark filter &lt;&lt;&lt;&lt;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="e8f8e706-3dd6-4679-9a47-f06cf3853750" action="open" session="wireshark" skip="true">
+                <item guid="e8f8e706-3dd6-4679-9a47-f06cf3853750" action="open" session="wireshark">
                     <command>
                         <body>application:com.fnfr.svt.applications.wireshark</body>
                     </command>
@@ -3127,7 +3232,7 @@
                         <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                     </applicationProperties>
                 </item>
-                <item guid="7af015b3-29ed-46fe-8a85-13f97d52d6c7" action="call" skip="true" useFieldsInCommand="false">
+                <item guid="7af015b3-29ed-46fe-8a85-13f97d52d6c7" action="call" useFieldsInCommand="false">
                     <command>
                         <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message]</body>
                     </command>
@@ -3199,6 +3304,21 @@
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item/id</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>packet_loc</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
                                         <query>rowCount</query>
                                     </extractorProperties>
                                 </extractorInfo>
@@ -3210,6 +3330,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3225,6 +3346,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3240,6 +3362,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3255,6 +3378,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="none">
@@ -3300,6 +3424,7 @@
                                         </actionsWhenFalse>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                         </analysisRules>
                         <storeResponseAt>response</storeResponseAt>
@@ -3345,18 +3470,18 @@
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="22f53444-9d11-46d3-9633-149710d14522" action="comment" useFieldsInCommand="false">
+                                <item guid="28308734-6854-4e59-a037-e6410bfbf39e" action="comment" useFieldsInCommand="false">
                                     <command>
-                                        <body>Add the amf_ip to the filter</body>
+                                        <body>Add the gndC_ip to the filter</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="f6f21fac-a492-4ec9-898a-4497832e1209" action="eval" useFieldsInCommand="false">
+                                        <item guid="7b60e1bd-0e65-4df7-94d5-622176448e8a" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+amf_ip+&quot;)&quot;</body>
+                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+gnbC_ip+&quot;)&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="d6bb895a-5615-454c-b19e-a5385846a156" action="eval" useFieldsInCommand="false">
+                                        <item guid="d35e6be8-433c-4a93-9b8a-646a7bb30a0c" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>display_filter</body>
                                             </command>
@@ -3434,6 +3559,9 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
+                <item guid="604ba6e0-e02a-49d0-8434-262c472f64bd" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="be5da67f-62ec-465e-99d0-e3fd266889eb" action="command" session="wireshark">
                     <command>
                         <body>query packets</body>
@@ -3462,6 +3590,21 @@
                                                 <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                             </item>
                                         </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item/id</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>packet_loc</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -3576,6 +3719,50 @@
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
+                <item guid="f3ef0897-dedf-45d7-9a7e-43f198600ac1" action="command" session="wireshark" useResponseMapLibraryApplicability="false" useAutoMap="false">
+                    <command>
+                        <body>query details [packet_loc]</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^\\s+ngap\\.TransportLayerAddressIPv4\\s+\\|\\s+(((\\d+\\.)+\\d+))\\s+\\|\\s+\\S+\\s+\\(\\S+\\):\\s+((\\d+\\.)+\\d+)\\s+\\|\\s+\\S+\\s+$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>value == str(gnbU_ip)</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Pre mobility Update GnbUser gTPTunnel Address as Expected. [gnbU_ip]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Pre mobility Update GnbUser gTPTunnel Address NOT as Expected. [value]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                    <performResponseMapping>false</performResponseMapping>
+                </item>
                 <item guid="db2525a9-17b4-49e4-97c9-da89bd343175" action="comment" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -3614,18 +3801,18 @@
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="f6152222-3742-4d88-9f02-e0acced5d463" action="comment" useFieldsInCommand="false">
+                                <item guid="442bdf9d-3c6b-44fb-9639-ca89204b4c44" action="comment" useFieldsInCommand="false">
                                     <command>
-                                        <body>Add the gndC_ip to the filter</body>
+                                        <body>Add the mob_gndC_ip to the filter</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="39153fd0-60ed-49a0-8e37-ea42a9d8315e" action="eval" useFieldsInCommand="false">
+                                        <item guid="59b392bb-dfdb-48c4-968e-7f459d4ec495" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+gnbC_ip+&quot;)&quot;</body>
+                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+mob_gnbC_ip+&quot;)&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="966ab90f-a634-4929-a85d-dd41094b6944" action="eval" useFieldsInCommand="false">
+                                        <item guid="81ea9177-d99b-44b9-8e35-cf1c7e05674a" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>display_filter</body>
                                             </command>
@@ -3737,6 +3924,21 @@
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item/id</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>packet_loc</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
                                         <query>rowCount</query>
                                     </extractorProperties>
                                 </extractorInfo>
@@ -3748,6 +3950,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3763,6 +3966,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3778,6 +3982,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3793,6 +3998,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="none">
@@ -3838,12 +4044,57 @@
                                         </actionsWhenFalse>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                         </analysisRules>
                         <storeResponseAt>response</storeResponseAt>
                         <storeResponseText>true</storeResponseText>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="49f26ad4-6e41-4548-8e72-80e6418b560f" action="command" session="wireshark" useResponseMapLibraryApplicability="false" useAutoMap="false">
+                    <command>
+                        <body>query details [packet_loc]</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^\\s+ngap\\.TransportLayerAddressIPv4\\s+\\|\\s+(((\\d+\\.)+\\d+))\\s+\\|\\s+\\S+\\s+\\(\\S+\\):\\s+((\\d+\\.)+\\d+)\\s+\\|\\s+\\S+\\s+$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>value == str(mob_gnbU_ip)</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Post mobility Update GnbUser gTPTunnel Address as Expected. [mob_gnbU_ip]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Post mobility Update GnbUser gTPTunnel Address NOT as Expected. [value]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                    <performResponseMapping>false</performResponseMapping>
                 </item>
                 <item guid="88e4358c-9af1-4be2-83a9-b119936af4c9" action="comment" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
