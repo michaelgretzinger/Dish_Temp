@@ -15,7 +15,6 @@ Expected Result/Post Condition:
 • Verify UPF allocates IPv6 address for the PDU Session.</notes>
         <language>Python</language>
     </general>
-    <testbed>project://ai_Dish_Prototype/topologies/Dish%20Custom/D-E1-IN-001_TS2.tbml</testbed>
     <procedures>
         <item name="main">
             <steps>
@@ -632,12 +631,12 @@ Expected Result/Post Condition:
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="523e6482-68f2-4ab2-9152-0f85e1094cbe" action="comment" useFieldsInCommand="false">
+                <item guid="22f12514-6e83-4212-80f1-6005063cc81a" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
                     </command>
                     <nestedSteps>
-                        <item guid="0eb2e741-9288-44b6-b1e6-10f375cd97e4" action="call" useFieldsInCommand="false">
+                        <item guid="7edee331-3efd-4d4c-8557-3dc00ee2cee6" action="call" useFieldsInCommand="false">
                             <command>
                                 <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
                             </command>
