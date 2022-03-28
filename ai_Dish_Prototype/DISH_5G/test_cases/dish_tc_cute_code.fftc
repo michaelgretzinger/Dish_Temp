@@ -133,7 +133,7 @@
                                     <nestedSteps>
                                         <item guid="b394c1a2-5255-4d25-84dc-c1cea0ef387b" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>tc1_dict[&apos;GnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/GnbId&apos;)) +16)</body>
+                                                <body>tc1_dict[&apos;GnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/GnbId&apos;)) +100)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
@@ -495,7 +495,7 @@
                                     <nestedSteps>
                                         <item guid="2d7409f4-461e-4fa4-a6ff-b79202d6b550" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>tc1_dict[&apos;GnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/GnbId&apos;)) +16)</body>
+                                                <body>tc1_dict[&apos;GnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/GnbId&apos;)) +100)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>

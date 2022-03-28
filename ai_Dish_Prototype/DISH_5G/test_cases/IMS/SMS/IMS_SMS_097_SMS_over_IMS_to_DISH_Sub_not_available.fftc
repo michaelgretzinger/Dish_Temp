@@ -1169,7 +1169,7 @@ Expected Result/Post Condition:
                                     <nestedSteps>
                                         <item guid="b405830b-a89e-416e-95b1-ae1a241a34e1" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>tc1_dict[&apos;GnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/GnbId&apos;)) +16)</body>
+                                                <body>tc1_dict[&apos;GnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc1/GnbId&apos;)) +100)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
