@@ -2981,7 +2981,7 @@
                 </item>
                 <item guid="7d653786-398b-438b-8916-fa780181ec7c" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>Get the AMF, GnbController and GnbUser addresses for the current LS_Nodal_favorite_params</body>
+                        <body>Get the AMF, GnbController , MobGnbController and GnbUser addresses for the current LS_Nodal_favorite_params</body>
                     </command>
                     <nestedSteps>
                         <item guid="7ce9a1de-4f9c-47a6-9cde-3886cd10daae" action="eval" useFieldsInCommand="false">
@@ -2999,6 +2999,12 @@
                         <item guid="b827e7fc-3405-4fa6-ad51-e2bb32ee031e" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>gnbU_ip = param(&apos;LS_Nodal_favorite_params/ts0/tc0/GnbUserAddr/ip&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="294405fb-2db8-4656-85a1-5b56c9dc329d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>mob_gnbC_ip = param(&apos;LS_Nodal_favorite_params/ts0/tc0/MobGnbControlAddr/ip&apos;, &apos;NA&apos;)</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
@@ -3347,12 +3353,12 @@
                                 </item>
                                 <item guid="22f53444-9d11-46d3-9633-149710d14522" action="comment" useFieldsInCommand="false">
                                     <command>
-                                        <body>Add the amf_ip to the filter</body>
+                                        <body>Add the amf_ip to the filter AND the (GnbC | MobGnbC) IP address. THIS alllows for Shared utilization of a given TS resource</body>
                                     </command>
                                     <nestedSteps>
                                         <item guid="f6f21fac-a492-4ec9-898a-4497832e1209" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+amf_ip+&quot;)&quot;</body>
+                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+amf_ip+&quot;)&quot;+&quot; &amp;&amp; (ip.dst == &quot;+gnbC_ip+&quot;)&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
