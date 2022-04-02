@@ -619,28 +619,14 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="4ebece9d-2bc7-4ea4-b0f7-6ca71dcf3192" action="comment" useFieldsInCommand="false">
+                <item guid="85bf0d39-77de-4eed-b896-e528a7c2103c" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>Pre-verify Test Servers are &quot;Ready&quot;</body>
+                        <body>#### Verify test servers: status, license, process, ... map test session requirement ####</body>
                     </command>
                     <nestedSteps>
-                        <item guid="97575bf1-f699-4c9e-8ddc-ea97d23f0065" action="call" useFieldsInCommand="false">
+                        <item guid="04c082c2-18bb-4831-8b0d-f1e6ce294753" action="call" useFieldsInCommand="false">
                             <command>
-                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#wait_for_test_servers_ready -session s1 -ts_groups_json [ts_groups]</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="9d115d4a-9a53-4a6d-af8b-5e24689b1211" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Verify test servers: status, license, process, ... map test session requirement</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="c8681331-fbdd-4b01-bb8f-072b93285d71" action="verify_test_servers" session="s1" useFieldsInCommand="false">
-                            <command>
-                                <body>-ts_groups [ts_groups]</body>
+                                <body>project://$project_id/DISH_5G/Utilities/dish_landslide_rest_library.fftc#dish_verify_test_servers -session s1 -ts_groups [ts_groups]</body>
                             </command>
                             <postProcessing>
                                 <storeResponseAt>ts_groups</storeResponseAt>
