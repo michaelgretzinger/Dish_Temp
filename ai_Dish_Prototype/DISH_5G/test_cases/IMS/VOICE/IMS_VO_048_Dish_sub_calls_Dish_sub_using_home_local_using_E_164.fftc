@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
+        <documentation>IMS_VO_048 Dish sub calls Dish sub using E.164 dial number w/ plus.</documentation>
+        <tags>IMS_VO_048</tags>
+        <notes>Test Purpose: The purpose of this test is to verify Dish sub. successfully using E.164 dial number with plus.
+
+Expected Result/Post Condition:
+• Verify UE_1 Sends Invite request with E.164 dial number with plus.
+• Verify UE_2 respond back with 200 Ok.
+• Verify that the PDU session is created with QCI (fiveQI) value set to 1.</notes>
         <language>Python</language>
     </general>
     <procedures>
@@ -133,6 +141,26 @@
                                         <item guid="842425f7-3ed4-4e3c-8195-da96a991cf63" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>pcap_analysis = param(tmd_query_path + &quot;/pcap_analysis&quot;, &quot;false&quot;)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="55045d42-4336-4afc-b241-6a156f1866cf" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>#### Determine our mode of operation via parameter &apos;ts_node_mode&apos; ####</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="d2b66d89-8227-44f3-a409-6257bead90ef" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>ts_node_mode = param(&apos;Env_global_override/ts_node_mode&apos;, &quot;locked&quot;)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="037d2682-98d1-4696-9ef2-fe79a514b8da" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>ts_node_mode</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
@@ -816,31 +844,71 @@
                                 <body>Get run data for each test instance - Response stored: &apos;run_data_list&apos;; Analysis stored: &apos;instance_number&apos;</body>
                             </command>
                             <nestedSteps>
-                                <item guid="8f639afc-2528-4c36-b053-cd5d3b1da0aa" action="get_run_data_for_multi_test_instance" session="s1" useFieldsInCommand="false">
+                                <item guid="df2f79bd-2beb-4ff2-83bd-5b49d92f534b" action="if" useFieldsInCommand="false">
                                     <command>
-                                        <body>-run_data [testsession_data] -ts_groups [ts_groups] -param_group_names LS_Nodal_favorite_params</body>
+                                        <body>(ts_node_mode != &quot;shared&quot;):</body>
                                     </command>
-                                    <postProcessing>
-                                        <analysisRules>
-                                            <item>
-                                                <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                        <query>count(mapped/Json/item)</query>
-                                                    </extractorProperties>
-                                                </extractorInfo>
-                                                <processorInfo ruleType="store">
-                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                                        <storageLocation>instance_number</storageLocation>
-                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
-                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
-                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
-                                                    </ruleProperties>
-                                                </processorInfo>
-                                            </item>
-                                        </analysisRules>
-                                        <storeResponseAt>run_data_list</storeResponseAt>
-                                        <storeResponseText>true</storeResponseText>
-                                    </postProcessing>
+                                    <nestedSteps>
+                                        <item guid="8f639afc-2528-4c36-b053-cd5d3b1da0aa" action="get_run_data_for_multi_test_instance" session="s1" useFieldsInCommand="false">
+                                            <command>
+                                                <body>-run_data [testsession_data] -ts_groups [ts_groups] -param_group_names LS_Nodal_favorite_params</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>count(mapped/Json/item)</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>instance_number</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                                <storeResponseAt>run_data_list</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="60bab59b-5514-4e40-a205-d41a987e373b" action="else" useFieldsInCommand="false">
+                                    <nestedSteps>
+                                        <item guid="8c92db39-2f99-4b54-b2a8-7925afff4d3d" action="get_run_data_for_multi_test_instance" session="s1" useFieldsInCommand="false">
+                                            <command>
+                                                <body>-run_data [testsession_data] -ts_groups [ts_groups] -param_group_names LS_Nodal_favorite_params -reservePorts false -reserveProcesses false</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>count(mapped/Json/item)</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>instance_number</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                                <storeResponseAt>run_data_list</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
