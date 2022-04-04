@@ -820,6 +820,41 @@
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
+                        <item guid="4ac6c361-fb92-4a51-8e01-94cb7ad64411" action="comment" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>SHARED TS RESOUCE ######## Get run data for each test instance - Response stored: &apos;run_data_list&apos;; Analysis stored: &apos;instance_number&apos; #######</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ed0d2930-6d4b-40bf-b333-93849451ace7" action="get_run_data_for_multi_test_instance" session="s1" useFieldsInCommand="false">
+                                    <command>
+                                        <body>-run_data [testsession_data] -ts_groups [ts_groups] -param_group_names LS_Nodal_favorite_params -reservePorts false</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>count(mapped/Json/item)</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>instance_number</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                        <storeResponseAt>run_data_list</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
