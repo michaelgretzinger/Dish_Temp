@@ -1,6 +1,23 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
+        <documentation>Mo_MV_010 5G Mobility Voice N2 – Intra-frequency Handover.</documentation>
+        <tags>Mo_MV_010</tags>
+        <notes>Test Purpose: The purpose of this test is to verify successful intra-frequency N2 handover for mobility voice.
+
+Expected Result/Post Condition: 
+•\tN2 intra-frequency handover successfully.
+•\tThe voice call should not drop during the inter-frequency handover
+•\tVerify UE receives a RRC message implying handover.
+•\tVerify that Handover Command message is sent from AMF to S-RAN.
+•\tVerify that Handover Confirm message is sent from UE to AMF.
+•\tVerify that T-AMF sent Nsmf_PDUSession_UpdateSMContext Request to SMF.
+•\tVerify that SMF sent Nsmf_PDUSession_UpdateSMContext Response to T-AMF.
+•\tVerify that AMF sent UE Context Release Command to source gNB.
+•\tVerify that Source gNB removed UE Context and sent UE Context Release Complete to AMF.
+•\tVerify UE should measure SS-RSRP and SS-RSRQ at least every T(measure,NR_Inter)) for intra-frequency cells.
+•\tVerify gNB address before and after N2 inter-frequency handover.
+•\tTraces and logs are stopped successfully.</notes>
         <language>Python</language>
     </general>
     <procedures>
@@ -902,6 +919,114 @@
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f500cb01-5af9-43a0-8d67-c498b647c106" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>##### Modify JSON in string format before passing to Landslide #####</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6d2ad598-9c2d-47c2-8349-814f4b7f2985" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Convert json list to dict</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="5ad66626-1273-4552-863c-d1204b5a6069" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>import json</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="823c1ef4-f3e5-49ca-87e4-bea4be1273cd" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>import re</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="21a8895a-bec8-4a45-bfba-a75622c7fb4f" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>temp_dict = json.loads(run_data_list[0])</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="91413f71-08b5-4cf7-b309-2f5f8efaeafa" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Modify tc0 - Test contains 2 gNB controllers.... We need just an updated Cell ID</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="b5121c2c-6753-4114-a1b3-331bab4c4549" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>tc0_dict = {}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="e78e931b-1576-4736-bfcd-31b8a0e3b4f5" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>tc0_dict[&apos;MobGnbId&apos;] = str(int(param(&apos;LS_Nodal_favorite_params/ts0/tc0/MobGnbId&apos;)) +100)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ee51199d-ee1b-469a-ae84-50cd69da4ee4" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Add dictionary to run data</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="0b67aa2c-1dfa-4ed1-b3ea-d93de601bc24" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc0_dict]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>run_data_list</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="82b3432e-e239-460d-8b08-833f62421ae5" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>run_data_list</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3399c380-5541-4b34-bae0-0887b18b5cdc" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>##### Message all updated Sub_1 Non-default values #####</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="de43b137-9b49-409a-9133-fca30517d389" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://ai_LS_5G/utility_library/utils.fftc#insert_devider_string -length 135</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="874fb544-7a8f-4511-b179-3389a92a32b4" action="message" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Information:The Following values have been modified from the assigned Sub_1 default values</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                        <message inherit="false">The Following values have been modified from the assigned Sub_1 default values</message>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="0573cb66-c190-4bbb-9ed0-c329ec442dd4" action="message" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Information:LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                        <message inherit="false">LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</message>
+                                    </applicationProperties>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
@@ -2422,27 +2547,6 @@
         <item name="pcap_validation" isPublic="true" defaultSessionProfile="application:com.fnfr.svt.applications.wireshark">
             <steps>
                 <item guid="07b68bb5-6a87-4aea-b06a-304205bf3102" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>######################################################################################</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="04e009b5-c9a7-471f-bc55-3c55c109b7d6" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>This an example routine, it is from a previously developed test instance. AND is NOT intended to work as is.</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="76ba2fc6-ec2c-4530-8527-29da82ecbff7" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Utilizes parameter data and the pcap_utils as the primary driver.</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="9a6c741a-9c47-4468-be75-58ef7b5815fd" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>######################################################################################</body>
-                    </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
                 <item guid="09c7d505-9d75-4294-99bf-f900e72f64a9" action="comment" useFieldsInCommand="false">
@@ -3094,16 +3198,16 @@
                                 </item>
                                 <item guid="807c8a0b-6d60-4c4e-bc73-d6859f9d31ef" action="comment" useFieldsInCommand="false">
                                     <command>
-                                        <body>Add the gndC_ip to the filter</body>
+                                        <body>Add the amf_ip (src) and gndC_ip to the filter</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="01c3e439-8341-41e9-a206-100bdefb06ac" action="eval" useFieldsInCommand="false">
+                                        <item guid="d5b435d2-50e1-4128-a11a-6009250f97f3" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+gnbC_ip+&quot;)&quot;</body>
+                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+amf_ip+&quot;) &amp;&amp; (ip.dst == &quot;+gnbC_ip+&quot;)&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="95220085-6837-4ef7-b6b8-c1a81a3265f4" action="eval" useFieldsInCommand="false">
+                                        <item guid="912e44a5-eaee-4039-b2fc-888b90a6e195" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>display_filter</body>
                                             </command>
@@ -3143,25 +3247,13 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="694ea51e-3db7-44aa-b5b7-42167283ee7f" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>&gt;&gt;&gt;&gt; No tshark filter &lt;&lt;&lt;&lt;</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="fb5f8d71-d96c-4888-a288-ebb0859cfed7" action="call" useFieldsInCommand="false">
-                    <command>
-                        <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message] -open_session True</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="2c6131f4-2eca-4778-9ba4-279c412557d6" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>&gt;&gt;&gt;&gt; Utilize  tshark filter &lt;&lt;&lt;&lt;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="e8f8e706-3dd6-4679-9a47-f06cf3853750" action="open" session="wireshark" skip="true">
+                <item guid="e8f8e706-3dd6-4679-9a47-f06cf3853750" action="open" session="wireshark">
                     <command>
                         <body>application:com.fnfr.svt.applications.wireshark</body>
                     </command>
@@ -3179,7 +3271,7 @@
                         <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                     </applicationProperties>
                 </item>
-                <item guid="7af015b3-29ed-46fe-8a85-13f97d52d6c7" action="call" skip="true" useFieldsInCommand="false">
+                <item guid="7af015b3-29ed-46fe-8a85-13f97d52d6c7" action="call" useFieldsInCommand="false">
                     <command>
                         <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#query_load_defined_pcap -pcapAbsolutePath [temp_file] -display_filter [display_filter] -optional_message [optional_message]</body>
                     </command>
@@ -3266,7 +3358,7 @@
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>messages/item/source</query>
+                                        <query>messages/item[1]/source</query>
                                     </extractorProperties>
                                 </extractorInfo>
                                 <processorInfo ruleType="store">
@@ -3281,7 +3373,7 @@
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>messages/item/destination</query>
+                                        <query>messages/item[1]/destination</query>
                                     </extractorProperties>
                                 </extractorInfo>
                                 <processorInfo ruleType="store">
@@ -3296,7 +3388,7 @@
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>messages/item/info</query>
+                                        <query>messages/item[1]/info</query>
                                     </extractorProperties>
                                 </extractorInfo>
                                 <processorInfo ruleType="store">
@@ -3314,7 +3406,7 @@
                                 </extractorInfo>
                                 <processorInfo ruleType="assert">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                        <expression>int(inst_cnt) == 1</expression>
+                                        <expression>int(inst_cnt) &gt;= 2</expression>
                                         <actionsWhenTrue>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
@@ -3535,6 +3627,96 @@
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item[1]/source</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>inst_src</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item[1]/destination</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>inst_dst</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item[1]/info</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>inst_info</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>int(inst_cnt) &gt;= 2</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Target Capture Packet found as expected.</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                    <message>PCAP Eth Id: [eth_target]    Wireshark display filter: [display_filter]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                    <message>Src Addr: [inst_src]    Dst Addr: [inst_dst]    Packet Info: [inst_info]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Target Capture Packet NOT found.</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                    <message>PCAP Eth Id: [eth_target]    Wireshark display filter: [display_filter]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
                                         <query>messages/item/source</query>
                                     </extractorProperties>
                                 </extractorInfo>
@@ -3546,6 +3728,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3561,6 +3744,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3576,6 +3760,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="none">
@@ -3621,6 +3806,7 @@
                                         </actionsWhenFalse>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                         </analysisRules>
                         <storeResponseAt>response</storeResponseAt>
@@ -3804,6 +3990,96 @@
                             <item>
                                 <extractorInfo extractorType="query">
                                     <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item[1]/source</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>inst_src</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item[1]/destination</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>inst_dst</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>messages/item[1]/info</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>inst_info</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>int(inst_cnt) &gt;= 2</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Target Capture Packet found as expected.</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                    <message>PCAP Eth Id: [eth_target]    Wireshark display filter: [display_filter]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                    <message>Src Addr: [inst_src]    Dst Addr: [inst_dst]    Packet Info: [inst_info]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Target Capture Packet NOT found.</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                    <message>PCAP Eth Id: [eth_target]    Wireshark display filter: [display_filter]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
                                         <query>messages/item/source</query>
                                     </extractorProperties>
                                 </extractorInfo>
@@ -3815,6 +4091,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3830,6 +4107,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="query">
@@ -3845,6 +4123,7 @@
                                         <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                             <item>
                                 <extractorInfo extractorType="none">
@@ -3890,6 +4169,7 @@
                                         </actionsWhenFalse>
                                     </ruleProperties>
                                 </processorInfo>
+                                <skip>true</skip>
                             </item>
                         </analysisRules>
                         <storeResponseAt>response</storeResponseAt>
