@@ -150,6 +150,26 @@ Expected Result/Post Condition:
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
+                                <item guid="ce3161cc-f82f-4172-badb-324f931222f0" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>#### Determine our mode of operation via parameter &apos;ts_node_mode&apos; ####</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="3a13b9cb-8cae-4170-81d9-41730f73e7d8" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>ts_node_mode = param(&apos;Env_global_override/ts_node_mode&apos;, &quot;locked&quot;)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="2dc90782-793f-41cb-b5b3-873fd36a9d8b" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>ts_node_mode</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
@@ -668,23 +688,23 @@ Expected Result/Post Condition:
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="22ea5fe8-edb4-43a2-90df-93762d679af1" action="comment" useFieldsInCommand="false">
+                <item guid="09d3bf85-1e35-4a19-994c-7b6d85906f29" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Construct/load run data for Nodal Test Session</body>
                     </command>
                     <nestedSteps>
-                        <item guid="a3d927a1-b6f4-4d0b-af09-889139a63288" action="comment" useFieldsInCommand="false">
+                        <item guid="ac2e2b12-e98d-41ae-891a-1f31601f0676" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>Init variables</body>
                             </command>
                             <nestedSteps>
-                                <item guid="261d4db5-cd98-44f2-b3f5-5d24f6f99adf" action="eval" useFieldsInCommand="false">
+                                <item guid="195a2e8f-51b6-4377-87d4-868e10eafabc" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>running_node_id = &quot;&quot;</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="d729150b-6d79-459e-9ad4-4685aa5592aa" action="eval" useFieldsInCommand="false">
+                                <item guid="999190ad-8df0-44a7-82f7-2bab1cb50348" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>node_run_data = &quot;&quot;</body>
                                     </command>
@@ -693,12 +713,12 @@ Expected Result/Post Condition:
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="5defa333-a440-44fb-bb4b-8e1ad768ddac" action="comment" useFieldsInCommand="false">
+                        <item guid="bdf50cc7-81fe-4a4f-b49d-ead6b35c62e3" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>Get run data - Response stored: &quot;testsession_data&quot;</body>
                             </command>
                             <nestedSteps>
-                                <item guid="8177142d-6dbb-4028-b41b-bc7744ca559b" action="get_test_session_data" session="s1" useFieldsInCommand="false">
+                                <item guid="9625f0bf-d69e-457e-ba6a-b340a5eb0f2c" action="get_test_session_data" session="s1" useFieldsInCommand="false">
                                     <command>
                                         <body>-test_session_name [nodal_test_session] -library_id [library_id]</body>
                                     </command>
@@ -711,22 +731,22 @@ Expected Result/Post Condition:
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="f7d06915-262b-4685-b23f-332178f2d70f" action="comment" useFieldsInCommand="false">
+                        <item guid="1616c65a-c368-4fa5-b621-7ef9a3d8034d" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>Configure Reports Options</body>
                             </command>
                             <nestedSteps>
-                                <item guid="dc053a70-9080-4801-aa1a-a2121a56b79d" action="comment" useFieldsInCommand="false">
+                                <item guid="3dd456c5-75a3-4862-a36f-ca38f50a38fb" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Configure TAC Report Option</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="ef39007f-7cc5-49ad-a62d-64eb5c796698" action="if" useFieldsInCommand="false">
+                                        <item guid="5e920815-4625-42c6-97bd-c25077556700" action="if" useFieldsInCommand="false">
                                             <command>
                                                 <body>enable_tac_report:</body>
                                             </command>
                                             <nestedSteps>
-                                                <item guid="2a8c6afb-bc90-4c57-9a1d-05ad822dc221" action="json" useFieldsInCommand="false">
+                                                <item guid="4df7cb34-04b0-4ace-b6cc-0f39102c7f25" action="json" useFieldsInCommand="false">
                                                     <command>
                                                         <body>action=&apos;setJsonValue&apos;, editResponseStructure=&apos;false&apos;, documentName=&apos;testsession_data&apos;, pathValue=&apos;{&quot;reportOptions/generateTac&quot;:true}&apos;</body>
                                                     </command>
@@ -739,9 +759,9 @@ Expected Result/Post Condition:
                                             </nestedSteps>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="e1f2fc34-4f2e-4348-8e61-aee4d14fc236" action="else" useFieldsInCommand="false">
+                                        <item guid="fc137a1d-d89c-4952-aaf9-5ca6f31263d4" action="else" useFieldsInCommand="false">
                                             <nestedSteps>
-                                                <item guid="4b604389-9f7c-4ff8-ab66-e14ab3f9e922" action="json" useFieldsInCommand="false">
+                                                <item guid="9ce738cb-185c-4d85-bf98-ab65aae83964" action="json" useFieldsInCommand="false">
                                                     <command>
                                                         <body>action=&apos;setJsonValue&apos;, editResponseStructure=&apos;false&apos;, documentName=&apos;testsession_data&apos;, pathValue=&apos;{&quot;reportOptions/generateTac&quot;:false}&apos;</body>
                                                     </command>
@@ -757,17 +777,17 @@ Expected Result/Post Condition:
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="a1e3ff31-64f1-41db-b660-a732af5d7f7c" action="comment" useFieldsInCommand="false">
+                                <item guid="3a388fcb-5f80-4dbe-b231-dac8695b62fc" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Configure report format</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="0d1c79d1-9819-4abb-9198-c055e827a5ab" action="if" useFieldsInCommand="false">
+                                        <item guid="8c1aafcc-393e-41ac-88f4-e63351b2a250" action="if" useFieldsInCommand="false">
                                             <command>
                                                 <body>report_format == &quot;csv&quot;:</body>
                                             </command>
                                             <nestedSteps>
-                                                <item guid="04db0800-1f94-4866-a2ea-fb2b44b61cf1" action="json" useFieldsInCommand="false">
+                                                <item guid="0d686339-8701-439c-86b8-d5fa65771b1b" action="json" useFieldsInCommand="false">
                                                     <command>
                                                         <body>action=&apos;setJsonValue&apos;, editResponseStructure=&apos;false&apos;, documentName=&apos;testsession_data&apos;, pathValue=&apos;{&quot;reportOptions/format&quot;:1}&apos;</body>
                                                     </command>
@@ -780,12 +800,12 @@ Expected Result/Post Condition:
                                             </nestedSteps>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="88190eda-8438-4c20-acc9-14f21abba785" action="elif" useFieldsInCommand="false">
+                                        <item guid="eb8bf93b-7a03-431a-b489-7ca2f92f2603" action="elif" useFieldsInCommand="false">
                                             <command>
                                                 <body>report_format == &quot;xls&quot;:</body>
                                             </command>
                                             <nestedSteps>
-                                                <item guid="4d5502fa-860b-4cf7-982d-b439a7c47a7d" action="json" useFieldsInCommand="false">
+                                                <item guid="d267435d-c21d-4c4f-9d1d-50417acddd9d" action="json" useFieldsInCommand="false">
                                                     <command>
                                                         <body>action=&apos;setJsonValue&apos;, editResponseStructure=&apos;false&apos;, documentName=&apos;testsession_data&apos;, pathValue=&apos;{&quot;reportOptions/format&quot;:0}&apos;</body>
                                                     </command>
@@ -804,12 +824,12 @@ Expected Result/Post Condition:
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="b06a02ec-ffad-422e-8ef7-7c9d566b1fa2" action="comment" useFieldsInCommand="false">
+                        <item guid="2ddf7b81-0638-4940-a4a5-6a94ddd45074" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>Apply SUTs - Response stored &apos;testsession_data&apos;</body>
                             </command>
                             <nestedSteps>
-                                <item guid="9ef283e2-c62e-4aed-bd17-b996113228d8" action="apply_SUT_parameter" session="s1" useFieldsInCommand="false">
+                                <item guid="8b09d27c-5361-4230-aa14-430bb7801b2f" action="apply_SUT_parameter" session="s1" useFieldsInCommand="false">
                                     <command>
                                         <body>-run_data [testsession_data] -sut_path &quot;SUT/nodal&quot;</body>
                                     </command>
@@ -822,36 +842,76 @@ Expected Result/Post Condition:
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="3e0fcb51-2552-4430-bc45-b6752ac07c71" action="comment" useFieldsInCommand="false">
+                        <item guid="e03d06fd-d18c-427a-bd6e-9f4779707276" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>Get run data for each test instance - Response stored: &apos;run_data_list&apos;; Analysis stored: &apos;instance_number&apos;</body>
                             </command>
                             <nestedSteps>
-                                <item guid="a619f12e-626e-49f1-a6b9-c553d47f6a96" action="get_run_data_for_multi_test_instance" session="s1" useFieldsInCommand="false">
+                                <item guid="b73cca89-1cef-4034-aeea-4ba052042cad" action="if" useFieldsInCommand="false">
                                     <command>
-                                        <body>-run_data [testsession_data] -ts_groups [ts_groups] -param_group_names LS_Nodal_favorite_params</body>
+                                        <body>(ts_node_mode != &quot;shared&quot;):</body>
                                     </command>
-                                    <postProcessing>
-                                        <analysisRules>
-                                            <item>
-                                                <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                        <query>count(mapped/Json/item)</query>
-                                                    </extractorProperties>
-                                                </extractorInfo>
-                                                <processorInfo ruleType="store">
-                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                                        <storageLocation>instance_number</storageLocation>
-                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
-                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
-                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
-                                                    </ruleProperties>
-                                                </processorInfo>
-                                            </item>
-                                        </analysisRules>
-                                        <storeResponseAt>run_data_list</storeResponseAt>
-                                        <storeResponseText>true</storeResponseText>
-                                    </postProcessing>
+                                    <nestedSteps>
+                                        <item guid="8b55b17c-c0ed-4ffc-9ae5-39ee7b9c1972" action="get_run_data_for_multi_test_instance" session="s1" useFieldsInCommand="false">
+                                            <command>
+                                                <body>-run_data [testsession_data] -ts_groups [ts_groups] -param_group_names LS_Nodal_favorite_params</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>count(mapped/Json/item)</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>instance_number</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                                <storeResponseAt>run_data_list</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="05d65745-6182-485b-a1f2-41a7b68b8d88" action="else" useFieldsInCommand="false">
+                                    <nestedSteps>
+                                        <item guid="cd08f88d-0b75-48c1-abf2-59be9d6ac324" action="get_run_data_for_multi_test_instance" session="s1" useFieldsInCommand="false">
+                                            <command>
+                                                <body>-run_data [testsession_data] -ts_groups [ts_groups] -param_group_names LS_Nodal_favorite_params -reservePorts false -reserveProcesses false</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>count(mapped/Json/item)</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>instance_number</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                                <storeResponseAt>run_data_list</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>

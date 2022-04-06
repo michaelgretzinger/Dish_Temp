@@ -3404,7 +3404,7 @@
                                     <nestedSteps>
                                         <item guid="f6f21fac-a492-4ec9-898a-4497832e1209" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+amf_ip+&quot;)&quot;+&quot; &amp;&amp; (ip.dst == &quot;+gnbC_ip+&quot;)&quot;</body>
+                                                <body>display_filter = display_filter+&quot; &amp;&amp; (ip.src == &quot;+amf_ip+&quot;) &amp;&amp; (ip.dst == &quot;+gnbC_ip+&quot;)&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
