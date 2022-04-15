@@ -48,11 +48,11 @@
                     <csv_analysis pt:datatype="BOOLEAN">false</csv_analysis>
                     <defect_active pt:datatype="BOOLEAN">false</defect_active>
                     <active_defect_data>
-                        <isv_key pt:description="Spirent, Nokia, AWS, Dish">Spirent</isv_key>
-                        <defect_id pt:description="valid defect name - any system">LS-53800 AMF Nodal</defect_id>
-                        <opt_defect_msg pt:description="If you want to tell them something extra">MM Cause - The corresponding OM is not pegged (MAC Failure). Validated in PCAP analysis idx 4.</opt_defect_msg>
-                        <validation_defect_type pt:description="criteria or pcap">criteria</validation_defect_type>
-                        <validation_defect_idx pt:description="Base 1 indexing">1</validation_defect_idx>
+                        <isv_key pt:description="Spirent, Nokia, AWS, Dish">Nokia</isv_key>
+                        <defect_id pt:description="valid defect name - any system">DEF-999000</defect_id>
+                        <opt_defect_msg pt:description="If you want to tell them something extra">Multiple Back-to-Back Automation Failures Cause: Network Issue</opt_defect_msg>
+                        <validation_defect_type pt:description="criteria, pcap or test">test</validation_defect_type>
+                        <validation_defect_idx pt:description="Base 1 indexing - Utilized in criteria and pcap validation operation">1</validation_defect_idx>
                     </active_defect_data>
                     <Enable_TAC_Report pt:datatype="BOOLEAN">true</Enable_TAC_Report>
                     <Enable_Port_Capture pt:datatype="BOOLEAN">true</Enable_Port_Capture>
