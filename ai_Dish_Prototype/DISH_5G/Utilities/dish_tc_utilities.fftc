@@ -2487,15 +2487,45 @@ This and isv_key, defect_id and if provided and opt_defect_msg: Will be used to 
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
+                        <item guid="4f805562-e621-4a88-9419-5b3599e17b37" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>nums</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
                         <item guid="1de50fb3-d8ea-48a0-8ff6-2d4ca0cea60f" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>phone_tail = nums[0]</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
+                        <item guid="9baf4e16-ff7c-43ef-8eb2-b6e88e1b9605" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>phone_tail</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
                         <item guid="fd6625ef-cb6b-41ec-9652-1fc4994b2759" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>phone_len = nums[1]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="8954e995-f2f8-4072-913d-0fec68adb57a" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>@MIKE_G - I&apos;ve added this additional step. We&apos;re getting a phone# something like this: +130740210#(N5:2 0/2) == :(</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d9536f15-c81f-4124-ab57-5bda6b6b655a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>phone_len = phone_len[0]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="72c5b5c2-721c-4787-997a-7a1ba209dd4c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>phone_len</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
