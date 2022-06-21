@@ -3919,6 +3919,21 @@
                                                             </nestedSteps>
                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                         </item>
+                                                        <item guid="b95669c6-53b1-4ace-84a0-097256e2ede4" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>#### NEW AWS LANDSLIDE DATA WRITE ####</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="1e94a1e5-9a26-4125-bb24-22c3bc1ad8ee" action="call" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#write_aws_landslide_data -pcap_files [pcap_files]</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="2cb66aca-86bb-4969-a06d-33757572d65b" action="comment" useFieldsInCommand="false">
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
                                                     </nestedSteps>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>

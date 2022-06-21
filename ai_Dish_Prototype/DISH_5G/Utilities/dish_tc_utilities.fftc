@@ -4515,9 +4515,9 @@ and this will return the number between the N and the : incremented</multilineDe
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="b943f5e9-12f1-4431-8fc7-4f86af662d8c" action="eval" useFieldsInCommand="false">
+                                <item guid="96184d78-193c-4209-a83b-f834883cbd48" action="eval" useFieldsInCommand="false">
                                     <command>
-                                        <body>tas_ipAddress = param(&apos;Topology_parameters/TAS/ipAddress&apos;, &quot;&quot;)</body>
+                                        <body>tas_ipaddress = param(&apos;Topology_parameters/TAS/ipAddress&apos;, &quot;&quot;)</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
@@ -5382,6 +5382,149 @@ and this will return the number between the N and the : incremented</multilineDe
                 </item>
             </arguments>
             <response>{}</response>
+        </item>
+        <item name="write_aws_landslide_data" isPublic="true">
+            <steps>
+                <item guid="9d27a0fe-e403-482e-b54a-737f4bff641e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Set the project_id</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9773e97d-1d8b-4913-88e4-01160892082b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>project_id = info(&apos;testCaseProject&apos;, &apos;main&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="70ec7fd3-b31d-4dc5-b611-27db721006b8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get the required data from the pcap_utils</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ce30ef0f-e9c3-4cf8-aa12-3714663a78f9" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_pcap_user_name -pcap_uri [pcap_files]</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>user_id</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c4ba7c75-af5c-4010-9b36-d3d2797ef9a3" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_pcap_rid -pcap_uri [pcap_files]</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>pid</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5b8a36e5-d4b6-4610-b32b-454b0fc6fbc4" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_pcap_data_time -pcap_uri [pcap_files]</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>date_time</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0df2ff33-dac1-477c-86a9-63d0f120414c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Write the to the dB as abstracted data</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d23f0828-c3eb-484a-86d3-712c4941788e" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(user_id)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>Landslide_user: {value}</message>
+                                                <extractData>true</extractData>
+                                                <tag sub="false">Landslide_user</tag>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b01187b6-9966-4a40-9fee-34dad441bc21" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(pid)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>Landslide_PID: {value}</message>
+                                                <extractData>true</extractData>
+                                                <tag sub="false">Landslide_PID</tag>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="91b2c2f1-aaa3-4532-91d1-caaf1af3fe5c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(date_time)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>Landslide_date-time: {value}</message>
+                                                <extractData>true</extractData>
+                                                <tag sub="false">Landslide_date-time</tag>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="87bc9279-ee35-4100-9f4b-6af99d548ec7" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="pcap_files"/>
+            </arguments>
         </item>
     </procedures>
 </testCase>
