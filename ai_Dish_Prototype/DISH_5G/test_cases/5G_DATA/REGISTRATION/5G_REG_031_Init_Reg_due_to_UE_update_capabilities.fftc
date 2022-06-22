@@ -966,14 +966,51 @@ Expected Result/Post Condition:
                                                     </item>
                                                     <item actionId="Eval">
                                                         <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
-                                                            <statement>errorsAndWarnings = True</statement>
+                                                            <statement>errorsAndWarnings = &quot;True&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="SkipRemainingRules">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>errorsAndWarnings = &quot;False&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>reason</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>[fail_reason]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>errorsAndWarnings = &quot;True&quot;</statement>
                                                         </actionProperties>
                                                     </item>
                                                 </actionsWhenTrue>
                                                 <actionsWhenFalse>
                                                     <item actionId="Eval">
                                                         <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
-                                                            <statement>errorsAndWarnings = False</statement>
+                                                            <statement>errorsAndWarnings = &quot;False&quot;</statement>
                                                         </actionProperties>
                                                     </item>
                                                 </actionsWhenFalse>
@@ -2021,12 +2058,12 @@ Expected Result/Post Condition:
                                 <body>idx, running_id in enumerate(running_id_list):</body>
                             </command>
                             <nestedSteps>
-                                <item guid="fcb7fef6-a740-4c3c-a0cb-0487135c11ac" action="comment" useFieldsInCommand="false">
+                                <item guid="0077582a-3a4c-480c-ab9d-a55eef5bf8a9" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>&gt;&gt;&gt;&gt;&gt;&gt; Store ALL result file uri&apos;s  &apos;results_payload_uri_list&apos; &lt;&lt;&lt;&lt;&lt;&lt;</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="d83e2399-f6c6-4eff-9a34-2fbce306e6b4" action="Custom" session="s1">
+                                        <item guid="194099e8-3903-404a-bd75-cbb0099c384f" action="Custom" session="s1">
                                             <command>
                                                 <body>-requestMethod GET -dataType json -rawResponse true -url runningTests/[running_id]</body>
                                             </command>
@@ -2051,18 +2088,18 @@ Expected Result/Post Condition:
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.itest.platform2.shared.documents.ntaf.NtafTransferableDocumentObject" action="Custom" subharness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harness="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" harnessName="http://spirent.com/NTAF/harness/iTest/LandslideRest/Main" rawResponse="true" rawResponse.inherit="false" url="runningTests/[running_id]" url.inherit="false"/>
                                         </item>
-                                        <item guid="9b9a68ac-2b2e-4ec7-8ae5-d888289ece39" action="eval" useFieldsInCommand="false">
+                                        <item guid="23fbcc79-f879-4782-b8d9-0d0c0a30cc9e" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>results_payload_uri_list</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="62e1288f-df70-413a-98ec-4916684677ba" action="comment" useFieldsInCommand="false">
+                                        <item guid="ef14b030-2642-4118-8894-205cf93e1aa0" action="comment" useFieldsInCommand="false">
                                             <command>
                                                 <body>##### Used for reporting; Get the pcap file payload and Store: &apos;pcap_files&apos; #####</body>
                                             </command>
                                             <nestedSteps>
-                                                <item guid="1c970eb1-0288-4427-8102-bf1355d25efe" action="call" useFieldsInCommand="false">
+                                                <item guid="fb2e36f5-68fe-4a26-be23-30d54f49353e" action="call" useFieldsInCommand="false">
                                                     <command>
                                                         <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#get_pcap_result_urls -results_url_list [results_payload_uri_list]</body>
                                                     </command>
@@ -2072,7 +2109,7 @@ Expected Result/Post Condition:
                                                     </postProcessing>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
-                                                <item guid="ecd5632a-cd68-4058-a9a4-695461885544" action="eval" useFieldsInCommand="false">
+                                                <item guid="110ca298-fcc7-48bd-a851-12fe7009aea5" action="eval" useFieldsInCommand="false">
                                                     <command>
                                                         <body>pcap_files</body>
                                                     </command>
@@ -2124,23 +2161,23 @@ Expected Result/Post Condition:
                                                     </postProcessing>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
-                                                <item guid="dca58ee3-82a8-4341-86f3-ef72c866455d" action="if" useFieldsInCommand="false">
+                                                <item guid="5ea40783-eeb7-47e1-b289-6186b9751f6d" action="if" useFieldsInCommand="false">
                                                     <command>
                                                         <body>pcap_display_cnt:</body>
                                                     </command>
                                                     <nestedSteps>
-                                                        <item guid="52d29bf7-cc01-46dd-990c-6853b5353b60" action="for" useFieldsInCommand="false">
+                                                        <item guid="ad98b631-b623-4257-bec4-56b9177d79a7" action="for" useFieldsInCommand="false">
                                                             <command>
                                                                 <body>cnt in range(1, int(pcap_display_cnt) + 1):</body>
                                                             </command>
                                                             <nestedSteps>
-                                                                <item guid="eaa43216-1afd-4654-aeef-c2f6619d7fcd" action="eval" useFieldsInCommand="false">
+                                                                <item guid="3e1c0a1e-16ed-4f7b-8362-21a52f0440fe" action="eval" useFieldsInCommand="false">
                                                                     <command>
                                                                         <body>queryStr = &quot;mapped/Json/item[&quot; +str(cnt)+ &quot;]&quot;</body>
                                                                     </command>
                                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                 </item>
-                                                                <item guid="ed573621-b4bf-44f8-b2cc-77752b52c644" action="eval" useFieldsInCommand="false">
+                                                                <item guid="fb9e12ef-28c1-4bf2-9246-ff38a04a626f" action="eval" useFieldsInCommand="false">
                                                                     <command>
                                                                         <body>pcap_files</body>
                                                                     </command>
@@ -2165,7 +2202,7 @@ Expected Result/Post Condition:
                                                                     </postProcessing>
                                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                 </item>
-                                                                <item guid="26f4c8a8-a475-4b08-8e71-1d1f124f3b7c" action="message" useFieldsInCommand="false">
+                                                                <item guid="883c8df6-f2b7-4e43-9839-5dd78d9dd09e" action="message" useFieldsInCommand="false">
                                                                     <command>
                                                                         <body>Information:[file_url]</body>
                                                                     </command>
@@ -2173,18 +2210,33 @@ Expected Result/Post Condition:
                                                                         <message inherit="false">[file_url]</message>
                                                                     </applicationProperties>
                                                                 </item>
-                                                                <item guid="71b10779-1734-4f2c-8588-d386a70f0b65" action="comment" useFieldsInCommand="false">
+                                                                <item guid="5abc0a82-cb72-4871-ad02-ba1c2d004f7c" action="comment" useFieldsInCommand="false">
                                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                 </item>
                                                             </nestedSteps>
                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                         </item>
+                                                        <item guid="07f77a0e-a7ac-4acd-87ca-45b5cd378e71" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>#### MIKE - NEW AWS DATA WRITE ####</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="6b54976c-7990-4a5b-9181-18d9d1c37762" action="call" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#write_aws_landslide_data -pcap_files [pcap_files]</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="7204b81b-6e1e-4af7-81a5-db81517497f9" action="comment" useFieldsInCommand="false">
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
                                                     </nestedSteps>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
-                                                <item guid="3e0917fb-29d6-4651-b29a-d26e0bf2b14d" action="else" useFieldsInCommand="false">
+                                                <item guid="2fca4468-e856-4594-a91b-c00042d65497" action="else" useFieldsInCommand="false">
                                                     <nestedSteps>
-                                                        <item guid="4c9bae5c-acaf-4c92-a580-a0a64f329896" action="comment" useFieldsInCommand="false">
+                                                        <item guid="c965e843-dfd4-4035-b1fb-ced378c96f8f" action="comment" useFieldsInCommand="false">
                                                             <command>
                                                                 <body>!!!! use IF additional message is required for AWS query !!!!</body>
                                                             </command>
