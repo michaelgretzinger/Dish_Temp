@@ -7333,12 +7333,6 @@ and this will return the number between the N and the : incremented</multilineDe
                                                             </command>
                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                         </item>
-                                                        <item guid="30745d84-6789-44a4-8bff-035d844d6f4a" action="comment" useFieldsInCommand="false">
-                                                            <command>
-                                                                <body>NOTE: -filepattern is a misnomer it is the entire URL. using that name for backwards compatability</body>
-                                                            </command>
-                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                        </item>
                                                     </nestedSteps>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
