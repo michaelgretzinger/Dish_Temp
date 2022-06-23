@@ -4752,7 +4752,7 @@ Note: &apos;nulll&apos; will return all values found for the defined target Id.
                 </item>
                 <item guid="67e594f3-3efc-4480-a9ed-d4b3cfd9eb24" action="eval" useFieldsInCommand="false">
                     <command>
-                        <body>file_contents = requests.get(clean_file)</body>
+                        <body>file_contents = requests.get(url)</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -4785,7 +4785,9 @@ Note: &apos;nulll&apos; will return all values found for the defined target Id.
                 <item name="url">
                     <isMandatory>true</isMandatory>
                 </item>
-                <item name="location"/>
+                <item name="location">
+                    <isMandatory>true</isMandatory>
+                </item>
             </arguments>
         </item>
     </procedures>

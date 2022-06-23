@@ -7194,7 +7194,7 @@ and this will return the number between the N and the : incremented</multilineDe
                 </item>
             </steps>
         </item>
-        <item name="download_landslide_files_by_pattern" isPublic="true">
+        <item name="download_landslide_files_by_pattern_to_temp_dir" isPublic="true">
             <steps>
                 <item guid="1549f5f5-de6f-4ea9-811d-68a089493467" action="comment" useFieldsInCommand="false">
                     <command>
@@ -7249,7 +7249,7 @@ and this will return the number between the N and the : incremented</multilineDe
                 </item>
                 <item guid="be9fb575-273f-45e2-afcb-7a71a5285a0c" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>if csv list NOT empty then download the file(s)</body>
+                        <body>if pattern url list NOT empty then download the file(s)</body>
                     </command>
                     <nestedSteps>
                         <item guid="00270c22-eb2f-44f6-ac1d-ee9881afe217" action="for" useFieldsInCommand="false">
@@ -7296,7 +7296,7 @@ and this will return the number between the N and the : incremented</multilineDe
                                         </item>
                                         <item guid="b68098de-91d1-4fbc-8113-a78ed9966080" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>file_list.append(temp_file)</body>
+                                                <body>stored_file_list.append(temp_file)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
@@ -7350,7 +7350,7 @@ and this will return the number between the N and the : incremented</multilineDe
                 </item>
                 <item guid="8238a397-16e9-4ead-8915-ff7fb514b447" action="return">
                     <command>
-                        <body>[stored_pcap_url]</body>
+                        <body>[stored_file_list]</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
