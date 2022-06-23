@@ -4368,58 +4368,6 @@ Note: &apos;nulll&apos; will return all values found for the defined target Id.
                 <item name="lsSession"/>
             </arguments>
         </item>
-        <item name="SaveResult" isPublic="true">
-            <steps>
-                <item guid="97370086-68be-4158-818f-9e4a58999832" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>import requests</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="0a22c3a3-522b-481d-9eb4-936763e6673f" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>import re</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="67e594f3-3efc-4480-a9ed-d4b3cfd9eb24" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>file_contents = requests.get(clean_file)</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="308f827c-546f-4c43-ac7f-6099cfa21191" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>file_contents</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="7e75ef2b-7cc2-4d55-9c26-d4fdfd82b4af" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>f = open(location,&apos;wb&apos;)</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="37fe2b22-9fb2-4886-a433-b90e03b3206e" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>f.write(file_contents.content)</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="5c8f4f6f-616c-4a59-8ab1-99e74a3288e6" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>f.close</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-            <arguments>
-                <item name="url">
-                    <isMandatory>true</isMandatory>
-                </item>
-                <item name="location"/>
-            </arguments>
-        </item>
         <item name="query_load_defined_pcap" isPublic="true">
             <steps>
                 <item guid="76dc396b-bd55-4078-83c7-902d3619a839" action="comment" useFieldsInCommand="false">
@@ -4786,6 +4734,58 @@ Note: &apos;nulll&apos; will return all values found for the defined target Id.
             </steps>
             <arguments>
                 <item name="tmd_query_path"/>
+            </arguments>
+        </item>
+        <item name="SaveResult" isPublic="true">
+            <steps>
+                <item guid="97370086-68be-4158-818f-9e4a58999832" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>import requests</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0a22c3a3-522b-481d-9eb4-936763e6673f" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>import re</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="67e594f3-3efc-4480-a9ed-d4b3cfd9eb24" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>file_contents = requests.get(clean_file)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="308f827c-546f-4c43-ac7f-6099cfa21191" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>file_contents</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7e75ef2b-7cc2-4d55-9c26-d4fdfd82b4af" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>f = open(location,&apos;wb&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="37fe2b22-9fb2-4886-a433-b90e03b3206e" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>f.write(file_contents.content)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5c8f4f6f-616c-4a59-8ab1-99e74a3288e6" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>f.close</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="url">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="location"/>
             </arguments>
         </item>
     </procedures>
