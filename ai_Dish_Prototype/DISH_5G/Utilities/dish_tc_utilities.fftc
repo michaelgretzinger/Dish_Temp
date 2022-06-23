@@ -6575,5 +6575,576 @@ and this will return the number between the N and the : incremented</multilineDe
                 <item name="favorites_measurements"/>
             </arguments>
         </item>
+        <item name="get_csv_tables_to_json" isPublic="true">
+            <steps>
+                <item guid="2ec5cc77-dd33-4814-8460-b52dae4366d8" action="open" session="py">
+                    <command>
+                        <body>application:com.fnfr.svt.applications.python</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.applications.python.PythonSessionProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="a7c121b0-dad7-4dfd-a9a1-14b7f228ecf4" action="scriptSet" useFieldsInCommand="false">
+                    <command>
+                        <body>csv_file &apos;$csv_file&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.execution.tcl.properties.ScriptSetProperties">
+                        <sessionTclInterpreter inherit="false">py</sessionTclInterpreter>
+                    </applicationProperties>
+                </item>
+                <item guid="618e5426-021e-40b9-950e-e51d4e14c80f" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>import json</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9c889a74-f01e-4bae-b054-e3f210f1b75f" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>csv_file</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5c3c36af-d1d0-448b-8820-a88bb9307065" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>f = open(csv_file,&apos;r&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1ed4ee38-ffdc-4e61-b0da-fbe0b16927ad" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>lines = f.readlines()</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="050a2cc1-5ac6-455e-891d-3a695746a146" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>lines = [x.strip() for x in lines]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="122ca021-c63e-4314-b5fa-09c3b33495e4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialize variables</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b3698945-c9a6-4915-862f-5c3dfaf88027" action="command" session="py" useFieldsInCommand="false">
+                            <command>
+                                <body>csv_dict = {}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="7266ccab-3475-4312-b298-dd8b85b4c64d" action="command" session="py" useFieldsInCommand="false">
+                            <command>
+                                <body>current_table = &apos;&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="dbb77303-f1e9-49ac-948b-428d1300aff0" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>for i in range(0,len(lines)):</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d44b9e5f-4f48-4c2e-8d67-04c659501d42" action="command" session="py" useFieldsInCommand="false">
+                            <command>
+                                <body>  if &quot;Table,&quot; in lines[i]:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="9b3bb8e7-5452-4fce-95ef-5f5ec43329cc" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get table name</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="a49dd8bf-df37-431b-a8ba-16a38c816521" action="command" session="py" useFieldsInCommand="false">
+                                            <command>
+                                                <body>    current_table =lines[i].split(&apos;,&apos;)[1]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="f9739eaa-9802-4255-8729-6ef5886ab1b2" action="command" session="py" useFieldsInCommand="false">
+                                            <command>
+                                                <body>    csv_dict[current_table] = {}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="0c382204-87db-4aa6-848f-8ebae0aabe95" action="command" session="py" useFieldsInCommand="false">
+                                            <command>
+                                                <body>    i+=1</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c55c3881-629b-464c-a772-6fd3529a92aa" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>skip tables with word &quot;CFG&quot; in them</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="4043c08b-1d51-456d-aa0c-5f8452c123c4" action="command" session="py" useFieldsInCommand="false">
+                                            <command>
+                                                <body>    if &quot;CFG&quot; in current_table:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="4edae8b5-e707-4a86-a77b-f143eaa0461f" action="command" session="py" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>      break</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="20f5efb7-bd39-4774-91c1-d2c08efebf1b" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get headers list (w/out iteration numbers)</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="bf81b23b-48b6-4616-88a8-bc1026656f9d" action="command" session="py" useFieldsInCommand="false">
+                                            <command>
+                                                <body>    csv_dict[current_table][&apos;headers&apos;] = lines[i].strip(&apos;,&apos;).split(&apos;,&apos;)[1:]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="de27a477-e19f-4b59-b419-5aa43bdf0017" action="command" session="py" useFieldsInCommand="false">
+                                            <command>
+                                                <body>    i+=1</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="01789a56-019f-4b64-88f5-0485488ee6e1" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get each iteration info</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="39b0ec06-5c09-4020-a6e8-8e554acc650e" action="command" session="py" useFieldsInCommand="false">
+                                            <command>
+                                                <body>    while lines[i] != &quot;&quot;:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="62b7a886-90cf-44fe-9bed-8d5a5903afb8" action="command" session="py" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>      preamble = [int(lines[i].split(&apos;,&apos;)[1]), lines[i].split(&apos;,&apos;)[2]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="9cf3bebe-6423-48b3-8285-d53c727804c6" action="command" session="py" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>      preamble</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="07cfe340-eafe-4ad9-98c5-9b0040a8cd3a" action="command" session="py" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>      rest = list(map(lambda x: x.replace(&apos; &apos;, &apos;0.0&apos;),lines[i].strip(&apos;,&apos;).split(&apos;,&apos;)[3:]))</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="f5eac53d-5d15-4264-8c67-2da0783bc6fe" action="command" session="py" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>      rest</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="1ba224dd-026d-4435-8a12-e4b7d0e13789" action="command" session="py" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>      csv_dict[current_table][str(lines[i].split(&apos;,&apos;)[0])] =preamble+rest</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="c410c1ab-69b4-4869-95bf-1fdfbe9baac0" action="command" session="py" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>      lines[i].split(&apos;,&apos;)[3:]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="1aae182c-8fa7-4229-96f8-952902c94f51" action="command" session="py" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>      i+=1</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="01bc5682-5259-4c73-a924-c47d4405c1e5" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get current line</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="730753da-540d-40c2-99cd-1771b9f583a3" action="command" session="py" useFieldsInCommand="false">
+                            <command>
+                                <body>  i+=1</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="055d7b79-80a0-4cfd-af93-5c6ddd753b74" action="command" session="py" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f95858ae-93e8-419c-8a93-6a3c0b49566d" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>f.close()</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6ff79ad9-5aff-4ee5-863b-d2a5b7fb778d" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>import os</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c6c7d4dc-14a4-4597-8e1d-fba7eb829968" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>return_inf = os.path.dirname(csv_file)+&quot;/temp.json&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="56e179fe-4fcd-419e-84c7-ebf36d7c1d37" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>f = open(return_inf, &quot;w&quot;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c13f2f9e-bc10-4d97-8610-540f21d97fcd" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>json.dump(csv_dict,f)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d5009658-5501-4515-868f-429dcb3db059" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>f.close()</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="80b67ff7-7a92-4db7-a113-6aa475fcbc61" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>return_inf</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>item()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>return_inf</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d8242136-ede3-4488-92aa-2178d128b135" action="close" session="py" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b917a042-b291-485b-9d16-a33784de2cca" action="return">
+                    <command>
+                        <body>[return_inf]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="csv_file">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="report_causes" isPublic="true">
+            <steps>
+                <item guid="9378b69d-bd7d-47e3-a558-5b3ed87ef99b" action="eval" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>json_file = string(eval(json_file))</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5d7a5395-c7ea-4243-8701-dde16bd55967" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>json_file</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c6d81d5e-f029-4df3-bf49-f507fffa9bd0" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>type(json_file)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d2b1e579-1136-42d1-8300-c07c8d508d4c" action="open" session="py">
+                    <command>
+                        <body>application:com.fnfr.svt.applications.python</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.applications.python.PythonSessionProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="6ed624a8-543b-4984-8cdd-34bad7de4272" action="scriptSet" useFieldsInCommand="false">
+                    <command>
+                        <body>json_file &apos;$json_file&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.execution.tcl.properties.ScriptSetProperties">
+                        <sessionTclInterpreter inherit="false">py</sessionTclInterpreter>
+                    </applicationProperties>
+                </item>
+                <item guid="866c8b46-3067-4ff0-9704-c00e7c35e5c3" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>import json</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d7561b1d-9dff-4d4b-92ad-1e604fcfc92b" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>json_file</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f4793981-e569-42cf-ab73-87a088a16105" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>f = open(json_file,&quot;r&quot;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2fae9645-a30a-43ef-817f-ed168dc11feb" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>csv_table_dict = json.load(f)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ef143872-e5e1-4f0c-9d4a-5ec9389816d6" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>csv_table_dict</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="99dcb780-709e-4583-a13d-4e06b0fc01e9" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>csv_table_dict.keys()</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8758b327-df6d-45aa-b9e5-3028496ce742" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>f.close()</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8ee1e31e-36e5-4542-8fd9-087052dc4ce2" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>message_list = []</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ececc7e2-fe17-45da-acb5-b393d9ed2a88" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>for k in csv_table_dict.keys():</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="20162286-15d7-4d13-b77a-425f7839b435" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>  if &quot;Cause&quot; in k or &quot;Codes&quot; in k:</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e1e52751-ec8b-4336-8440-c3df7ed71ee0" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>    for i in range(2,len(csv_table_dict[k][&apos;headers&apos;])):</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d6858af1-e581-4f08-994b-fa505ab9affd" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>      if int(float(csv_table_dict[k][&apos;Current&apos;][i])) &gt;= 1:</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ffa63203-6981-4400-8619-b0f882b30932" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>        message_dict = {}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="31d6e783-80d2-4dd8-8fa0-3662cb91c57e" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>        message_dict[&apos;item&apos;] = csv_table_dict[k][&apos;headers&apos;][i]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ad98f6a9-3ed8-43d2-b0aa-1d3075109038" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>        message_dict[&apos;value&apos;] = csv_table_dict[k][&apos;Current&apos;][i]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e387f349-9c8a-403d-8922-08a383fe3351" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>        message_list.append(message_dict)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ffd0a437-6846-4452-afc6-e4888b441c13" action="command" session="py" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="effc2250-4fa1-4c23-b65c-7818af573640" action="command" session="py" useFieldsInCommand="false">
+                    <command>
+                        <body>message_list</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>message_list</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b0dadf82-204e-4351-a2e2-87fe307346e6" action="close" session="py" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9df63ec2-f58d-410c-8531-e9e92da2d1ed" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>message_list = list(eval(message_list))</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="379204a6-1da3-4a49-9796-6b2871a6786c" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>message_list</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="02fdadde-e33e-4ead-b815-f3f9cd0ead01" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>type(message_list)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="253dfc52-c766-42cb-ba50-b72470682b76" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>d in message_list:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2377fc00-93f1-47d9-acda-b3a0b69e2daf" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>d</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e3ae8df9-0194-40b2-8740-66b9c0265ff7" action="message" useFieldsInCommand="false">
+                            <command>
+                                <body>Warning:Found cause: [d[&apos;item&apos;]] count of [str(d[&apos;value&apos;])]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                <severity inherit="false">Warning</severity>
+                                <message inherit="false">Found cause: [d[&apos;item&apos;]] count of [str(d[&apos;value&apos;])]</message>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d13c060a-44f0-4573-aac9-ccf41b2b76c2" action="for" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>k in csv_table_dict.keys():</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="cf840c03-408b-4004-aa83-ba9bcda06daf" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>&quot;Cause&quot; in k or &quot;Codes&quot; in k:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ca585e71-bfba-45aa-9531-344cae58762b" action="message" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Information:Working on [k]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                        <message inherit="false">Working on [k]</message>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="e6a13b08-7148-4a36-b1ac-98b06fc04053" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>csv_table_dict[k][&apos;headers&apos;]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="28bde7b7-cbc2-40e0-ad48-5df49f985253" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>len(csv_table_dict[k][&apos;headers&apos;])</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="b49bb516-6800-4e24-92ff-403bb6897443" action="for" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i in range(2,len(csv_table_dict[k][&apos;headers&apos;])):</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="b3f0a8ea-8247-4fa3-8352-4ce4f4090b28" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>int(float(csv_table_dict[k][&apos;Current&apos;][i]))</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="61db45e4-5d22-4028-b4c2-7467520bd3bf" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>int(float(csv_table_dict[k][&apos;Current&apos;][i])) &gt;= 1:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="de115534-4b09-4627-a1f3-aecb1dda52c6" action="message" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>Information:Found cause: [csv_table_dict[k][&apos;headers&apos;][i]] count of [csv_table_dict[k][&apos;Current&apos;][i]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                        <message inherit="false">Found cause: [csv_table_dict[k][&apos;headers&apos;][i]] count of [csv_table_dict[k][&apos;Current&apos;][i]]</message>
+                                                    </applicationProperties>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>input</multilineDescription>
+            <arguments>
+                <item name="json_file">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
     </procedures>
 </testCase>
