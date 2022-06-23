@@ -7146,5 +7146,230 @@ and this will return the number between the N and the : incremented</multilineDe
                 </item>
             </arguments>
         </item>
+        <item name="create_temp_dir" isPublic="true">
+            <steps>
+                <item guid="5ed89961-aed5-4b82-8fa1-61fe94246d6a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>create temp folder</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ee72b465-02dc-4163-a9f4-086d8bf6b72d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>import tempfile</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="32288648-8357-443f-b40b-e4241652b12f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>temp_dir = tempfile.TemporaryDirectory()</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e0c22c5c-f4e6-46e8-9d48-7caededf8837" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>temp_dir.name</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5ef3dbcf-ef51-4c4b-b967-f9cd2bb19941" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>results_root_url = temp_dir.name.replace(&apos;\\\\&apos;,&apos;/&apos;)+&apos;/&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2ab969ae-809b-4dac-9e1e-e401a6ad3c29" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>results_root_url</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="70743a90-ee3e-48e2-855a-8b6d291ab646" action="return">
+                            <command>
+                                <body>[results_root_url]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="download_landslide_files_by_pattern" isPublic="true">
+            <steps>
+                <item guid="1549f5f5-de6f-4ea9-811d-68a089493467" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get url(s)</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9468c86f-bf34-4995-a4e8-3b06b1c12b91" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>project_id = info(&apos;testCaseProject&apos;, &apos;main&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3ecb49cd-9dca-4450-9f48-c1ac90447bc1" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>stored_file_list = []</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9dfd543d-8dfb-4eb8-a464-d669c7a7b64e" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>urls = [match for match in results_url_list if file_pattern in match]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c8581f28-3ab1-4033-81c0-a7856a40357c" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>create_temp_dir()</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>temp_dir</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="be9fb575-273f-45e2-afcb-7a71a5285a0c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>if csv list NOT empty then download the file(s)</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="00270c22-eb2f-44f6-ac1d-ee9881afe217" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>url in urls:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="76030134-997e-45f2-a830-d79870875e3f" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Get the file tail from filepattern; Store in &apos;file_name&apos;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="645b67fa-dca3-41e7-b6e1-b642beecdad9" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>file_name = url.split(&apos;/&apos;)[-1]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="9d1dbe2e-760d-4f28-95bf-76b3a257804a" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>file_name</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="d696ec75-1805-45f7-b8b6-c67e83192cb5" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Store the target files</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="e4a63d82-3034-442b-8576-1f335f65554c" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>temp_file = temp_dir+file_name</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="abd6e0a7-4a00-4a18-8bba-f2ab7e5884cf" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>temp_file</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="b68098de-91d1-4fbc-8113-a78ed9966080" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>file_list.append(temp_file)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="c04e2ce3-53a7-4c07-bcbf-e28fbdda3e1b" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Download file</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="4b16f9bf-6045-4159-a750-ba4cc5d0e7e4" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>param(&apos;Topology_parameters/TAS/Hostname&apos;) == &apos;localhost&apos;:</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="7b1b8046-37ff-454e-8b12-3179d03cf5a5" action="call" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#SaveResultLocalhost -filepattern [url] -location [temp_file]</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="77c4cb42-8ef8-408f-b9f5-4cad591b148c" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>NOTE: -filepattern is a misnomer it is the entire URL. using that name for backwards compatability</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="cf449428-3406-439f-aca8-d92beee88f5b" action="else" useFieldsInCommand="false">
+                                                    <nestedSteps>
+                                                        <item guid="a647c905-b4dc-422d-8dfb-1838ca57c243" action="call" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>project://$project_id/DISH_5G/Utilities/pcap_utils.fftc#SaveResult -runningTestId [running_id] -url [url] -location [temp_file]</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="30745d84-6789-44a4-8bff-035d844d6f4a" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>NOTE: -filepattern is a misnomer it is the entire URL. using that name for backwards compatability</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8238a397-16e9-4ead-8915-ff7fb514b447" action="return">
+                    <command>
+                        <body>[stored_pcap_url]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="file_pattern">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="results_url_list">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;csv_file&quot;:&quot;&quot;}</response>
+        </item>
     </procedures>
 </testCase>
