@@ -1980,6 +1980,11 @@
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
                                         <expression>value == 1</expression>
                                         <actionsWhenTrue>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>pcap_return_status = &quot;FAILED&quot;</statement>
+                                                </actionProperties>
+                                            </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
                                                     <message>No packets to process with current WireShark display filter: [display_filter]</message>
@@ -1990,11 +1995,6 @@
                                             </item>
                                             <item actionId="SkipRemainingRules">
                                                 <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            </item>
-                                            <item actionId="Eval">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
-                                                    <statement>pcap_return_status = &quot;FAILED&quot;</statement>
-                                                </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
                                     </ruleProperties>
@@ -2034,6 +2034,11 @@
                                             </item>
                                         </actionsWhenTrue>
                                         <actionsWhenFalse>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>pcap_return_status = &quot;FAILED&quot;</statement>
+                                                </actionProperties>
+                                            </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
                                                     <message>Found [len(index_list)] PDU sessions, expected 2</message>
@@ -2044,11 +2049,6 @@
                                             </item>
                                             <item actionId="SkipRemainingRules">
                                                 <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            </item>
-                                            <item actionId="Eval">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
-                                                    <statement>pcap_return_status = &quot;FAILED&quot;</statement>
-                                                </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
                                     </ruleProperties>
@@ -2102,6 +2102,11 @@
                                             </item>
                                         </actionsWhenTrue>
                                         <actionsWhenFalse>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>pcap_return_status = &quot;FAILED&quot;</statement>
+                                                </actionProperties>
+                                            </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
                                                     <message>The IP address on the first and second test runs were the same: [ip1]</message>
@@ -2109,11 +2114,6 @@
                                             </item>
                                             <item actionId="FailTest">
                                                 <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            </item>
-                                            <item actionId="Eval">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
-                                                    <statement>pcap_return_status = &quot;FAILED&quot;</statement>
-                                                </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
                                     </ruleProperties>

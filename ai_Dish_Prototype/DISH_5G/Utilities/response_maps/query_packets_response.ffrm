@@ -30,13 +30,41 @@
                 </item>
             </aliases>
         </item>
+        <item name="sample2">
+            <action actionType="eval">
+                <command>
+                    <body>query_packets_response</body>
+                </command>
+            </action>
+            <responseBody>ID | Time  | Source        | Destination    | Protocol | Info                                     
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+9  | 0.000 | 172.24.142.22 | 172.30.242.204 | ngap     | NG Application Protocol (NGSetupResponse)
+
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;responseLine&gt;ID | Time  | Source        | Destination    | Protocol | Info                                     &lt;/responseLine&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="responseLine">
+                    <queryFormatString>.//responseLine</queryFormatString>
+                </item>
+            </aliases>
+        </item>
     </sampleDictionary>
     <mapperProperties>
         <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
             <tabularMaps>
                 <item name="filtered_response_table">
                     <additionalBannerLineCount>1</additionalBannerLineCount>
-                    <banner>ID\\s+\\|\\s+Time\\s+\\|\\s+Source\\s+\\|\\s+Destination\\s+\\|\\s+Protocol\\s+\\|\\s+Info                                      </banner>
+                    <banner>ID\\s+\\|\\s+Time\\s+\\|\\s+Source\\s+\\|\\s+Destination\\s+\\|\\s+Protocol\\s+\\|\\s+Info\\s+</banner>
                     <bannerStructure>Regex</bannerStructure>
                     <footerStructure>End</footerStructure>
                     <customDelimiter>|</customDelimiter>
