@@ -113,6 +113,12 @@ Expected Result/Post Condition:
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
+                        <item guid="bac9eda7-99ec-4d70-bfcb-d68cbfc31cfd" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ls_criteria_data_error = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -899,15 +905,23 @@ Expected Result/Post Condition:
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="1aabaf18-9959-4917-a408-80aeebf65024" action="comment" useFieldsInCommand="false">
+                <item guid="cf35182b-cbe3-4e42-89ba-bdd1926373e0" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Call post_instance_processor - Always called</body>
                     </command>
                     <nestedSteps>
-                        <item guid="4fa387e0-23aa-4741-9d1f-c05dea754bc7" action="call" useFieldsInCommand="false">
+                        <item guid="bb5c2bfc-3b60-4d25-9467-12862c9d239a" action="if" useFieldsInCommand="false">
                             <command>
-                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#post_instance_processing -instance_id [tc_id] -project_id [project_id]</body>
+                                <body>str(ls_criteria_data_error) == &quot;False&quot;:</body>
                             </command>
+                            <nestedSteps>
+                                <item guid="e987e3d8-da64-4935-b616-ab97a1b62017" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#post_instance_processing -instance_id [tc_id] -project_id [project_id] -running_id [running_id]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>

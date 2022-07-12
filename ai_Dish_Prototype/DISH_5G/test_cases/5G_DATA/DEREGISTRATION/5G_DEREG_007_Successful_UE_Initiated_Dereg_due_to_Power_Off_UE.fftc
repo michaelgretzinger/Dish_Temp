@@ -930,15 +930,23 @@ Performance Counters:
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="0505db43-c14d-4241-937c-fccf48bfb408" action="comment" useFieldsInCommand="false">
+                <item guid="98a1801c-d743-49d7-9b19-53f36f45ba9b" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Call post_instance_processor - Always called</body>
                     </command>
                     <nestedSteps>
-                        <item guid="57c91d36-2799-4a90-9fcb-6ceae11cea3f" action="call" useFieldsInCommand="false">
+                        <item guid="ae793331-4527-4226-b2db-8a833d4aa847" action="if" useFieldsInCommand="false">
                             <command>
-                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#post_instance_processing -instance_id [tc_id] -project_id [project_id]</body>
+                                <body>str(ls_criteria_data_error) == &quot;False&quot;:</body>
                             </command>
+                            <nestedSteps>
+                                <item guid="d330630e-29cd-4521-a534-5cbaa8a14388" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#post_instance_processing -instance_id [tc_id] -project_id [project_id] -running_id [running_id]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>

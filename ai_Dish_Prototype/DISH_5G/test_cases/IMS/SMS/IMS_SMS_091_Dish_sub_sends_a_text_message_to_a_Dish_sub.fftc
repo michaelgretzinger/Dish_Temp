@@ -1319,15 +1319,23 @@ Expected Result/Post Condition:
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="39f1c603-2b6f-4ddd-938a-0be54314b2f0" action="comment" useFieldsInCommand="false">
+                <item guid="d46dbcef-77d8-4d1a-8ed1-a7afc3d7cb30" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Call post_instance_processor - Always called</body>
                     </command>
                     <nestedSteps>
-                        <item guid="afc37068-9df9-4d53-8253-274dd3c4e500" action="call" useFieldsInCommand="false">
+                        <item guid="2db6cb6f-d83b-4bc9-aaec-ba773b4b800c" action="if" useFieldsInCommand="false">
                             <command>
-                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#post_instance_processing -instance_id [tc_id] -project_id [project_id]</body>
+                                <body>str(ls_criteria_data_error) == &quot;False&quot;:</body>
                             </command>
+                            <nestedSteps>
+                                <item guid="b3983c69-9374-4e8b-862a-7b861347828e" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#post_instance_processing -instance_id [tc_id] -project_id [project_id] -running_id [running_id]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>
