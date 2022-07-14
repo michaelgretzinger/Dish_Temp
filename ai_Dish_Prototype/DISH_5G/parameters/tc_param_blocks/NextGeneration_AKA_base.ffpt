@@ -124,7 +124,7 @@
                         </validation_instances_groups>
                     </pcap_analysis_drivers>
                     <show_charts pt:datatype="BOOLEAN">false</show_charts>
-                    <test_severity pt:description="Dish defined: &quot;severity&quot;: &quot;Sev 1 - Critical&quot; or &quot;Sev 2 - Major&quot; or &quot;Sev 3 - Minor&quot;">Sev 2 - Major</test_severity>
+                    <test_severity pt:datatype="severity" pt:description="Pull down menu">Sev 2 - Major</test_severity>
                     <ts_clean_up_required pt:datatype="BOOLEAN" pt:description="Enable: if LS doesn&apos;t contain &apos;cleanup&apos; step">false</ts_clean_up_required>
                     <ts_groups_required pt:datatype="INTEGER">1</ts_groups_required>
                 </process_manager>
@@ -155,4 +155,13 @@ If additions are required/desired please contact Spirent Automation Engineer for
         <item>project://ai_Dish_Prototype/DISH_5G/parameters/tc_param_blocks/topology_params/single_testserver_1.ffpt</item>
         <item>project://ai_Dish_Prototype/DISH_5G/parameters/tc_param_blocks/sut_params/1-AMF_SUTs.ffpt</item>
     </includeParameters>
+    <parametersTypes>
+        <item name="severity">
+            <items>
+                <item name="Sev 1 - Critical"/>
+                <item name="Sev 2 - Major"/>
+                <item name="Sev 3 - Minor"/>
+            </items>
+        </item>
+    </parametersTypes>
 </ParameterTree>
