@@ -695,46 +695,46 @@
                 </item>
                 <item guid="2f79423c-0b01-447d-b12f-d64d031ca98b" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>Modify tc0 JSON - NAS example</body>
+                        <body>Modify JSON in string format before passing to Landslide - NAS example</body>
                     </command>
                     <nestedSteps>
-                        <item guid="d06db452-fab0-4293-96ab-15b074032813" action="comment" useFieldsInCommand="false">
+                        <item guid="c2884a69-fa09-4563-ad06-3d1faaacc2d6" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>modify info for tc0</body>
                             </command>
                             <nestedSteps>
-                                <item guid="801f23b9-9a29-4543-b79c-d6a14fcc2f6b" action="eval" useFieldsInCommand="false">
+                                <item guid="dde9b24e-38b3-45e5-b7b5-ec4616595c0f" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>tc0_dict = {}</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="f8116a0d-f149-4073-b890-38def51d606a" action="comment" useFieldsInCommand="false">
+                                <item guid="7b1fbff5-c012-4230-86d7-5e44235cb14a" action="comment" useFieldsInCommand="false">
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="be68f2a0-8b94-481d-8fe2-f6e0323d4e5b" action="comment" useFieldsInCommand="false">
+                                <item guid="f5951f1c-0351-4feb-876a-36bf1e37b1bd" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Construct the GM/SMS driving data</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="1bc1458c-db01-4657-bf68-4aee0b7ad500" action="eval" useFieldsInCommand="false">
+                                        <item guid="48d3f759-ea70-4d9d-877e-c2d971da48d3" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>start_phone_num_tc0 = param(&apos;LS_Nodal_favorite_params/ts0/tc0/ImsSipSubsPublicUserName&apos;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="dd332f81-1c73-412f-a012-136e022f708b" action="eval" useFieldsInCommand="false">
+                                        <item guid="b8f04f6f-1bd2-46ba-8eb5-3a51f5e42c1e" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>start_phone_num_tc0</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="2009b66a-a771-4507-bf3c-354cdd52a27b" action="comment" useFieldsInCommand="false">
+                                        <item guid="910cc8ed-1cd7-4882-8a18-7405f96800c6" action="comment" useFieldsInCommand="false">
                                             <command>
-                                                <body>Tcl Variable Name: UeSmsOrigAddrNum == tc0 phone start (raw)</body>
+                                                <body>Tcl Variable Name: 5gSmsRecipAddrNum == tc0 phone start (raw)</body>
                                             </command>
                                             <nestedSteps>
-                                                <item guid="739f6455-4d6d-42a9-9209-fa261966660f" action="call" useFieldsInCommand="false">
+                                                <item guid="18ebb7f7-148a-43c3-a22d-f332ec07d5ec" action="call" useFieldsInCommand="false">
                                                     <command>
                                                         <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#get_raw_phone_number -ims_sip_public_user [start_phone_num_tc0]</body>
                                                     </command>
@@ -744,29 +744,9 @@
                                                     </postProcessing>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
-                                                <item guid="1f16fbe6-1adc-473b-ae10-56c3354fb5ec" action="eval" useFieldsInCommand="false">
+                                                <item guid="6b33792f-dd4d-4fcd-afb8-f60f9571677a" action="eval" useFieldsInCommand="false">
                                                     <command>
                                                         <body>raw_phone_number_tc0</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                            </nestedSteps>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="7f464b67-dc78-4f57-8968-6d4869a39d38" action="comment" useFieldsInCommand="false">
-                                            <command>
-                                                <body>Tcl Variable Name: UeSmsRecipAddrNum == tc0 phone start +2 (raw)</body>
-                                            </command>
-                                            <nestedSteps>
-                                                <item guid="d0087b42-cdde-4bef-963e-a9585e1d5a16" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>raw_phone_number_tc1 = str(int(raw_phone_number_tc0) + 1)</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                                <item guid="0b146b32-578b-4a27-b0e6-5cc9944f2d3d" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>raw_phone_number_tc1</body>
                                                     </command>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
@@ -776,43 +756,43 @@
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="4d92b9b4-f188-4365-9e86-66c86da31fba" action="comment" useFieldsInCommand="false">
+                                <item guid="6a03cab4-e27d-478f-ba43-fd88447e600a" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Update the data for tc0</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="75cf8af3-8704-44f7-a7d5-79b1adb4b85b" action="comment" useFieldsInCommand="false">
+                                        <item guid="608a7720-3434-4d06-b7b2-6ebb886e7602" action="comment" useFieldsInCommand="false">
                                             <command>
                                                 <body>Update the GM/SMS numbers</body>
                                             </command>
                                             <nestedSteps>
-                                                <item guid="58364ebc-2c72-4231-891c-13ed481616cd" action="eval" useFieldsInCommand="false">
+                                                <item guid="940b4cbc-6939-4d60-806a-909977425b77" action="eval" useFieldsInCommand="false">
                                                     <command>
-                                                        <body>tc0_dict[&apos;5gSmsRecipAddrNum&apos;] = raw_phone_number_tc1</body>
+                                                        <body>tc0_dict[&apos;5gSmsRecipAddrNum&apos;] = raw_phone_number_tc0</body>
                                                     </command>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
                                             </nestedSteps>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="8053d49a-3964-43e1-9cea-34b5401402ca" action="eval" useFieldsInCommand="false">
+                                        <item guid="6e412e6d-5c4d-4ea8-b682-399cc6f476ee" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>tc0_dict</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="e01ef980-e00d-47bb-b248-ee177d6144bf" action="comment" useFieldsInCommand="false">
+                                        <item guid="c49b470c-d9bc-41bd-9f7c-c79a98d75a4e" action="comment" useFieldsInCommand="false">
                                             <command>
                                                 <body>Add dictionary to run data</body>
                                             </command>
                                             <nestedSteps>
-                                                <item guid="3b38f34c-547f-4f20-ad74-5a71835fa23e" action="eval" useFieldsInCommand="false">
+                                                <item guid="2517e2fc-2bdc-41f4-91c9-735e5652aabb" action="eval" useFieldsInCommand="false">
                                                     <command>
                                                         <body>run_data_list</body>
                                                     </command>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
-                                                <item guid="f0a430b1-0693-491e-847d-d753e2d84484" action="call" useFieldsInCommand="false">
+                                                <item guid="d8b24302-474a-4473-a5c5-c027c5aa471e" action="call" useFieldsInCommand="false">
                                                     <command>
                                                         <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc0_dict]</body>
                                                     </command>
@@ -822,7 +802,7 @@
                                                     </postProcessing>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                 </item>
-                                                <item guid="d2aa8889-c5eb-4626-9e57-7077e4befbff" action="eval" useFieldsInCommand="false">
+                                                <item guid="b8a591d3-237d-41ae-a6de-2dcdba7eb52e" action="eval" useFieldsInCommand="false">
                                                     <command>
                                                         <body>run_data_list</body>
                                                     </command>
@@ -837,18 +817,18 @@
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="82679b62-0577-4d1f-aae9-710153f1012b" action="comment" useFieldsInCommand="false">
+                        <item guid="d3d045ae-4839-4884-b35b-fa322dfd9a97" action="comment" useFieldsInCommand="false">
                             <command>
                                 <body>##### Message all updated Sub_1 Non-default values #####</body>
                             </command>
                             <nestedSteps>
-                                <item guid="4b3495b1-2bd9-4f7b-aedd-aa6ae51a1863" action="call" useFieldsInCommand="false">
+                                <item guid="1cea6687-2f4a-435d-bdf3-f71d9a8ee097" action="call" useFieldsInCommand="false">
                                     <command>
                                         <body>project://ai_LS_5G/utility_library/utils.fftc#insert_devider_string -length 135</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="522b6946-e428-47d6-9f03-3e51263db965" action="message" useFieldsInCommand="false">
+                                <item guid="6ed64221-8427-4280-8521-8334db6fe576" action="message" useFieldsInCommand="false">
                                     <command>
                                         <body>Information:The Following values have been modified from the assigned Sub_1 default values</body>
                                     </command>
@@ -856,7 +836,7 @@
                                         <message inherit="false">The Following values have been modified from the assigned Sub_1 default values</message>
                                     </applicationProperties>
                                 </item>
-                                <item guid="860ddba4-af6c-4683-a0a5-95ac474c68b4" action="message" useFieldsInCommand="false">
+                                <item guid="bfed7641-a26e-4b7f-9694-d10a6225568a" action="message" useFieldsInCommand="false">
                                     <command>
                                         <body>Information:LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</body>
                                     </command>
