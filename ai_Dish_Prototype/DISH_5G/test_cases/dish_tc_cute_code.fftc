@@ -631,9 +631,12 @@
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
+                <item guid="1c34c816-85bf-45e7-a871-61e95c14cc5a" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="057bca13-1b72-4723-b6d3-15221a4ed8e7" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>TEST LEVEL PCAP PROCESEING VIA UTILITIES</body>
+                        <body>TEST LEVEL PCAP PROCESEING VIA UTILITIES; based upon the return, report cause codes if failure logged</body>
                     </command>
                     <nestedSteps>
                         <item guid="0c8f8231-ad6c-4a4d-bc2f-e11487adad91" action="call" useFieldsInCommand="false">

@@ -63,9 +63,9 @@
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="f919a048-b01d-4247-8f2b-8b719a95b2e2" action="eval" useFieldsInCommand="false">
+                                        <item guid="578054dc-b867-445e-b6e3-7ef362897400" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>show_charts = param(tmd_query_path + &quot;/show_charts&quot;, &apos;False&apos;)</body>
+                                                <body>show_charts = param(&apos;TMD_Name/process_manager/show_charts&apos;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
