@@ -4704,9 +4704,21 @@ and this will return the number between the N and the : incremented</multilineDe
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="563881bc-ff65-4b72-8943-941b62cd9961" action="eval" useFieldsInCommand="false">
+                                <item guid="b5d7119c-c6be-4ab4-85ce-e241b9a9b9d0" action="eval" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>test_severity</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="58607930-c9ec-4ff0-bfc7-b1b32fd8d64c" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>test_severity = param(&apos;TMD_Name/process_manager/test_severity&apos;, &apos;Not Set&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="5e0233d2-3562-436c-8613-470d1b9a12e5" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>test_severity</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
