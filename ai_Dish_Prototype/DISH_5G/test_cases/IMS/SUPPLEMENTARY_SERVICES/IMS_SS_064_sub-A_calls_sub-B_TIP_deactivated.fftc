@@ -1,15 +1,16 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
-        <documentation>IMS_SS_061 Dish sub calls Dish sub with Originating Identification Restriction Activated [Special_SUPI]</documentation>
-        <tags>Automation_Next_Gen_Framework_v2, IMS_SS_061, Special_Supi</tags>
-        <notes>The purpose of this test is to verify that Dish sub calls Dish sub with Originating Identification Restriction Activated.
-
-Expected Result
-
-* The originating NTAS sends to S-CSCF the INVITE message with &quot;From&quot; header containing the sip Uri as &apos;sip:anonymous@anonymous.invalid&apos;.
-* The originating NTAS sends to S-CSCF the INVITE message with &quot;PAI&quot; headers containing the proper sip Uri and proper tel Uri.
-* Traces and logs are stopped successfully.</notes>
+        <documentation>IMS_SS_064 Dish sub calls Dish sub with Terminating Identification Presentation Deactivated. </documentation>
+        <tags>IMS_SS_064, Automation_Next_Gen_Framework_v2, Special_Supi</tags>
+        <notes>Expected Result/Post Condition: 
+• The NTAS sends to S-CSCF the INVITE message with “From” header containing the proper sip Uri.
+• The NTAS sends to S-CSCF the INVITE message with “PAI” headers containing the proper sip Uri and proper tel Uri.
+• From and To SIP &amp; TEL URIs contains P-Asserted Identity header.
+• Termination Identification Presentation Deactivated.
+• TIP service removes any P-Asserted-Identity header fields included in the SIP response.
+• UE_1 cannot See the UE_2 number on the screen.
+• Traces and logs are stopped successfully.</notes>
         <language>Python</language>
     </general>
     <procedures>

@@ -2,24 +2,18 @@
 <testCase version="8.6.2.202112190518">
     <general>
         <documentation>IMS_SS_060 Dish sub calls Dish sub with Originating Identification Presentation Deactivated.</documentation>
-        <tags>IMS_SS_060</tags>
+        <tags>IMS_SS_060, Automation_Next_Gen_Framework_v2, Special_Supi</tags>
         <notes>Test Purpose: The purpose of this test is to verify that Dish sub calls Dish sub with Originating Identification Presentation Deactivated. 
 
 Expected Result/Post Condition: 
-•\tThe terminating NTAS sends to S-CSCF INVITE with “From” header containing the sip Uri as sip:anonymous@anonymous.invalid.
-•\tTraces and logs are stopped successfully.
+• The terminating NTAS sends to S-CSCF INVITE with “From” header containing the sip Uri as sip:anonymous@anonymous.invalid.
+• Traces and logs are stopped successfully.
 </notes>
         <language>Python</language>
     </general>
     <procedures>
         <item name="main">
             <steps>
-                <item guid="188a2cc9-72e0-431b-8d20-8b74b853818a" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>######### DEVELOPMENT NOT COMPLETE #########</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="8405b6a3-6018-4d52-a3dc-2af9bea0cec3" action="comment" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
