@@ -118,7 +118,7 @@
                                     <item pt:description="get method - Valid values: typeCapture or typeQuery">typeQuery</item>
                                     <item pt:datatype="INTEGER" pt:description="expected response line count from PCAP query.">2</item>
                                     <item pt:description="system IP additions to display filter: keys amf_ip, gnbC_ip, gnbU_ip or not_utilized">[&apos;ip.src&apos;, &apos;==&apos;, &apos;gnbC_ip&apos;]</item>
-                                    <item pt:description="optional message">Verify the Content-Type header: application/vnd.3gpp.sms</item>
+                                    <item pt:description="step message">Verify the Content-Type header: application/vnd.3gpp.sms</item>
                                 </item>
                             </instance_1>
                         </validation_instances_groups>
