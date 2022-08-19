@@ -88,12 +88,6 @@ Expected Result/Post Condition:
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="a5c95b9e-823b-45b8-bbb3-15d30f7751ca" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>libraryName = &quot;{Dish 5G Velocity Scrub}&quot;</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
                         <item guid="bf3c4af7-6cfb-4b0e-bca4-462d4f0bf7ef" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>tc_id = info(&apos;testCaseName&apos;, &apos;main&apos;)</body>
