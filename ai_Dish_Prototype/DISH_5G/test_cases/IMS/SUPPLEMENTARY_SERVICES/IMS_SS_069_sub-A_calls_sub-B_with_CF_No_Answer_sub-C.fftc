@@ -1,7 +1,21 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
-        <tags>Automation_Next_Gen_Framework_v2</tags>
+        <documentation>IMS_SS_069 Dish sub A calls Dish sub B with Call Forwarding No Answer to Dish sub C [Special_SUPI]</documentation>
+        <tags>Automation_Next_Gen_Framework_v2, IMS_SS_069, Special_Supi</tags>
+        <notes>Description
+
+The purpose of this test is to verify Dish sub A calls Dish sub B with Call Forwarding No Answer to Dish sub C.
+
+Expected Result
+
+? Verify UE_2 profile at NTAS, User profile should have CFNA activated.
+? Verify NON-REPLY timer expires at NTAS before sending CANCEL request.
+? Verify UE_2 sends 487 Request Terminated in response of Invite request.
+? Verify time duration for No response timer by using command (e.g. MOD SBR: IMPU=&quot;impu�, NOAT=20 ).
+
+? Verify UE_1 sends Invite request to UE_3 includes �History_info� header.
+? Traces and logs are stopped successfully.</notes>
         <language>Python</language>
     </general>
     <procedures>
@@ -58,12 +72,6 @@
                         <item guid="f46c0365-5987-4b8f-9266-132e590c171f" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>libraryName = &quot;{Dish 5G Velocity Automation}&quot;</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="af14c9f7-2ce4-4d8d-a9a1-b95c2c1ec04d" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>libraryName = &quot;{Dish 5G Velocity Scrub}&quot;</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
