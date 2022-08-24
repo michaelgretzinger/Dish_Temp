@@ -1,17 +1,15 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
-        <documentation>IMS_SS_065 Dish sub calls Dish sub with Terminating Identification Restriction Activated.</documentation>
-        <tags>Automation_Next_Gen_Framework_v2, IMS_SS_065, Special_Supi</tags>
+        <documentation>IMS_VO_016 Dish sub A has an ongoing call with Dish sub B, Dish sub C calls sub B, which has call waiting, call forwarding, and VM disabled.</documentation>
+        <tags>Automation_Next_Gen_Framework_v2, Special_Supi, IMS_VO_016</tags>
         <notes>Description
-The purpose of this test is to verify Dish subs calls Dish sub with TIR activated.
+The purpose of this test is to verify Dish sub A has an ongoing call with Dish sub B, Dish sub C calls sub B, which has call waiting, call forwarding, and VM disabled.
 
 Expected Result
 
-The NTAS sends to S-CSCF the INVITE message with From header containing the sip Uri as sip:anonymous@anonymous.invalid.
-The NTAS sends to S-CSCF the INVITE message with PAI headers containing the proper sip Uri and proper tel Uri.
-Termination Identification Restriction Activated.
-Calls connected RTP established. UE_1 does not See UE_2 number on the screen.
+Verify UE1 profile at NTAS, User profile should have CFU, CW and VM as disable.
+Verify UE_3 receives a 486 Busy here response.
 Traces and logs are stopped successfully.</notes>
         <language>Python</language>
     </general>
@@ -31,32 +29,52 @@ Traces and logs are stopped successfully.</notes>
                                 <body>Local process driver variable init. (Instence level parameters)</body>
                             </command>
                             <nestedSteps>
-                                <item guid="571331e7-a9b2-4426-93c9-3dfaf02139e1" action="comment" useFieldsInCommand="false">
+                                <item guid="08bbb9c1-c475-4c26-9237-e85101f7b69c" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Set the tmd_query_path</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="a854fb22-8602-420d-85c8-a403b4d7df75" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>tmd_key = param(&apos;TC_parameters/tmd_key&apos;)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="7cbd8d9e-c311-48cf-9ada-877e38bd5a41" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>tmd_query_path = &apos;TMD_Name/{0}/&apos;.format(tmd_key)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="2239f800-7fa8-47d8-8141-6e0a9efb6707" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Set the tmd variables</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="a9af3bd9-6da7-4275-9a0e-6ee87af6416b" action="eval" useFieldsInCommand="false">
+                                        <item guid="1a4e0631-4cf3-4501-abf2-5818d7e5b44c" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>additional_validation = param(&apos;TMD_Name/process_manager/additional_validation&apos;, &apos;False&apos;)</body>
+                                                <body>additional_validation = param(tmd_query_path + &quot;/additional_validation&quot;, &apos;False&apos;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="5a75f818-0a45-4a04-8058-df35894f7b47" action="eval" useFieldsInCommand="false">
+                                        <item guid="5c87dcfb-10f7-4b95-9cd9-0468d997748b" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>nf_interaction = param(&apos;TMD_Name/process_manager/nf_interaction&apos;, &apos;False&apos;)</body>
+                                                <body>nf_interaction = param(tmd_query_path + &quot;/nf_interaction&quot;, &apos;False&apos;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="e5944b36-0a2a-4ee2-9828-943594652dac" action="eval" useFieldsInCommand="false">
+                                        <item guid="f9db0700-c74c-429e-b87f-e744e249c131" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>pcap_analysis = param(&apos;TMD_Name/process_manager/pcap_analysis&apos;, &quot;false&quot;)</body>
+                                                <body>pcap_analysis = param(tmd_query_path + &quot;/pcap_analysis&quot;, &quot;false&quot;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="3f2cf9d4-b84d-43b3-a49c-45596f2dc7b7" action="eval" useFieldsInCommand="false">
+                                        <item guid="f919a048-b01d-4247-8f2b-8b719a95b2e2" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>show_charts = param(&apos;TMD_Name/process_manager/show_charts&apos;, &quot;false&quot;)</body>
+                                                <body>show_charts = param(tmd_query_path + &quot;/show_charts&quot;, &apos;False&apos;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>

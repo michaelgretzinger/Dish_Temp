@@ -1,18 +1,7 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
-        <documentation>IMS_SS_065 Dish sub calls Dish sub with Terminating Identification Restriction Activated.</documentation>
-        <tags>Automation_Next_Gen_Framework_v2, IMS_SS_065, Special_Supi</tags>
-        <notes>Description
-The purpose of this test is to verify Dish subs calls Dish sub with TIR activated.
-
-Expected Result
-
-The NTAS sends to S-CSCF the INVITE message with From header containing the sip Uri as sip:anonymous@anonymous.invalid.
-The NTAS sends to S-CSCF the INVITE message with PAI headers containing the proper sip Uri and proper tel Uri.
-Termination Identification Restriction Activated.
-Calls connected RTP established. UE_1 does not See UE_2 number on the screen.
-Traces and logs are stopped successfully.</notes>
+        <tags>Automation_Next_Gen_Framework_v2</tags>
         <language>Python</language>
     </general>
     <procedures>

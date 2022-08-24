@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
-        <tags>Automation_Next_Gen_Framework_v2</tags>
+        <documentation>IMS_SS_067 Dish sub A calls Dish sub B with Call Forwarding Unconditional to Dish sub C [Special_SUPI]</documentation>
+        <tags>Automation_Next_Gen_Framework_v2, Special_Supi, IMS_SS_067</tags>
+        <notes>Test Purpose: The purpose of this test is to verify Dish sub A calls Dish sub B with Call Forwarding unconditional to Dish sub C.
+
+Expected Result
+# Verify UE_2 profile at NTAS, User profile should have CFU activated.
+# Call forwarding leg unconditional initiated.
+# Verify NTAS inserts valid �Alert-Info header� in the 181 Call being Forwarded including a URL to a media file containing the appropriate tone and sends the 181 Call being Forwarded response to S-CSCF.
+# Traces and logs are stopped successfully.</notes>
         <language>Python</language>
     </general>
     <procedures>

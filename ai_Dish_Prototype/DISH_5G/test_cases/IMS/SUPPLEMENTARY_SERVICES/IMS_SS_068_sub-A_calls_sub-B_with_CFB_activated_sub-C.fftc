@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 <testCase version="8.6.2.202112190518">
     <general>
-        <tags>Automation_Next_Gen_Framework_v2</tags>
+        <documentation>IMS_SS_068 Dish sub A calls Dish sub B with Call Forwarding Busy to Dish sub C.</documentation>
+        <tags>Automation_Next_Gen_Framework_v2,IMS_SS_068, Special_Supi</tags>
+        <notes>Description
+The purpose of this test is to verify Dish sub A calls Dish sub B with Call Forwarding Busy to Dish sub C.
+
+Expected Result
+? Verify UE_2 profile at NTAS, User profile should have CFB activated.
+? Verify UE_2 sends 486 Busy Here in response of Invite.
+? Traces and logs are stopped successfully.</notes>
         <language>Python</language>
     </general>
     <procedures>
