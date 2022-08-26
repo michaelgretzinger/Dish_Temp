@@ -10,7 +10,10 @@ Expected Result
 Verify incoming call barring activated which is routed to the NTAS of UE-2.
 UE-2 is NOT allowed with incoming calls.
 603 Decline is usually returned as a response when the called party was successfully contacted but cannot or does not wish to participate.
-Traces and logs are stopped successfully.</notes>
+Traces and logs are stopped successfully.
+
+Actual Result
+Issue/Observation: When Subscriber B initiated a call to Subscriber A, we are observing 488 not acceptable error from the network.</notes>
         <language>Python</language>
     </general>
     <procedures>
@@ -67,12 +70,6 @@ Traces and logs are stopped successfully.</notes>
                         <item guid="f46c0365-5987-4b8f-9266-132e590c171f" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>libraryName = &quot;{Dish 5G Velocity Automation}&quot;</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="af14c9f7-2ce4-4d8d-a9a1-b95c2c1ec04d" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>libraryName = &quot;{Dish 5G Velocity Scrub}&quot;</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
