@@ -24,12 +24,6 @@ Traces and logs are stopped successfully.</notes>
                 <item guid="0f39d5f5-1021-42e5-a8d1-e08b15debbc1" action="comment" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="c7ab19cf-3397-4305-949a-d073026ca571" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>ImsSipEndptsPublicUserName</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="0d827159-4081-4dbe-b1bf-19ba44800154" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Define Landslide Library Key, project_id; INIT instance_id aka tc_id, failure_originators_list and write_cause_code_data</body>
@@ -78,12 +72,6 @@ Traces and logs are stopped successfully.</notes>
                         <item guid="f46c0365-5987-4b8f-9266-132e590c171f" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>libraryName = &quot;{Dish 5G Velocity Automation}&quot;</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="af14c9f7-2ce4-4d8d-a9a1-b95c2c1ec04d" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>libraryName = &quot;{Dish 5G Velocity Scrub}&quot;</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
