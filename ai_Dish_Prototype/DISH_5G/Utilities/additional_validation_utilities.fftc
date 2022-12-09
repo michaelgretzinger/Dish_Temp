@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<testCase version="8.7.2.202202281342">
+    <general>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="e42184b4-d761-461e-8ab2-100e4e371089" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>One stop shop for ALL additional validation Interaction</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="get_radcom_payload" isPublic="true">
+            <description>Retrieve Radcom Network Segment data</description>
+            <steps>
+                <item guid="e4bd5533-00ce-40c0-af06-0e511a7cf33b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Arguement inspection</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9e8ad179-b392-4137-b46a-ec06c0e5e3b0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>network_segment</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="364d31f1-3041-4340-bfc9-b56af8953170" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>start_at</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c2765d70-4238-4c3d-bb3b-a92502a8d221" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>end_time</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0b5c23b3-6e40-4616-a1fe-a700fe528730" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>capture_filter</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b468da65-f479-44fa-b89a-c4b72fd8cf55" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>system_level_filter</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1ad1c166-1c4a-436e-8c5f-b08b84385ce7" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>process_data_results</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7a17c1d3-b3f0-44e7-bfe4-a0ec29102409" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get the target payload from the system using location/start/end time as qualifiers</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bab2a338-1361-421f-8d1e-79e72dd8899d" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>str(process_data_results) == &quot;true&quot;:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7aa5a51c-5fde-4783-a2a4-582be8a07ee3" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Get the name from parameters</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="cbbe30ff-8ae0-49c5-b1ab-e4cc411b6659" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>data_results_name = param(&apos;TMD_Name/process_manager/additional_validation_data/probe_trace_process_steps/process_mgr_data/capture_name&apos;, &apos;defaulted_name&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="833f71f9-093a-4bf0-b3ec-ee98830a7b9d" action="comment" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b8c5711d-8fd9-43b3-8f08-30a14fe8617a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>QUERY/GET DATA FROM SYSTEM and STORE - via Radcom Interface</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="eb1a8c3f-4dc5-44d2-87f5-640ba0aee33b" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cb6594c9-914e-4d47-8207-c6b9f5e73485" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="network_segment">
+                    <description>Where are we looking: RAND, 5G_Core or SMS network segment</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="start_at">
+                    <description>timestamp of start of desired capture frame</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="end_time">
+                    <description>timestamp of end of desired capture frame</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="capture_filter">
+                    <description>base payload capture filter - utilized for initial data pull</description>
+                </item>
+                <item name="system_level_filter">
+                    <description>System level capture filter - utilized for initial data pull</description>
+                </item>
+                <item name="process_data_results">
+                    <description>Perform Import/Export functions on Radcom data</description>
+                    <defaultValue>False</defaultValue>
+                </item>
+            </arguments>
+        </item>
+        <item name="radcom_import_export_functions" isPublic="true">
+            <steps>
+                <item guid="29ddaeee-59c0-4ef3-9ad2-01eb111f2c89" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="14a29496-7629-4cd0-bcf2-a2abb5190afc" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1df68a81-664a-431b-ae18-4fee67d70a6f" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4a901b35-15ec-47fd-9d23-2d26f3d42340" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="action_type">
+                    <description>Valid values: import or export</description>
+                </item>
+                <item name="data_src">
+                    <description>The location of target data</description>
+                </item>
+                <item name="data_dst">
+                    <description>The location destination target data</description>
+                </item>
+            </arguments>
+        </item>
+        <item name="probe_trace_validation">
+            <steps>
+                <item guid="b19bd98a-4d23-46db-825a-6728fadf0e7b" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8a0d5cd2-63b3-4deb-844d-45453bc10a91" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7a02f41f-7b7c-4484-acbe-8dd827ecffa5" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1a87e535-27c7-4ac4-bd82-6e6a10d26e34" action="comment" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="radcom_master_payload_uri">
+                    <description>URI to Radcom data set</description>
+                    <defaultValue>False</defaultValue>
+                </item>
+                <item name="instance_cnt">
+                    <description>Number of validation actions to perform</description>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>
