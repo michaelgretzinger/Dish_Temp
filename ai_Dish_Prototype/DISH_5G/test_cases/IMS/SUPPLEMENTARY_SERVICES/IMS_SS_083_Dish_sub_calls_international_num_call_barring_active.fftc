@@ -1,30 +1,13 @@
 <?xml version="1.0"?>
-<testCase version="8.7.2.202202281342">
+<testCase version="8.6.2.202112190518">
     <general>
-        <documentation>SMS_NAS_102  Mobile Terminated SMS delivery in Connected state.</documentation>
-        <tags>Automation_Next_Gen_Framework_v2, SMS_NAS_102</tags>
-        <notes>The purpose of this test is to verify that UE_2 sends SMS over NAS to UE_1 in connected state, SMS delivered successfully to UE_1.
-
-Expected Result
-
-• Verify SMSF sends Namf_Communication_N1N2MessageTransfer to AMF with SMS body.
-• Verify AMF sends NAS message to UE_1 with SMS Body.
-• Verify UE_1 responds with NAS message to AMF with CP-ack.</notes>
+        <tags>Automation_Next_Gen_Framework_v2</tags>
         <language>Python</language>
     </general>
     <procedures>
         <item name="main">
             <steps>
                 <item guid="0f39d5f5-1021-42e5-a8d1-e08b15debbc1" action="comment" useFieldsInCommand="false">
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="207b5b9a-ea21-4864-8f59-e50fd1045b0e" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>INCOMPLETE - REQUIRES NF_ACCESS AND PROBE_TRACE. LS PAYLOAD IN SCRUB</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="8bd9caa4-4538-4a69-bd3a-4ab411ef1cb0" action="comment" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
                 <item guid="0d827159-4081-4dbe-b1bf-19ba44800154" action="comment" useFieldsInCommand="false">
@@ -37,52 +20,32 @@ Expected Result
                                 <body>Local process driver variable init. (Instence level parameters)</body>
                             </command>
                             <nestedSteps>
-                                <item guid="08bbb9c1-c475-4c26-9237-e85101f7b69c" action="comment" useFieldsInCommand="false">
-                                    <command>
-                                        <body>Set the tmd_query_path</body>
-                                    </command>
-                                    <nestedSteps>
-                                        <item guid="a854fb22-8602-420d-85c8-a403b4d7df75" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>tmd_key = param(&apos;TC_parameters/tmd_key&apos;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="7cbd8d9e-c311-48cf-9ada-877e38bd5a41" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>tmd_query_path = &apos;TMD_Name/{0}/&apos;.format(tmd_key)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                    </nestedSteps>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                                <item guid="2239f800-7fa8-47d8-8141-6e0a9efb6707" action="comment" useFieldsInCommand="false">
+                                <item guid="571331e7-a9b2-4426-93c9-3dfaf02139e1" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>Set the tmd variables</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="1a4e0631-4cf3-4501-abf2-5818d7e5b44c" action="eval" useFieldsInCommand="false">
+                                        <item guid="a9af3bd9-6da7-4275-9a0e-6ee87af6416b" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>additional_validation = param(tmd_query_path + &quot;/additional_validation&quot;, &apos;False&apos;)</body>
+                                                <body>additional_validation = param(&apos;TMD_Name/process_manager/additional_validation&apos;, &apos;False&apos;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="5c87dcfb-10f7-4b95-9cd9-0468d997748b" action="eval" useFieldsInCommand="false">
+                                        <item guid="5a75f818-0a45-4a04-8058-df35894f7b47" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>nf_interaction = param(tmd_query_path + &quot;/nf_interaction&quot;, &apos;False&apos;)</body>
+                                                <body>nf_interaction = param(&apos;TMD_Name/process_manager/nf_interaction&apos;, &apos;False&apos;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="f9db0700-c74c-429e-b87f-e744e249c131" action="eval" useFieldsInCommand="false">
+                                        <item guid="e5944b36-0a2a-4ee2-9828-943594652dac" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>pcap_analysis = param(tmd_query_path + &quot;/pcap_analysis&quot;, &quot;false&quot;)</body>
+                                                <body>pcap_analysis = param(&apos;TMD_Name/process_manager/pcap_analysis&apos;, &quot;false&quot;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
-                                        <item guid="f919a048-b01d-4247-8f2b-8b719a95b2e2" action="eval" useFieldsInCommand="false">
+                                        <item guid="3f2cf9d4-b84d-43b3-a49c-45596f2dc7b7" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>show_charts = param(tmd_query_path + &quot;/show_charts&quot;, &apos;False&apos;)</body>
+                                                <body>show_charts = param(&apos;TMD_Name/process_manager/show_charts&apos;, &quot;false&quot;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
@@ -98,7 +61,7 @@ Expected Result
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
-                        <item guid="af14c9f7-2ce4-4d8d-a9a1-b95c2c1ec04d" action="eval" useFieldsInCommand="false">
+                        <item guid="af14c9f7-2ce4-4d8d-a9a1-b95c2c1ec04d" action="eval" skip="true" useFieldsInCommand="false">
                             <command>
                                 <body>libraryName = &quot;{Dish 5G Velocity Scrub}&quot;</body>
                             </command>
@@ -172,178 +135,9 @@ Expected Result
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="7b2e69e8-4544-4848-8d21-71ab6c85c6c4" action="comment" useFieldsInCommand="false">
+                <item guid="1e1bfc3f-fff1-4345-95ef-406619e667b9" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>##################################################</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="b71c6dbd-1fcb-46c8-b584-0de1226f9486" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Modify JSON in string format before passing to Landslide - starting phone (raw) + 1 to produce &apos;start_recipient_phone_num&apos;</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="04121df5-a778-4b30-8217-20fedf889b45" action="comment" useFieldsInCommand="false">
-                            <command>
-                                <body>modify info for tc0</body>
-                            </command>
-                            <nestedSteps>
-                                <item guid="3dd16c3a-b2fb-40b9-8c64-037150d28976" action="eval" useFieldsInCommand="false">
-                                    <command>
-                                        <body>tc0_dict = {}</body>
-                                    </command>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                                <item guid="7be2ede0-9635-4ed7-a394-09919f519d7a" action="comment" useFieldsInCommand="false">
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                                <item guid="dd97ed98-f617-4999-b06a-e1d5c096bcfa" action="comment" useFieldsInCommand="false">
-                                    <command>
-                                        <body>Construct the GM/SMS driving data</body>
-                                    </command>
-                                    <nestedSteps>
-                                        <item guid="24f71191-aef7-49a3-ab20-f8f9668d8088" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>start_phone_num_tc0 = param(&apos;LS_Nodal_favorite_params/ts0/tc0/ImsSipSubsPublicUserName&apos;)</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="f63ec3fb-7359-4942-bf2a-4b3fabd92d29" action="call" useFieldsInCommand="false">
-                                            <command>
-                                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#get_raw_phone_number -ims_sip_public_user [start_phone_num_tc0]</body>
-                                            </command>
-                                            <postProcessing>
-                                                <storeResponseAt>raw_phone_number_tc0</storeResponseAt>
-                                                <storeResponseText>true</storeResponseText>
-                                            </postProcessing>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="e3322335-89ed-4f4a-a6ab-85551acc536b" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>raw_phone_number_tc0</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="6b5ff121-2cd5-4088-8ca3-1826dad1e886" action="comment" useFieldsInCommand="false">
-                                            <command>
-                                                <body>Tcl Variable Name: 5gSmsRecipAddrNum == tc0 phone start (raw)</body>
-                                            </command>
-                                            <nestedSteps>
-                                                <item guid="2d6d5419-6eba-4748-81ad-eb712b5f9d2a" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>start_recipient_phone_num = str(int(raw_phone_number_tc0) + 1)</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                                <item guid="4b19c086-a1b3-4618-9a42-b541b858a1da" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>start_recipient_phone_num</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                            </nestedSteps>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                    </nestedSteps>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                                <item guid="88c50406-9090-4eaf-91ba-c539f402452f" action="comment" useFieldsInCommand="false">
-                                    <command>
-                                        <body>Update the data for tc0</body>
-                                    </command>
-                                    <nestedSteps>
-                                        <item guid="3326c7dc-cd56-48bc-bbb5-3217b4b770a9" action="comment" useFieldsInCommand="false">
-                                            <command>
-                                                <body>Update the GM/SMS numbers</body>
-                                            </command>
-                                            <nestedSteps>
-                                                <item guid="63c97a74-44a9-4af6-b168-d2c07774842c" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>tc0_dict[&apos;5gSmsRecipAddrNum&apos;] = start_recipient_phone_num</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                            </nestedSteps>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="06de2404-e4b3-480f-ba78-80bc57d399ae" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>tc0_dict</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                        <item guid="5dcaf7b0-b595-4428-aaf4-e674f00cb7bd" action="comment" useFieldsInCommand="false">
-                                            <command>
-                                                <body>Add dictionary to run data</body>
-                                            </command>
-                                            <nestedSteps>
-                                                <item guid="c7b5e7c7-9219-4257-bb69-94397c3f21fe" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>run_data_list</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                                <item guid="4f85002d-02be-41c1-93d6-3b7c2da9430c" action="call" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc0_dict]</body>
-                                                    </command>
-                                                    <postProcessing>
-                                                        <storeResponseAt>run_data_list</storeResponseAt>
-                                                        <storeResponseText>true</storeResponseText>
-                                                    </postProcessing>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                                <item guid="27ee4cbe-41da-46e7-8072-1645f9bc94d7" action="eval" useFieldsInCommand="false">
-                                                    <command>
-                                                        <body>run_data_list</body>
-                                                    </command>
-                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                </item>
-                                            </nestedSteps>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                    </nestedSteps>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                            </nestedSteps>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="d167032e-0b0a-4630-8abf-8648d4fef2fb" action="comment" useFieldsInCommand="false">
-                            <command>
-                                <body>##### Message all updated Sub_1 Non-default values #####</body>
-                            </command>
-                            <nestedSteps>
-                                <item guid="15eb68d6-2c58-4dd7-a8b8-354d6c7084e8" action="call" useFieldsInCommand="false">
-                                    <command>
-                                        <body>project://ai_LS_5G/utility_library/utils.fftc#insert_devider_string -length 135</body>
-                                    </command>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                                <item guid="cfed3160-0074-4914-9dbe-36b90ec69e0e" action="message" useFieldsInCommand="false">
-                                    <command>
-                                        <body>Information:The Following values have been modified from the assigned Sub_1 default values</body>
-                                    </command>
-                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
-                                        <message inherit="false">The Following values have been modified from the assigned Sub_1 default values</message>
-                                    </applicationProperties>
-                                </item>
-                                <item guid="a53fc996-e09b-4be3-ac8b-c1a52bd63e11" action="message" useFieldsInCommand="false">
-                                    <command>
-                                        <body>Information:LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</body>
-                                    </command>
-                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
-                                        <message inherit="false">LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</message>
-                                    </applicationProperties>
-                                </item>
-                            </nestedSteps>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="51f642d3-c23e-4ffb-a593-9b739b199fea" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>##################################################</body>
+                        <body>!!!! Perform Any REQUIRED Modifacation(s) to &apos;run_data_list&apos; driving data HERE!!!!   Next step Landslide execution.</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -1133,30 +927,6 @@ Expected Result
                 </item>
                 <item guid="f5e2e869-760e-49e4-a8ee-2fe2c18f9012" action="comment" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-        </item>
-        <item name="run1" isPublic="true">
-            <steps>
-                <item guid="0261f454-1463-4b99-b141-47069dc7dd2b" action="message" useFieldsInCommand="false">
-                    <command>
-                        <body>Information: [info(&apos;procedure&apos;)]</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
-                        <message inherit="false"> [info(&apos;procedure&apos;)]</message>
-                    </applicationProperties>
-                </item>
-            </steps>
-        </item>
-        <item name="run2" isPublic="true">
-            <steps>
-                <item guid="0e5b96cb-1263-4f76-992d-ae78c8b74364" action="message" useFieldsInCommand="false">
-                    <command>
-                        <body>Information: [info(&apos;procedure&apos;)]</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
-                        <message inherit="false"> [info(&apos;procedure&apos;)]</message>
-                    </applicationProperties>
                 </item>
             </steps>
         </item>
