@@ -10,7 +10,6 @@ Expected Result
 • Verify SMSF sends Namf_Communication_N1N2MessageTransfer to AMF with SMS body.
 • Verify AMF sends NAS message to UE_1 with SMS Body.
 • Verify UE_1 responds with NAS message to AMF with CP-ack.</notes>
-        <emulation enable="true"/>
         <language>Python</language>
     </general>
     <procedures>
@@ -21,7 +20,7 @@ Expected Result
                 </item>
                 <item guid="207b5b9a-ea21-4864-8f59-e50fd1045b0e" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>INCOMPLETE - REQUIRES NF_ACCESS AND PROBE_TRACE. LS PAYLOAD IN SCRUB</body>
+                        <body>INCOMPLETE - REQUIRES NF_ACCESS AND PROBE_TRACE. LS PAYLOAD IN SCRUB </body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -366,7 +365,7 @@ Expected Result
                                 </item>
                                 <item guid="f0fffc7c-2dfd-415d-ac39-46e2e384127b" action="call" useFieldsInCommand="false">
                                     <command>
-                                        <body>verifyUeDown(when=Pre-Test)</body>
+                                        <body>verifyUeDown(when=&quot;Pre-Test&quot;)</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
@@ -1108,7 +1107,7 @@ Expected Result
                             <nestedSteps>
                                 <item guid="fc5ce9c1-d373-4502-b74e-3f19630c468b" action="call" useFieldsInCommand="false">
                                     <command>
-                                        <body>verifyUeDown(when=Post-Test)</body>
+                                        <body>verifyUeDown(when=&quot;Post-Test&quot;)</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
@@ -1198,7 +1197,7 @@ Expected Result
                 </item>
                 <item guid="58592d89-6349-4783-816c-1deedb41043b" action="get_subscriber_info_by_supi" session="AMF" responseMap="project://di_Nokia/response_maps/subscriber_show_plain.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
                     <command>
-                        <body>-supi [sub]</body>
+                        <body>-supi $sub</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
@@ -1210,14 +1209,14 @@ Expected Result
                                 </extractorInfo>
                                 <processorInfo ruleType="assert">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                        <expression>str(value) == &quot;CONNECTED&quot;</expression>
+                                        <expression>str(value) == &quot;CONNECTED&quot; or str(value) == &quot;IDLE&quot;</expression>
                                         <actionsWhenTrue>
                                             <item actionId="PassTestIfNotAlreadyFailed">
                                                 <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber&apos;s [sub] CM State is CONNECTED</message>
+                                                    <message>AMF confirms that subscriber [sub] CM State is CONNECTED or IDLE</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
@@ -1227,7 +1226,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber&apos;s [sub] CM State is not CONNECTED</message>
+                                                    <message>AMF says that subscriber [sub] CM State is not CONNECTED (but should be)</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
@@ -1249,7 +1248,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber&apos;s [sub] RM State is REGISTERED</message>
+                                                    <message>AMF confirms that subscriber [sub] RM State is REGISTERED</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
@@ -1259,7 +1258,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber&apos;s [sub] CM State is not REGISTERED</message>
+                                                    <message>AMF says that subscriber [sub] CM State is not REGISTERED (but should be)</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
@@ -1271,7 +1270,6 @@ Expected Result
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                     <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
                     <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
                 </item>
                 <item guid="b6203d72-b9ee-43cb-8713-1dce64f59ad4" action="eval" useFieldsInCommand="false">
                     <command>
@@ -1282,7 +1280,7 @@ Expected Result
                 </item>
                 <item guid="6218ebfd-3668-463d-8f16-4e2c784dc8ce" action="get_subscriber_info_by_supi" session="AMF" responseMap="project://di_Nokia/response_maps/subscriber_show_plain.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
                     <command>
-                        <body>-supi [sub]</body>
+                        <body>-supi $sub</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
@@ -1294,14 +1292,14 @@ Expected Result
                                 </extractorInfo>
                                 <processorInfo ruleType="assert">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                        <expression>str(value) == &quot;CONNECTED&quot;</expression>
+                                        <expression>str(value) == &quot;CONNECTED&quot;  or str(value) == &quot;IDLE&quot;</expression>
                                         <actionsWhenTrue>
                                             <item actionId="PassTestIfNotAlreadyFailed">
                                                 <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber&apos;s [sub] CM State is CONNECTED</message>
+                                                    <message>AMF confirms that subscriber [sub] CM State is CONNECTED or IDLE</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
@@ -1311,7 +1309,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber&apos;s [sub] CM State is not CONNECTED</message>
+                                                    <message>AMF says that subscriber [sub] CM State is not CONNECTED (but should be)</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
@@ -1333,7 +1331,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber&apos;s [sub] RM State is REGISTERED</message>
+                                                    <message>AMF confirms that subscriber [sub] RM State is REGISTERED</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
@@ -1343,7 +1341,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber&apos;s [sub] CM State is not REGISTERED</message>
+                                                    <message>AMF says that subscriber [sub] CM State is not REGISTERED (but should be)</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
@@ -1355,12 +1353,10 @@ Expected Result
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                     <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
                     <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
                 </item>
                 <item guid="561ac695-c269-4059-86ab-5c0e2c484c4a" action="close" session="AMF" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                     <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
                 </item>
             </steps>
         </item>
@@ -1416,7 +1412,7 @@ Expected Result
                     </applicationProperties>
                     <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
                 </item>
-                <item guid="01b0b9d4-667c-42e4-8001-c464e64f4d48" action="eval" useFieldsInCommand="false">
+                <item guid="8deeaf2b-5952-4ece-8561-f6f19578777f" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>sub = param(&apos;LS_Nodal_favorite_params/ts0/tc0/UeNas5gMmSupi&apos;)</body>
                     </command>
@@ -1425,7 +1421,7 @@ Expected Result
                 </item>
                 <item guid="0d5636c8-14b2-4278-b0b6-61b5ca744181" action="get_subscriber_info_by_supi" session="AMF" responseMap="project://di_Nokia/response_maps/subscriber_show_plain.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
                     <command>
-                        <body>-supi [sub]</body>
+                        <body>-supi $sub</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
@@ -1444,7 +1440,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber&apos;s [sub] CM State is not CONNECTED</message>
+                                                    <message>AMF confirms that subscriber [sub] CM State is not CONNECTED</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
@@ -1454,7 +1450,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber&apos;s [sub] CM State is CONNECTED (it should be)</message>
+                                                    <message>AMF says that subscriber [sub] CM State is CONNECTED (it should be)</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
@@ -1476,7 +1472,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber&apos;s [sub] RM State is not REGISTERED</message>
+                                                    <message>AMF confirms that subscriber [sub] RM State is not REGISTERED</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
@@ -1486,7 +1482,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber&apos;s [sub] CM State is REGISTERED (it shouldn&apos;t be)</message>
+                                                    <message>AMF says that subscriber [sub] CM State is REGISTERED (it shouldn&apos;t be)</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
@@ -1498,7 +1494,6 @@ Expected Result
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                     <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
                     <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
                 </item>
                 <item guid="01f9c6fe-5e1d-4ffd-bf92-b934096769bf" action="eval" useFieldsInCommand="false">
                     <command>
@@ -1509,7 +1504,7 @@ Expected Result
                 </item>
                 <item guid="45f72a9e-4732-4e04-9b1c-7a500099440b" action="get_subscriber_info_by_supi" session="AMF" responseMap="project://di_Nokia/response_maps/subscriber_show_plain.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
                     <command>
-                        <body>-supi [sub]</body>
+                        <body>-supi $sub</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
@@ -1521,14 +1516,14 @@ Expected Result
                                 </extractorInfo>
                                 <processorInfo ruleType="assert">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                        <expression>str(value) == &quot;CONNECTED&quot;</expression>
+                                        <expression>str(value) != &quot;CONNECTED&quot;</expression>
                                         <actionsWhenTrue>
                                             <item actionId="PassTestIfNotAlreadyFailed">
                                                 <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber&apos;s [sub] CM State is CONNECTED</message>
+                                                    <message>AMF confirms that subscriber [sub] CM State is not CONNECTED</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
@@ -1538,7 +1533,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber&apos;s [sub] CM State is not CONNECTED</message>
+                                                    <message>AMF says that subscriber [sub] CM State is CONNECTED (it should be)</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
@@ -1553,14 +1548,14 @@ Expected Result
                                 </extractorInfo>
                                 <processorInfo ruleType="assert">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                        <expression>str(value) == &quot;REGISTERED&quot;</expression>
+                                        <expression>str(value) != &quot;REGISTERED&quot;</expression>
                                         <actionsWhenTrue>
                                             <item actionId="PassTestIfNotAlreadyFailed">
                                                 <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber&apos;s [sub] RM State is REGISTERED</message>
+                                                    <message>AMF confirms that subscriber [sub] RM State is not REGISTERED</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenTrue>
@@ -1570,7 +1565,7 @@ Expected Result
                                             </item>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber&apos;s [sub] CM State is not REGISTERED</message>
+                                                    <message>AMF says that subscriber [sub] CM State is REGISTERED (it shouldn&apos;t be)</message>
                                                 </actionProperties>
                                             </item>
                                         </actionsWhenFalse>
@@ -1582,12 +1577,10 @@ Expected Result
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                     <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
                     <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
                 </item>
                 <item guid="5edf813f-af29-43a9-94fb-fee807d6f532" action="close" session="AMF" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                     <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
                 </item>
             </steps>
             <arguments>
