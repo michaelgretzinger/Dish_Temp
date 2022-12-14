@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="8.6.2.202112190518">
+<testCase version="9.0.4.202208111512">
     <general>
         <tags>Automation_Next_Gen_Framework</tags>
         <language>Python</language>
@@ -7,12 +7,6 @@
     <procedures>
         <item name="main">
             <steps>
-                <item guid="4a09fa3e-f722-4d04-91aa-d29926173736" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>######### DEVELOPMENT NOT COMPLETE #########</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="4bc70d9a-e9cb-47f6-86c3-189190c38d68" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Define Landslide Library Key, project_id; INIT instance_id aka tc_id, failure_originators_list and write_cause_code_data</body>
@@ -171,7 +165,7 @@
                     <nestedSteps>
                         <item guid="d754bda6-fe8f-469d-a57a-4fb861959e6b" action="if" useFieldsInCommand="false">
                             <command>
-                                <body>str(nf_interaction) == &quot;True&quot;:</body>
+                                <body>param(&apos;TMD_Name/process_manager/nf_interaction_pre&apos;) == &quot;True&quot;:</body>
                             </command>
                             <nestedSteps>
                                 <item guid="fe788e46-165d-415d-b2b5-90b805ea8f65" action="comment" useFieldsInCommand="false">
@@ -180,13 +174,10 @@
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="28f8b394-45f6-487c-98da-e940327bca1f" action="call" useFieldsInCommand="false">
+                                <item guid="c86a2a61-c4a6-475c-8f2b-3c80b9e8f264" action="call" useFieldsInCommand="false">
                                     <command>
-                                        <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#network_function_mgr -instance_id [tc_id] -project_id [project_id] -run_data [run_data_list] -nf_instance_id NOT_DEFINED_instance_1</body>
+                                        <body>setEmergencyRegistration(state=&apos;false&apos;)</body>
                                     </command>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                                <item guid="c86a2a61-c4a6-475c-8f2b-3c80b9e8f264" action="comment" useFieldsInCommand="false">
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
@@ -931,6 +922,26 @@
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
+                        <item guid="9f4e4364-0988-4ebc-a51c-afef057c2f35" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>param(&apos;TMD_Name/process_manager/nf_interaction_post&apos;) == &quot;True&quot;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="f55aa400-049b-4c0f-96e3-3303874791c9" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Routine is just a stub; Awaiting requirements and process definition to continue/complete.</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="2011cd2c-11c0-4a1a-b7b8-ef723519e5ab" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>setEmergencyRegistration(state=&apos;true&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -952,6 +963,142 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+        </item>
+        <item name="setEmergencyRegistration" isPublic="true">
+            <steps>
+                <item guid="3cd07bc6-588c-4964-a3c6-17f1c68c1b80" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>param(&apos;AMF/hostname&apos;) != &quot;&quot;:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="41131010-fc2a-43d7-bab8-14cf5d9d93e6" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ipAddr = param(&apos;AMF/hostname&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="72470e98-2793-459c-a4ec-847b27229fca" action="else" useFieldsInCommand="false">
+                    <nestedSteps>
+                        <item guid="975c9939-2054-48fe-ae83-8053b2929471" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ipAddr = param(&apos;AMF/ip_address&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f37dfa9a-b5ed-4629-8b80-5a0fa7ab0730" action="message" useFieldsInCommand="false">
+                    <command>
+                        <body>Information:Getting UE registration status from AMF ([ipAddr]) while in Landslide state [param(&apos;TMD_Name/process_manager/nf_interaction_during/item/trigger_state&apos;)]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                        <message inherit="false">Getting UE registration status from AMF ([ipAddr]) while in Landslide state [param(&apos;TMD_Name/process_manager/nf_interaction_during/item/trigger_state&apos;)]</message>
+                    </applicationProperties>
+                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
+                </item>
+                <item guid="a9d825a6-f375-44bf-8a59-1fdcbb53643d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get info from t into variables</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0e352668-b30c-4641-8239-d11ff52b9a06" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>mmc = param(&apos;LS_Nodal_favorite_params/ts0/tc0/GnbMcc&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
+                        </item>
+                        <item guid="f97cfb0b-4dd3-4fde-8cec-9eb6e5b03b57" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>mnc = param(&apos;LS_Nodal_favorite_params/ts0/tc0/GnbMnc&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
+                        </item>
+                        <item guid="48f890c1-cf7d-454a-9c2a-71a48ba6ec41" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>tac = param(&apos;LS_Nodal_favorite_params/ts0/tc0/GnbTac&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
+                </item>
+                <item guid="33705844-a9db-49ec-9138-0b66db10bc44" action="open" session="AMF">
+                    <command>
+                        <body>project://di_[param(&apos;AMF/make&apos;)]/session_profiles/AMF.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                            <ipAddress inherit="false">[ipAddr]</ipAddress>
+                            <user inherit="false">[param(&apos;AMF/username&apos;)]</user>
+                            <password inherit="false" masked="false">[param(&apos;AMF/password&apos;)]</password>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
+                </item>
+                <item guid="e0cefd7e-e8fa-498d-9ca5-18b2e6f0b3c5" action="set_emergency_service_tai" session="AMF" useFieldsInCommand="false">
+                    <command>
+                        <body>-state $state -MCC $mcc -MNC $mnc -TAC $tac</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>emergencyServiceTai()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>str(value) == str(state)</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Successfully set Emergency Service TAI to [state]</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Failed to set Emergency Service TAI to [state]</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
+                </item>
+                <item guid="9ed6aaf0-7ce4-4f3a-bf9b-7d8565734a77" action="close" session="AMF" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="state">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
         </item>
     </procedures>
 </testCase>
