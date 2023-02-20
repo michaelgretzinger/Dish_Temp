@@ -2,7 +2,6 @@
 <testCase version="9.0.4.202208111512">
     <general>
         <tags>Automation_Next_Gen_Framework_v2</tags>
-        <emulation enable="true"/>
         <language>Python</language>
     </general>
     <procedures>
@@ -140,6 +139,171 @@
                     <command>
                         <body>!!!! Perform Any REQUIRED Modifacation(s) to &apos;run_data_list&apos; driving data HERE!!!!   Next step Landslide execution.</body>
                     </command>
+                    <nestedSteps>
+                        <item guid="baecf92f-bbdb-4fb8-a08f-8c4e521479f4" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Modify JSON in string format before passing to Landslide - NAS example</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="0b672c9e-39cb-45c4-866e-fb757ec9fcb5" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>modify info for tc0</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="85e3731e-b39b-4352-8f9d-58cc15546c40" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>tc0_dict = {}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="d26907e5-750f-4051-b79a-fc36ad817ccf" action="comment" useFieldsInCommand="false">
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="abcb85d3-3847-47b0-89f2-0b89cc501bdd" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Construct the GM/SMS driving data</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="b664e604-61b4-4528-aedf-627987c573cb" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>start_phone_num_tc0 = param(&apos;LS_Nodal_favorite_params/ts0/tc0/ImsSipSubsPublicUserName&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="627084c3-5960-47c8-9816-33fe81f13c37" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>start_phone_num_tc0</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="09590b39-4d02-4418-aacd-3d27b631ef20" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>Tcl Variable Name: 5gSmsRecipAddrNum == tc0 phone start (raw)</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="700fb796-8698-4459-b484-b79217982b1a" action="call" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#get_raw_phone_number -ims_sip_public_user [start_phone_num_tc0]</body>
+                                                            </command>
+                                                            <postProcessing>
+                                                                <storeResponseAt>raw_phone_number_tc0</storeResponseAt>
+                                                                <storeResponseText>true</storeResponseText>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="58ea4bcd-8ef2-44fe-b469-befa63e80b5b" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>raw_phone_number_tc0</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="14fa54c1-b2bc-42cd-a0b0-4a9cc0de137d" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>next_phone_number = int(raw_phone_number_tc0) +1</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="ef011137-c58b-4ca2-99b0-15082363eeee" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Update the data for tc0</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="fc8f9fd3-cb49-4abe-b510-94565cac0e79" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>Update the GM/SMS numbers</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="df31f1de-efe3-4b3b-b7f5-67d2a68372a0" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>tc0_dict[&apos;5gSmsRecipAddrNum&apos;] = str(next_phone_number)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="85f44631-3f31-4e3c-8ac9-26ccce468ef6" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>tc0_dict</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="324bee9d-6eb1-4d44-9de4-ab40f80eda35" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>Add dictionary to run data</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="e201b755-dcd4-43b8-9587-cd1acc010059" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>run_data_list</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="bc848007-fdbe-4cd0-bbf3-6fb4ee6f6607" action="call" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>project://$project_id/DISH_5G/Utilities/dish_tc_utilities.fftc#update_run_data_parameters -run_data_list [run_data_list] -add_dict [tc0_dict]</body>
+                                                            </command>
+                                                            <postProcessing>
+                                                                <storeResponseAt>run_data_list</storeResponseAt>
+                                                                <storeResponseText>true</storeResponseText>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="bfb36a06-8215-4dc9-a6e5-ec60386c1e7d" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>run_data_list</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c4403241-1053-4b90-ab2e-302ffe3bd968" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>##### Message all updated Sub_1 Non-default values #####</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="95616fa1-4e67-4011-8c1b-39d66bf3fa82" action="call" useFieldsInCommand="false">
+                                            <command>
+                                                <body>project://ai_LS_5G/utility_library/utils.fftc#insert_devider_string -length 135</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="3de1950e-e727-446a-a6e1-2634f26d3118" action="message" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Information:The Following values have been modified from the assigned Sub_1 default values</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                <message inherit="false">The Following values have been modified from the assigned Sub_1 default values</message>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="c074fcea-64ec-423e-9253-614a105f13f8" action="message" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Information:LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                <message inherit="false">LS_Nodal_favorite_params:ts0:tc0 [tc0_dict]</message>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
                 <item guid="7115b239-d6f6-4624-9e0f-9d577bff8d11" action="comment" useFieldsInCommand="false">
@@ -927,268 +1091,6 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
                 <item guid="f5e2e869-760e-49e4-a8ee-2fe2c18f9012" action="comment" useFieldsInCommand="false">
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-        </item>
-        <item name="deleteSub" isPublic="true">
-            <steps>
-                <item guid="dbfcf88b-e310-432f-be45-b8a0f9cedbe0" action="if" useFieldsInCommand="false">
-                    <command>
-                        <body>param(&apos;AMF/hostname&apos;) != &quot;&quot;:</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="fcd2319c-513a-4989-85ed-090fc43dfc45" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>ipAddr = param(&apos;AMF/hostname&apos;)</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="864e8210-8bfb-4c92-ba5f-deae435756be" action="else" useFieldsInCommand="false">
-                    <nestedSteps>
-                        <item guid="ddeefeb2-e1df-42fc-8fa5-dcda195fd8e8" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>ipAddr = param(&apos;AMF/ip_address&apos;)</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="b5587f53-e322-49cd-8aab-25a2765d1020" action="message" useFieldsInCommand="false">
-                    <command>
-                        <body>Information:Waiting for UE to enter CONNECTED state</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
-                        <message inherit="false">Waiting for UE to enter CONNECTED state</message>
-                    </applicationProperties>
-                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                </item>
-                <item guid="644a3c55-a5ba-4520-bdc7-15e0d6fbc079" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>sub = param(&apos;LS_Nodal_favorite_params/ts0/tc0/UeNas5gMmSupi&apos;)</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                </item>
-                <item guid="7e77f078-e65d-43d7-bf93-0f06143d5369" action="open" session="AMF">
-                    <command>
-                        <body>project://di_[param(&apos;AMF/make&apos;)]/session_profiles/AMF.ffsp</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
-                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
-                            <ipAddress inherit="false">[ipAddr]</ipAddress>
-                            <user inherit="false">[param(&apos;AMF/username&apos;)]</user>
-                            <password inherit="false" masked="false">[param(&apos;AMF/password&apos;)]</password>
-                        </sessionProperties>
-                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    </applicationProperties>
-                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
-                </item>
-                <item guid="3e301460-7367-4a2e-a363-0b79945cb2c6" action="get_subscriber_info_by_supi" session="AMF" responseMap="project://di_Nokia/response_maps/subscriber_show_plain.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
-                    <command>
-                        <body>-supi $sub</body>
-                    </command>
-                    <postProcessing>
-                        <analysisRules>
-                            <item>
-                                <extractorInfo extractorType="query">
-                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>amfCmState()</query>
-                                    </extractorProperties>
-                                </extractorInfo>
-                                <processorInfo ruleType="assert">
-                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                        <expression>str(value) == &quot;CONNECTED&quot;</expression>
-                                        <actionsWhenTrue>
-                                            <item actionId="PassTestIfNotAlreadyFailed">
-                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            </item>
-                                            <item actionId="DeclareExecutionIssue">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber [sub] CM State is CONNECTED</message>
-                                                </actionProperties>
-                                            </item>
-                                        </actionsWhenTrue>
-                                        <actionsWhenFalse>
-                                            <item actionId="DeclareExecutionIssue">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
-                                                    <message>UE has not reached CONNECTED</message>
-                                                </actionProperties>
-                                            </item>
-                                            <item actionId="RepeatStep">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="15" delayBetweenRepeats="3.0"/>
-                                            </item>
-                                            <item actionId="SkipRemainingRules">
-                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            </item>
-                                        </actionsWhenFalse>
-                                    </ruleProperties>
-                                </processorInfo>
-                            </item>
-                            <item>
-                                <extractorInfo extractorType="query">
-                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>amfRmState()</query>
-                                    </extractorProperties>
-                                </extractorInfo>
-                                <processorInfo ruleType="assert">
-                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                        <expression>str(value) == &quot;REGISTERED&quot;</expression>
-                                        <actionsWhenTrue>
-                                            <item actionId="PassTestIfNotAlreadyFailed">
-                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            </item>
-                                            <item actionId="DeclareExecutionIssue">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                    <message>AMF confirms that subscriber [sub] RM State is REGISTERED</message>
-                                                </actionProperties>
-                                            </item>
-                                        </actionsWhenTrue>
-                                        <actionsWhenFalse>
-                                            <item actionId="FailTest">
-                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            </item>
-                                            <item actionId="DeclareExecutionIssue">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>AMF says that subscriber [sub] CM State is not REGISTERED (but should be)</message>
-                                                </actionProperties>
-                                            </item>
-                                            <item actionId="DeclareExecutionIssue">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>Exiting w/out deleting subscriber</message>
-                                                </actionProperties>
-                                            </item>
-                                            <item actionId="ExitProcedure">
-                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExitProcedurePropertyGroup"/>
-                                            </item>
-                                        </actionsWhenFalse>
-                                    </ruleProperties>
-                                </processorInfo>
-                            </item>
-                        </analysisRules>
-                    </postProcessing>
-                    <eventHandlers>
-                        <item name="OnRepeatStepMaxCountExceeded">
-                            <item actionId="FailTest">
-                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            </item>
-                            <item actionId="DeclareExecutionIssue">
-                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                    <message>Timeout waiting for UE to reach IDLE state</message>
-                                </actionProperties>
-                            </item>
-                        </item>
-                        <item name="OnQueryExtractorInvalidQuery">
-                            <item actionId="DeclareExecutionIssue">
-                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
-                                    <message>UE has not reached IDLE</message>
-                                </actionProperties>
-                            </item>
-                            <item actionId="RepeatStep">
-                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="10" delayBetweenRepeats="3.0"/>
-                            </item>
-                        </item>
-                    </eventHandlers>
-                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                    <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
-                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
-                </item>
-                <item guid="ba67dc92-6a23-4c66-a005-dbd5206003c7" action="message" useFieldsInCommand="false">
-                    <command>
-                        <body>Information:Disabling UE in AMF ([ipAddr]) while in Landslide state [param(&apos;TMD_Name/process_manager/nf_interaction_during/item/trigger_state&apos;)] and UE in IDLE mode</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
-                        <message inherit="false">Disabling UE in AMF ([ipAddr]) while in Landslide state [param(&apos;TMD_Name/process_manager/nf_interaction_during/item/trigger_state&apos;)] and UE in IDLE mode</message>
-                    </applicationProperties>
-                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                </item>
-                <item guid="3e931210-087b-43e0-b057-90a786c5d051" action="delete_supi" session="AMF" useFieldsInCommand="false">
-                    <command>
-                        <body>-supi $sub</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                    <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                    <emulation emulate="ALWAYS"/>
-                </item>
-                <item guid="d31c3320-0cdc-46ed-90e6-a3bd5b0e2bf9" action="comment" skip="true" useFieldsInCommand="false">
-                    <command>
-                        <body>Skipping because determinge UE is down is difficult becaus it automatically reconnects IMMEDIATLY</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="d096a354-a5a5-4d1a-a4d5-b0036aa48e6b" action="message" useFieldsInCommand="false">
-                            <command>
-                                <body>Information:Verifying UE is down</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
-                                <message inherit="false">Verifying UE is down</message>
-                            </applicationProperties>
-                            <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                        </item>
-                        <item guid="217be87a-fac2-4f80-b050-39d1d6fa0b71" action="get_subscriber_info_by_supi" session="AMF" responseMap="project://di_Nokia/response_maps/subscriber_show_plain.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
-                            <command>
-                                <body>-supi $sub</body>
-                            </command>
-                            <postProcessing>
-                                <analysisRules>
-                                    <item>
-                                        <extractorInfo extractorType="query">
-                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                <query>amfCmState()</query>
-                                            </extractorProperties>
-                                        </extractorInfo>
-                                        <processorInfo ruleType="assert">
-                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                                <expression>str(value) == &quot;CONNECTED&quot;</expression>
-                                                <actionsWhenTrue>
-                                                    <item actionId="DeclareExecutionIssue">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
-                                                            <message>UE removed from AMF but still connected.</message>
-                                                        </actionProperties>
-                                                    </item>
-                                                    <item actionId="RepeatStep">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="10"/>
-                                                    </item>
-                                                </actionsWhenTrue>
-                                                <actionsWhenFalse>
-                                                    <item actionId="DeclareExecutionIssue">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
-                                                            <message>UE removed from AMF but still present in AMF database.</message>
-                                                        </actionProperties>
-                                                    </item>
-                                                    <item actionId="RepeatStep">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="10"/>
-                                                    </item>
-                                                </actionsWhenFalse>
-                                            </ruleProperties>
-                                        </processorInfo>
-                                    </item>
-                                </analysisRules>
-                            </postProcessing>
-                            <eventHandlers>
-                                <item name="OnResponseMappingIssue">
-                                    <item actionId="DeclareExecutionIssue">
-                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                            <message>Subscriber sucessfully removed from AMF</message>
-                                        </actionProperties>
-                                    </item>
-                                    <item actionId="SkipRemainingRules">
-                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    </item>
-                                </item>
-                            </eventHandlers>
-                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                            <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
-                            <advancedProperties defaultSessionProfile="project://di_Nokia/session_profiles/AMF.ffsp"/>
-                        </item>
-                    </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
